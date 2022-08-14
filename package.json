@@ -52,7 +52,7 @@
       },
       {
         "command": "vfmdbp-vscode.shelllTest",
-        "title": "Call Shell Test",
+        "title": "Generate Merged PDF",
         "category": "vfmdbp-vscode"
       }
     ]

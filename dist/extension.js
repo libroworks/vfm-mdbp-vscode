@@ -88,8 +88,13 @@ function activate(context) {
   function callShellTest(){
     const term = vscode.window.createTerminal();
     const shell = vscode.env.shell;
+    const shellcommand = 'vivliostyle build';
     term.show();
-    term.sendText('PowerShell -ExecutionPolicy RemoteSigned vivliostyle build formattest.html');
+    if (shell.includes('powershell')){
+      term.sendText(`PowerShell -ExecutionPolicy RemoteSigned ${shellcommand}`);
+    } else {
+      term.sendText(shellcommand);
+    }
   }
 }
 
