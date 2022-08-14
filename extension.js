@@ -15,13 +15,13 @@ function activate(context) {
 
   // Use the console to output diagnostic information (console.log) and errors (console.error)
   // This line of code will only be executed once when your extension is activated
-  console.log('Congratulations, your extension "mdbp-vscode" is now active!');
+  console.log('Congratulations, your extension "vfmdbp-vscode" is now active!');
 
-  context.subscriptions.push(vscode.commands.registerCommand('mdbp-vscode.startServer', startServer));
-  context.subscriptions.push(vscode.commands.registerCommand('mdbp-vscode.stopServer', stopServer));
-  context.subscriptions.push(vscode.commands.registerCommand('mdbp-vscode.toggle', toggle));
-  context.subscriptions.push(vscode.commands.registerCommand('mdbp-vscode.toggleVS', toggleVS));
-  context.subscriptions.push(vscode.commands.registerCommand('mdbp-vscode.exportXML', exportXML));
+  context.subscriptions.push(vscode.commands.registerCommand('vfmdbp-vscode.startServer', startServer));
+  context.subscriptions.push(vscode.commands.registerCommand('vfmdbp-vscode.stopServer', stopServer));
+  context.subscriptions.push(vscode.commands.registerCommand('vfmdbp-vscode.toggle', toggle));
+  context.subscriptions.push(vscode.commands.registerCommand('vfmdbp-vscode.toggleVS', toggleVS));
+  context.subscriptions.push(vscode.commands.registerCommand('vfmdbp-vscode.exportXML', exportXML));
 
 
   // サーバーの起動終了

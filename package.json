@@ -2,11 +2,11 @@
   "publisher": "Libroworks",
   "repository": {
     "type": "git",
-    "url": "https://github.com/libroworks/mdbp-vscode"
+    "url": "https://github.com/libroworks/vfm-mdbp-vscode"
   },
-  "name": "mdbp-vscode",
-  "displayName": "mdbp_vscode",
-  "description": "Markdown Book Preview for VSCode",
+  "name": "vfmdbp-vscode",
+  "displayName": "vfm_mdbp_vscode",
+  "description": "Markdown Book Preview for VSCode with VFM",
   "version": "0.1.0",
   "engines": {
     "vscode": "^1.69.0"
@@ -15,76 +15,76 @@
     "Other"
   ],
   "activationEvents": [
-    "onCommand:mdbp-vscode.startServer",
-    "onCommand:mdbp-vscode.stopServer",
-    "onCommand:mdbp-vscode.toggle",
-    "onCommand:mdbp-vscode.toggleVS",
-    "onCommand:mdbp-vscode.exportXML"
+    "onCommand:vfmdbp-vscode.startServer",
+    "onCommand:vfmdbp-vscode.stopServer",
+    "onCommand:vfmdbp-vscode.toggle",
+    "onCommand:vfmdbp-vscode.toggleVS",
+    "onCommand:vfmdbp-vscode.exportXML"
   ],
   "main": "./dist/extension.js",
   "contributes": {
     "commands": [
       {
-        "command": "mdbp-vscode.startServer",
+        "command": "vfmdbp-vscode.startServer",
         "title": "Start Server",
-        "category": "mdbp-vscode"
+        "category": "vfmdbp-vscode"
       },
       {
-        "command": "mdbp-vscode.stopServer",
+        "command": "vfmdbp-vscode.stopServer",
         "title": "Stop Server",
-        "category": "mdbp-vscode"
+        "category": "vfmdbp-vscode"
       },
       {
-        "command": "mdbp-vscode.toggle",
+        "command": "vfmdbp-vscode.toggle",
         "title": "Open HTML Preview",
-        "category": "mdbp-vscode"
+        "category": "vfmdbp-vscode"
       },
       {
-        "command": "mdbp-vscode.toggleVS",
+        "command": "vfmdbp-vscode.toggleVS",
         "title": "Open Vivliostyle Preview",
-        "category": "mdbp-vscode"
+        "category": "vfmdbp-vscode"
       },
       {
-        "command": "mdbp-vscode.exportXML",
+        "command": "vfmdbp-vscode.exportXML",
         "title": "Export InDesign XML",
-        "category": "mdbp-vscode"
+        "category": "vfmdbp-vscode"
       }
     ],
     "menus": {
       "editor/context": [
         {
-          "submenu": "mdbp-vscode-submenu1",
-          "group": "MDBP",
+          "submenu": "vfmdbp-vscode-submenu1",
+          "group": "VFMDBP",
           "when": "resourceLangId == markdown"
         }
       ],
-      "mdbp-vscode-submenu1": [
+      "vfmdbp-vscode-submenu1": [
         {
-          "command": "mdbp-vscode.startServer",
-          "group": "0_MDBP-server",
+          "command": "vfmdbp-vscode.startServer",
+          "group": "0_VFMDBP-server",
           "when": "resourceLangId == markdown"
         },
         {
-          "command": "mdbp-vscode.stopServer",
-          "group": "0_MDBP-server",
+          "command": "vfmdbp-vscode.stopServer",
+          "group": "0_VFMDBP-server",
           "when": "resourceLangId == markdown"
         },
         {
-          "command": "mdbp-vscode.toggleVS",
-          "group": "1_MDBP-preview",
+          "command": "vfmdbp-vscode.toggleVS",
+          "group": "1_VFMDBP-preview",
           "when": "resourceLangId == markdown"
         },
         {
-          "command": "mdbp-vscode.exportXML",
-          "group": "3_MDBP-indesign",
+          "command": "vfmdbp-vscode.exportXML",
+          "group": "3_VFMDBP-indesign",
           "when": "resourceLangId == markdown"
         }
       ]
     },
     "submenus": [
       {
-        "id": "mdbp-vscode-submenu1",
-        "label": "MDBP for VSCode"
+        "id": "vfmdbp-vscode-submenu1",
+        "label": "VFMDBP for VSCode"
       }
     ]
   },
