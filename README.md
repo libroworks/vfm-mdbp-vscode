@@ -1,9 +1,11 @@
-# mdbp-vscode README
+# vfm-mdbp-vscode README
 MDBP（MarkDown-Book-Preview）は書籍の原稿作成に適したMarkdownプレビューの機能拡張です。 [Vivliostyle Viewer](https://vivliostyle.org/download/)と組み合わせて書籍の体裁で表示し、原稿データをInDesign向けのXMLファイルとして書き出す機能を持ちます。
 
-AtomパッケージをVSCodeに移植しました。
+MarkdownパーサーをVFM（Vivliostyle Flavored Markdown）に変更したバージョンです。
 
-https://github.com/lwohtsu/atom-markdown-book-preview
+https://vivliostyle.github.io/vfm/#/ja/vfm
+
+https://github.com/vivliostyle/vfm
 
 ## Features
 - 任意の組版用CSSを読み込める
@@ -12,41 +14,38 @@ https://github.com/lwohtsu/atom-markdown-book-preview
 - HTMLを実ファイルとして書き出すので、簡易的なHTML生成ツールとしても使用できる
 - Vivliostyle Viwerを使用した書籍プレビューが可能
 - ファイルの更新を監視してプレビューを更新するため、別のテキストエディタで作業しビューワとしてのみ使うことも可能
-- InDesignで読み込み可能なXMLを書き出せる
 
 ![MDBPの使用中画面](docimg-1.png)
 
 ![コマンドパレットからの実行](docimg-2.png)
 
-![右クリックメニューからの実行](docimg-3.png)
-
 ### 事前準備
-1. 作業フォルダー内に「_template.html」というファイルを置いてください。これで読み込むcssファイルを指定します。
+1. 読み込むCSSファイルを指定するには、Markdownファイルの先頭にFrontmatterを書きます。
+https://vivliostyle.github.io/vfm/#/vfm#frontmatter
 
-```html
-<!doctype html>
-<html>
-  <head>
-    <title>doc</title>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="_css/fullpower.css">
-  </head>
-  <body>
-<%=content%>
-  </body>
-</html>
+Frontmatterの例
+```md
+---
+lang: 'ja'
+title: 'Format Test'
+link:
+  - rel: 'stylesheet'
+    href: '_css/fullpower.css'
+vfm:
+ - math: true
+---
 ```
+
+
 2. フォルダ内にVivliostyle Viewerのviwerフォルダを配置してください。
 
 - Vivliostyle Viewerのダウンロード
 https://vivliostyle.org/download/
 
 ## How to Use
-
-
-1. まずフォルダーを開いてください。そこがWebサーバーのルートになります。
-2. フォルダー内のMarkdownファイルを開き、右クリックメニューかコマンドパレットで、Start Serverを選択します。
-3. Open HTMLまたはVivliostyle Previewを選択すると、Webブラウザでプレビューが表示されます。※HTMLプレビューはコマンドパレットからのみ実行できます。
+1. まずVSCodeでフォルダーを開いてください。そこがWebサーバーのルートになります。
+2. フォルダー内のMarkdownファイルを開き、コマンドパレットで、Start Serverを選択します。
+3. Open HTMLまたはVivliostyle Previewを選択すると、Webブラウザでプレビューが表示されます。
 4. あとはフォルダー内（サブフォルダーも含む）でファイルの更新が発生すると、自動的にWebブラウザのプレビューが更新されます。※フォルダー内を監視しているので、VSCode以外でファイルを保存した場合でも更新されます。
 
 ### Start Server / Stop Server
@@ -63,7 +62,33 @@ PDFを出力したい場合は、Webブラウザ側の印刷機能を利用し�
 
 ![右クリックメニューからの実行](docimg-4.png)
 
-### Export InDesign XML
+### Generate Merged PDF（テスト機能）
+Vivliostyle CLIを使ってHTMLを連結して書き出します。
+
+vivliostyle.config.jsというファイルを作業フォルダ内のルートに作って、読み込みhtmlファイルを指定する必要があります。
+```
+// @ts-check
+const vivliostyleConfig = {
+  entry: [
+    // mdを指定するとMDBPの独自仕様部分と画像類が外れる
+    'formattest.html',
+    'formattest_copy.html'
+  ], 
+  output: [
+    './merged_output.pdf',
+  ],
+};
+
+module.exports = vivliostyleConfig;
+```
+
+Vivliostyle CLIの仕様ではentryセクションにMarkdownファイルも指定できますが、VMFでのHTML変換しか行われないため、MDBPが処理している部分が反映されません。MDBPが生成したHTMLファイルを指定するのが無難です。
+
+https://docs.vivliostyle.org/ja/vivliostyle-cli#%E6%A7%8B%E6%88%90%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB-vivliostyleconfigjs
+
+
+
+### Export InDesign XML（未テスト）
 InDesignの［構造］パネルで読み込み可能なXMLファイルを書き出します。XMLタグを任意のスタイルとマッピング可能です。また、画像のリンクを活かした自動配置、InDesign上のスクリプトと組み合わせた表の自動作成が可能です。
 
 
@@ -135,23 +160,10 @@ Markdownの記述を簡単にするために、デザイン都合でHTML構造�
 ]
 ```
 
-### 同名CSSの自動読み込み機能
-ファイルごとにCSSを切り替える需要が出てきたため、Markdownファイルと同名のCSSファイルがあれば自動的に読み込むようにしました。
-例えば「chap1.md」であれば、「chap1.css」を探し、存在したらHTMLファイルにlink要素を追加して読み込みます。
-
-これを利用すると、章ごとにツメや柱の位置を動かすことなどができます（章の数だけCSSを書くのは若干面倒ですが）。
-また、前付け／後付けのみ他と書式を変えることも可能になります。
-
-### ブックモード（version 2.2あたりで追加）
-「maeduke.md」というファイルをVivliostyleプレビューで表示した場合、ビューワーのURLに「`&bookMode=True'」を付けます。
-これによりViviostyleビューワーのブックモードが有効になり、目次のnav要素内でリンクしたHTMLファイルを順番に読み込んで、1つのブックとしてレンダリングします。
-この機能を利用しないと、全体でページを通すことができません。
-
-
 ## Requirements
 - VSCode 1.69.0以上
 - 作業フォルダー内にVivliostyle viwerが必要です。
-- TCP8085ポートを使用します。
+- TCP8087ポートを使用します。
 
 
 ## Extension Settings
@@ -162,18 +174,8 @@ Markdownの記述を簡単にするために、デザイン都合でHTML構造�
 
 Users appreciate release notes as you update your extension.
 
-### 0.0.1
-
-Initial release of ...
-
-### 0.0.8
-初期安定版（bundleなし）
-
-### 0.0.11
-プレリリース版
-
 ### 0.1.0
-bundle by Webpack（サイズが10分の1になったので多分早くなった）
+最初のリリース
 
 -----------------------------------------------------------------------------------------------------------
 
