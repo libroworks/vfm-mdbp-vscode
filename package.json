@@ -55,43 +55,6 @@
         "title": "Call Shell Test",
         "category": "vfmdbp-vscode"
       }
-    ],
-    "menus": {
-      "editor/context": [
-        {
-          "submenu": "vfmdbp-vscode-submenu1",
-          "group": "VFMDBP",
-          "when": "resourceLangId == markdown"
-        }
-      ],
-      "vfmdbp-vscode-submenu1": [
-        {
-          "command": "vfmdbp-vscode.startServer",
-          "group": "0_VFMDBP-server",
-          "when": "resourceLangId == markdown"
-        },
-        {
-          "command": "vfmdbp-vscode.stopServer",
-          "group": "0_VFMDBP-server",
-          "when": "resourceLangId == markdown"
-        },
-        {
-          "command": "vfmdbp-vscode.toggleVS",
-          "group": "1_VFMDBP-preview",
-          "when": "resourceLangId == markdown"
-        },
-        {
-          "command": "vfmdbp-vscode.exportXML",
-          "group": "3_VFMDBP-indesign",
-          "when": "resourceLangId == markdown"
-        }
-      ]
-    },
-    "submenus": [
-      {
-        "id": "vfmdbp-vscode-submenu1",
-        "label": "VFMDBP for VSCode"
-      }
     ]
   },
   "scripts": {

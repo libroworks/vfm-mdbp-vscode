@@ -78,8 +78,13 @@ function activate(context) {
   // Shellコマンド発行テスト
   function callShellTest(){
     const term = vscode.window.createTerminal();
+    const shell = vscode.env.shell;
     term.show();
-    term.sendText('ls');
+    if (shell.includes('powershell')){
+      term.sendText('PowerShell -ExecutionPolicy RemoteSigned vivliostyle build formattest.html');
+    } else {
+      term.sendText('vivliostyle build formattest.html');
+    }
   }
 }
 
