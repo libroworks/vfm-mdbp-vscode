@@ -19,7 +19,8 @@
     "onCommand:vfmdbp-vscode.stopServer",
     "onCommand:vfmdbp-vscode.toggle",
     "onCommand:vfmdbp-vscode.toggleVS",
-    "onCommand:vfmdbp-vscode.exportXML"
+    "onCommand:vfmdbp-vscode.exportXML",
+    "onCommand:vfmdbp-vscode.shelllTest"
   ],
   "main": "./dist/extension.js",
   "contributes": {
@@ -47,6 +48,11 @@
       {
         "command": "vfmdbp-vscode.exportXML",
         "title": "Export InDesign XML",
+        "category": "vfmdbp-vscode"
+      },
+      {
+        "command": "vfmdbp-vscode.shelllTest",
+        "title": "Call Shell Test",
         "category": "vfmdbp-vscode"
       }
     ],

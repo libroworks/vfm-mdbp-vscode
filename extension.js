@@ -22,6 +22,7 @@ function activate(context) {
   context.subscriptions.push(vscode.commands.registerCommand('vfmdbp-vscode.toggle', toggle));
   context.subscriptions.push(vscode.commands.registerCommand('vfmdbp-vscode.toggleVS', toggleVS));
   context.subscriptions.push(vscode.commands.registerCommand('vfmdbp-vscode.exportXML', exportXML));
+  context.subscriptions.push(vscode.commands.registerCommand('vfmdbp-vscode.shelllTest', callShellTest));
 
 
   // サーバーの起動終了
@@ -72,6 +73,13 @@ function activate(context) {
         return false;
     }
     return true;
+  }
+
+  // Shellコマンド発行テスト
+  function callShellTest(){
+    const term = vscode.window.createTerminal();
+    term.show();
+    term.sendText('ls');
   }
 }
 
