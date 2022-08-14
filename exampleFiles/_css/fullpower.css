@@ -1,303 +1,339 @@
 @charset "UTF-8";
 
 /*リセット*/
-*{
+* {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
+
 html {
-    text-spacing: auto;
+  text-spacing: auto;
 }
 
 /* フォントはcss/fontsフォルダのファイルを直接参照 */
-@font-face{
+@font-face {
   font-family: keyfont;
   src: url("fonts/keyboard-JP-Regular.otf");
 }
-@font-face{
+
+@font-face {
   font-family: inconsolata;
   src: url("fonts/Inconsolata-Regular.ttf");
 }
-@font-face{
+
+@font-face {
   font-family: inconsolata-b;
   src: url("fonts/Inconsolata-Bold.ttf");
 }
-@font-face{
+
+@font-face {
   font-family: notosans-l;
   src: url("fonts/NotoSansJP-Light.otf");
 }
-@font-face{
+
+@font-face {
   font-family: notosans-r;
   src: url("fonts/NotoSansJP-Regular.otf");
 }
-@font-face{
+
+@font-face {
   font-family: notosans-m;
   src: url("fonts/NotoSansJP-Medium.otf");
 }
-@font-face{
+
+@font-face {
   font-family: notosans-b;
   src: url("fonts/NotoSansJP-Bold.otf");
 }
 
 
 /*ページサイズ*/
-@page{
-  size: 148mm 210mm; /*A5正寸*/
+@page {
+  size: 148mm 210mm;
+  /*A5正寸*/
   margin: 18mm 18.5mm 18mm 18.5mm;
   font-size: 10q;
 
   @bottom-center {
-      content: counter(page);
-      margin-top: 2.5mm;
-      width: 8mm;
-      font-size: 12q;
+    content: counter(page);
+    margin-top: 2.5mm;
+    width: 8mm;
+    font-size: 12q;
   }
 }
 
-@page:right{
-    @top-right {
-        content: string(heading, first);
-    }
+@page: right {
+  @top-right {
+    content: string(heading, first);
+  }
 }
 
-@page:nth(1){
-    @top-right {
-        content: none;
-    }
+@page: nth(1) {
+  @top-right {
+    content: none;
+  }
 }
 
 /* 強制改ページ指定*/
-.pagebreak{
+.pagebreak {
   visibility: hidden;
   page-break-after: always;
   margin-top: -4mm;
 }
 
 body {
-    counter-reset: seccount;
-    font-family: notosans-r, sans-serif;
-    font-size: 12q;
-    line-height: 21q;
+  counter-reset: seccount;
+  font-family: notosans-r, sans-serif;
+  font-size: 12q;
+  line-height: 21q;
+  width: 111mm;
 }
 
 /* 基本要素 */
 p {
-    font-size: 12q;
-    line-height: 21q;
-    text-align: justify;
-    font-family: notosans-l;
-    text-indent: 1em;
+  font-size: 12q;
+  line-height: 21q;
+  text-align: justify;
+  font-family: notosans-l;
+  text-indent: 1em;
 }
 
 /* 見出し類 */
-h1,h2,h3,h4,h5,h6{
-    text-spacing: none;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-spacing: none;
 }
 
-h1{
-    font-size: 36q;
-    line-height: 40q;
-    text-align: center;
-    margin: 20mm 0;
-    /* 柱にする */
-    string-set: heading content();
+h1 {
+  font-size: 36q;
+  line-height: 40q;
+  text-align: center;
+  margin: 20mm 0;
+  /* 柱にする */
+  string-set: heading content();
 }
 
-.secheader{
-    background: #FEE;
-    counter-increment: seccount;
-    background: url("img/apron_man1-1smile.png");
-    background-size: 18%;
-    background-repeat: no-repeat;
-    background-position: right bottom;
-    height: 40mm;
-    border: solid 0.5mm #000;
-    padding: 2mm;
-    margin-bottom: 6mm;
+.secheader {
+  background: #FEE;
+  counter-increment: seccount;
+  background: url("img/apron_man1-1smile.png");
+  background-size: 18%;
+  background-repeat: no-repeat;
+  background-position: right bottom;
+  height: 40mm;
+  border: solid 0.5mm #000;
+  padding: 2mm;
+  margin-bottom: 6mm;
 }
 
 h2 {
-    font-size: 26q;
-    line-height: 30q;
-    break-before: page;
-    height: 20mm;
-    margin-bottom: 2mm;
-    margin-left: 20mm;
-}
-h2::before{
-    content:"XX-" counter(seccount, decimal-leading-zero);
-    margin-right: 3mm;
-    margin-left: -20mm;
-    color: #58f;
-}
-.secheader p{
-    text-indent: 0;
-    font-size: 11q;
-    line-height: 18q;
-    font-family: notosans-m;
-    width: 30em;
-    margin-left: 1em;
+  font-size: 26q;
+  line-height: 30q;
+  break-before: page;
+  height: 20mm;
+  margin-bottom: 2mm;
+  margin-left: 20mm;
 }
 
-h3{
-    font-size: 18q;
-    line-height: 22q;
-    margin-top: 6mm;
-    margin-bottom: 2mm;
-    color: #fff;
-    background: #58f;
-    padding: 0.5mm;
-}
-h3::before{
-    content: "●";
-    color: #fff;
+h2::before {
+  content: "XX-" counter(seccount, decimal-leading-zero);
+  margin-right: 3mm;
+  margin-left: -20mm;
+  color: #58f;
 }
 
-h4{
-    font-size: 13q;
-    margin-top: 4mm;
-}
-h4::before{
-    content: "●";
-    color: #58f;
-}
-
-h5{
-    font-size: 12q;
-    margin-top: 4mm;
-    margin-bottom: 1mm;
+.secheader p {
+  text-indent: 0;
+  font-size: 11q;
+  line-height: 18q;
+  font-family: notosans-m;
+  width: 30em;
+  margin-left: 1em;
 }
 
-h6{
-    font-size: 12q;
-    margin-top: 4mm;
-    margin-bottom: 1mm;
-}
-h6::before{
-    content: "CODE";
-    background: #888;
-    color: #FFF;
-    margin-right: 1mm;
-    padding: 0 0.5mm;
-}
-h6.result::before{
-    content: none;
-}
-h6.result{
-    margin-top: -3mm;
+h3 {
+  font-size: 18q;
+  line-height: 22q;
+  margin-top: 6mm;
+  margin-bottom: 2mm;
+  color: #fff;
+  background: #58f;
+  padding: 0.5mm;
 }
 
-ul, ol{
-    margin: 4mm 0 4mm 2em;
-    font-family: notosans-m;
+h3::before {
+  content: "●";
+  color: #fff;
 }
 
-strong{
-    /* text-decoration: underline;
+h4 {
+  font-size: 13q;
+  margin-top: 4mm;
+}
+
+h4::before {
+  content: "●";
+  color: #58f;
+}
+
+h5 {
+  font-size: 12q;
+  margin-top: 4mm;
+  margin-bottom: 1mm;
+}
+
+h6 {
+  font-size: 12q;
+  margin-top: 4mm;
+  margin-bottom: 1mm;
+}
+
+h6::before {
+  content: "CODE";
+  background: #888;
+  color: #FFF;
+  margin-right: 1mm;
+  padding: 0 0.5mm;
+}
+
+h6.result::before {
+  content: none;
+}
+
+h6.result {
+  margin-top: -3mm;
+}
+
+ul,
+ol {
+  margin: 4mm 0 4mm 2em;
+  font-family: notosans-m;
+}
+
+strong {
+  /* text-decoration: underline;
     text-decoration-color: #22f; */
-    border-bottom: dashed 0.25mm #22f;
+  border-bottom: dashed 0.25mm #22f;
 }
 
-kbd{
-    font-family: keyfont;
+kbd {
+  font-family: keyfont;
 }
 
 
 /* コード */
-pre{
-    font-size: 12q;
-    line-height: 21q;
-    font-family: inconsolata;
-    border: solid 0.5mm #000;
-    border-left: solid 7mm #888;
-    padding: 1mm;
-    margin-bottom: 6mm;
+pre {
+  font-size: 12q;
+  line-height: 21q;
+  font-family: inconsolata;
+  border: solid 0.5mm #000;
+  border-left: solid 7mm #888;
+  padding: 1mm;
+  margin-bottom: 6mm;
 }
-.result+pre{
-    background: #DDD;
-    border-left: solid 0.5mm #000;
+
+.result+pre {
+  background: #DDD;
+  border-left: solid 0.5mm #000;
 }
-.codered{
-    color: #58f;
-    font-size: 10q;
-    line-height: 12q;
-    position: relative;
+
+.codered {
+  color: #58f;
+  font-size: 10q;
+  line-height: 12q;
+  position: relative;
 }
-.codered::before{
-    content: "";
-    display: block;
-    position: absolute;
-    width: 5mm;
-    top: 1mm;
-    left: -5mm;
-    border-bottom: dashed 0.25mm #58f;
+
+.codered::before {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 5mm;
+  top: 1mm;
+  left: -5mm;
+  border-bottom: dashed 0.25mm #58f;
 }
 
 /* 構文（syntax） */
-.syntax{
-    padding: 1mm;
-    background: #cdf;
-    margin: 4mm 0;
+.syntax {
+  padding: 1mm;
+  background: #cdf;
+  margin: 4mm 0;
 }
-.syntax h6{
-    margin-top: 0;
+
+.syntax h6 {
+  margin-top: 0;
 }
-.syntax h6::before{
-    content: "Syntax";
+
+.syntax h6::before {
+  content: "Syntax";
 }
-.syntax pre{
-    border: none;
-    font-size: 14q;
-    background: #fff;
-    margin: 1mm;
+
+.syntax pre {
+  border: none;
+  font-size: 14q;
+  background: #fff;
+  margin: 1mm;
 }
-.syntax ul{
-    display: flex;
-    margin: 0;
-    list-style: none;
-    justify-content: space-around;
+
+.syntax ul {
+  display: flex;
+  margin: 0;
+  list-style: none;
+  justify-content: space-around;
 }
-.syntax li{
-    font-size: 11q;
-    line-height: 13q;
-    max-width: 9em;
+
+.syntax li {
+  font-size: 11q;
+  line-height: 13q;
+  max-width: 9em;
 }
 
 /* 表 */
-table{
-    border-collapse: collapse;
-    font-size: 11q;
-    line-height: 16q;
-    margin-bottom: 4mm;
-}
-td, th{
-    border: solid 0.5mm #888;
-    padding: 1mm;
-    min-width: 7em;
+table {
+  border-collapse: collapse;
+  font-size: 11q;
+  line-height: 16q;
+  margin-bottom: 4mm;
 }
 
-th{
+td,
+th {
+  border: solid 0.5mm #888;
+  padding: 1mm;
+  min-width: 7em;
+}
+
+th {
   font-family: notosans-m;
   color: #ffffff;
   background-color: #7e7e7e;
 }
 
 /* 図版領域 */
-.figure{
+.figure {
   display: flex;
-  flex-direction: row;     /*横並びにする*/
-  align-items: flex-end; /*縦に伸ばさない*/
+  flex-direction: row;
+  /*横並びにする*/
+  align-items: flex-end;
+  /*縦に伸ばさない*/
   flex-wrap: wrap;
   position: relative;
   margin-top: 4mm;
   margin-bottom: 4mm;
 }
-.figure svg{
+
+.figure svg {
   border: solid 0.2mm #eee;
 }
+
 /* 図中文字 */
-.figure ul{
+.figure ul {
   position: absolute;
   right: 0;
   top: 0;
@@ -310,67 +346,76 @@ th{
   margin: 0;
   padding-left: 0;
 }
-.figure li{
+
+.figure li {
   margin-bottom: 3.5mm;
   border: solid 0.25mm #f00;
   padding: 0.25mm 1mm;
-  background: rgba(255,255,255,0.5);
+  background: rgba(255, 255, 255, 0.5);
 }
-.figure .akakome::first-letter{
+
+.figure .akakome::first-letter {
   color: #f00;
 }
-li.aokome{
+
+li.aokome {
   /* text-indent: -1em; */
   border: dashed 0.25mm #00f;
 }
-.figure li>p::before{
-    content: "リストの最後に空き行入れてください";
-    position:absolute;
-    color: #fff;
-    background: #f00;
-    right: 0;
+
+.figure li>p::before {
+  content: "リストの最後に空き行入れてください";
+  position: absolute;
+  color: #fff;
+  background: #f00;
+  right: 0;
 }
 
 /* コラム */
 .column {
-    border: solid 0.5mm #000;
-    padding: 2mm;
+  border: solid 0.5mm #000;
+  padding: 2mm;
 }
-.column h5{
-    font-size: 12q;
-    margin: 3mm 0;
+
+.column h5 {
+  font-size: 12q;
+  margin: 3mm 0;
 }
-.column p{
-    font-size: 11q;
-    line-height: 18q;
+
+.column p {
+  font-size: 11q;
+  line-height: 18q;
 }
 
 /* 章末のまとめ */
-.matome{
-    background: #EEE;
-    padding: 2mm;
-    position: relative;
+.matome {
+  background: #EEE;
+  padding: 2mm;
+  position: relative;
 }
-.matome::after{
-    content: "";
-    background: url("img/apron_man2-1idea.png");
-    background-size: contain;
-    background-repeat: no-repeat;
-    width: 18mm;
-    height: 18mm;
-    position: absolute;
-    top: -4mm;
-    right: 0;
+
+.matome::after {
+  content: "";
+  background: url("img/apron_man2-1idea.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 18mm;
+  height: 18mm;
+  position: absolute;
+  top: -4mm;
+  right: 0;
 }
-.matome h3{
-    margin-top: 2mm;
+
+.matome h3 {
+  margin-top: 2mm;
 }
-.matome h3::before{
-    content: none;
+
+.matome h3::before {
+  content: none;
 }
 
 /* 会話のフキダシ */
-.face{
+.face {
   font-size: 12q;
   line-height: 17q;
   background: #cdf;
@@ -384,16 +429,20 @@ li.aokome{
   text-indent: 0;
   position: relative;
 }
-:not(.face)+.face{
+
+:not(.face)+.face {
   margin-top: 4mm;
 }
-.face+:not(.face){
-    margin-bottom: 4mm;
+
+.face+:not(.face) {
+  margin-bottom: 4mm;
 }
-.face + h3{
-    margin-top: 8mm;
+
+.face+h3 {
+  margin-top: 8mm;
 }
-.face::after{
+
+.face::after {
   content: "◀";
   background: url("img/apron_man1-1smile.png");
   background-size: contain;
@@ -407,22 +456,26 @@ li.aokome{
   text-align: right;
   line-height: 14mm;
 }
-.teacher-laugh::after{
+
+.teacher-laugh::after {
   background: url("img/apron_man1-4laugh.png");
   background-size: contain;
   background-repeat: no-repeat;
 }
-.teacher-idea::after{
+
+.teacher-idea::after {
   background: url("img/apron_man2-1idea.png");
   background-size: contain;
   background-repeat: no-repeat;
 }
-.teacher-shock::after{
+
+.teacher-shock::after {
   background: url("img/apron_man2-2shock.png");
   background-size: contain;
   background-repeat: no-repeat;
 }
-.teacher-hatena::after{
+
+.teacher-hatena::after {
   background: url("img/apron_man3-1question.png");
   background-size: contain;
   background-repeat: no-repeat;

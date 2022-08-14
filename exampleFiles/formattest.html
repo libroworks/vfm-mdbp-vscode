@@ -1,129 +1,155 @@
-<!DOCTYPE html><html><head>
-    <title></title>
+<!DOCTYPE html><html lang="ja"><head>
     <meta charset="utf-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="_css/fullpower.css">
   </head>
   <body>
-<h1 id="h1_0">Chapter 1　章タイトルる？</h1>
-<p>基本コンセプト</p>
-<ul>
-<li>その言語の魅力、面白さを伝える</li>
-<li>内容はガチでも、デザインは柔らか</li>
-</ul>
-<div class="secheader"><h2 id="h2_0">節タイトル - Enter The TypeScript or GoLang</h2><p>リード文。読者に話しかける感じで、この節で説明することを知ると、何ができるようになるのかを伝えてください。あああああああああああああああああああああああああああああああいああ</p></div>
+    <section id="chapter-1章タイトル" class="level1">
+      <h1 id="h1_0">Chapter 1　章タイトル</h1>
+      <p>基本コンセプト</p>
+      <ul>
+        <li>その言語の魅力、面白さを伝える</li>
+        <li>内容はガチでも、デザインは柔らか</li>
+      </ul>
+      <section id="節タイトル---enter-the-typescript-or-golang" class="level2">
+        <div class="secheader"><h2 id="h2_0">節タイトル - Enter The TypeScript or GoLang</h2><p>リード文。読者に話しかける感じで、この節で説明することを知ると、何ができるようになるのかを伝えてください。あああああああああああああああああああああああああああああああいああ</p></div>
+        
+        <section id="モジュールを利用する---h3中見出し" class="level3">
+          <h3 id="h3_0">モジュールを利用する - h3中見出し</h3>
+          <section id="datetimeクラスの利用---h4小見出し" class="level4">
+            <h4 id="h4_0">datetimeクラスの利用 - h4小見出し</h4>
+            <p>Chapter 4でオリジナルの関数をまとめたモジュールを作りましたが、実はPythonには、はじめから多数のモジュールが付属しています。これら<strong>付属のモジュールを総称して「標準ライブラリ」と呼びます</strong>。</p>
+            <p>標準ライブラリのモジュールを利用することで、プログラムでできることの範囲をさらに広げることができます。標準ライブラリはimport文でインポートするだけですぐに利用できます。</p>
+            <section id="chap5-3-1py" class="level6">
+              <h6 class="samplefile" id="h6_0">chap5-3-1.py</h6>
+              <pre class="language-py"><code class="language-py"><span class="token keyword">from</span> datetime <span class="token keyword">import</span> date<span class="token punctuation">,</span> timedelta
+start <span class="token operator">=</span> date<span class="token punctuation">(</span> <span class="token number">2018</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">,</span> <span class="token number">18</span> <span class="token punctuation">)</span>    <span class="token comment">#←コメントの先頭を←にすると引き出し線に</span>
+<span class="token keyword">for</span> days <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">14</span><span class="token punctuation">)</span><span class="token punctuation">:</span>    <span class="token comment">#←繰り返しのfor文</span>
+    cur <span class="token operator">=</span> start <span class="token operator">+</span> timedelta<span class="token punctuation">(</span> days<span class="token operator">=</span>days <span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span> cur <span class="token punctuation">)</span></code></pre>
 
-<h3 id="h3_0">モジュールを利用する - h3中見出し</h3>
-<h4 id="h4_0">datetimeクラスの利用 - h4小見出し</h4>
-<p>Chapter 4でオリジナルの関数をまとめたモジュールを作りましたが、実はPythonには、はじめから多数のモジュールが付属しています。これら<strong>付属のモジュールを総称して「標準ライブラリ」と呼びます</strong>。</p>
-<p>標準ライブラリのモジュールを利用することで、プログラムでできることの範囲をさらに広げることができます。標準ライブラリはimport文でインポートするだけですぐに利用できます。</p>
-<h6 class="samplefile" id="h6_0">chap5-3-1.py</h6>
-<pre><code class="language-py"><span class="hljs-keyword">from</span> datetime <span class="hljs-keyword">import</span> date, timedelta
-start = date( <span class="hljs-number">2018</span>, <span class="hljs-number">6</span>, <span class="hljs-number">18</span> )    <span class="hljs-comment codered">コメントの先頭を←にすると引き出し線に</span>
-<span class="hljs-keyword">for</span> days <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">14</span>):    <span class="hljs-comment codered">繰り返しのfor文</span>
-    cur = start + timedelta( days=days )
-    <span class="hljs-built_in">print</span>( cur )
-</code></pre>
-
-<h6 id="h6_1" class="result">実行結果</h6>
-<pre><code class="language-console">2018/6/18
+            </section>
+            <section id="実行結果" class="level6">
+              <h6 id="h6_1">実行結果</h6>
+              <pre class="language-console"><code class="language-console">2018/6/18
 2018/6/18
 2018/6/18
-2018/6/18
-</code></pre>
+2018/6/18</code></pre>
 
-<div class="syntax">
-<h6 id="h6_2">import文の書式</h6>
-<pre><code class="language-py"><span class="hljs-keyword">from</span> datetime <span class="hljs-keyword">import</span> date, timedelta
-</code></pre>
+              <p>
+                </p><div class="syntax">
+                ###### import文の書式
+              <p></p>
+              <pre class="language-py"><code class="language-py"><span class="token keyword">from</span> datetime <span class="token keyword">import</span> date<span class="token punctuation">,</span> timedelta</code></pre>
 
-<ul>
-<li>モジュール名またはパッケージ名</li>
-<li>クラス名
-</li></ul></div>
-
-<p>複数のクラスをカンマ区切りで指定すると、まとめてインポートできます。</p>
-<p class="face teacher teacher-laugh">吹き出しを使って時々読者に語りかけ、ポイント、心構え、注意点など、強調したい物事を伝えてください。</p>
-<h3 id="h3_1">2週間分の日付の一覧を作る</h3>
-<p>開始日から2週間分の日付を表示するプログラムを書いてみましょう。「2週間分」のように複数のデータを作る場合、for文を使うことはすぐ思いつきます。ただし、dateオブジェクトだけで2週間分の日付を作ろうとするとうまくいきません。<strong>その月の最終日を越えた日付、たとえば33日などを渡すと、バリューエラーが発生してしまうからです</strong>。そこで、開始日のdateオブジェクトを作り、そこに経過日数のtimedeltaオブジェクトを加えて目的の日付を作ります。</p>
-<h5 id="h5_0">標準ライブラリのモジュール（抜粋）</h5>
-<table>
-<thead>
-<tr>
-<th>モジュール名</th>
-<th>説明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>csv</td>
-<td>CSVファイルの読み込みと書き込みを行う</td>
-</tr>
-<tr>
-<td>datetime</td>
-<td>日時を扱う</td>
-</tr>
-<tr>
-<td>json</td>
-<td>Webでよく用いられるJSON形式のデータを扱う</td>
-</tr>
-<tr>
-<td>math</td>
-<td>三角関数など数値計算用の関数がまとめられている</td>
-</tr>
-<tr>
-<td>pathlib</td>
-<td>ファイルやフォルダの操作を行う</td>
-</tr>
-<tr>
-<td>random</td>
-<td>乱数（デタラメに見える数）を生成する</td>
-</tr>
-<tr>
-<td>tkinter</td>
-<td>GUIアプリケーションを作る</td>
-</tr>
-<tr>
-<td>zipfile</td>
-<td>ZIP形式の圧縮ファイルを扱う</td>
-</tr>
-</tbody></table>
-<div class="figure">
-<svg width="70.414mm" height="54.751mm" viewBox="0 0 70.414 54.751">
-<image width="176.036" height="136.878" xlink:href="img0/c0-1-12.png" transform="translate(0,0) scale(0.4)"> 
-</image></svg> <p></p>
-<ul>
-<li class="akakome"><span>❶</span>手順［I Agree］をクリック</li>
-<li class="akakome"><span>❷</span>手順［Cancel］をクリック</li>
-<li class="aokome">結果</li>
-</ul>
-</div>
-<ul>
-<li>箇条書きああああああああああああああああああああああああああああああああああああああ</li>
-<li>箇条書き</li>
-<li>箇条書き</li>
-<li>箇条書き</li>
-</ul>
-<ol>
-<li>番号付き箇条書き</li>
-<li>番号付き箇条書き</li>
-<li>番号付き箇条書き</li>
-<li>番号付き箇条書き</li>
-</ol>
-<div class="column">
-<h5 id="h5_1">コラム：コラムタイトル</h5>
-<p>開始日から2週間分の日付を表示するプログラムを書いてみましょう。「2週間分」のように複数のデータを作る場合、for文を使うことはすぐ思いつきます。ただし、dateオブジェクトだけで2週間分の日付を作ろうとするとうまくいきません。<strong>その月の最終日を越えた日付、たとえば33日などを渡すと、バリューエラーが発生してしまうからです</strong>。そこで、開始日のdateオブジェクトを作り、そこに経過日数のtimedeltaオブジェクトを加えて目的の日付を作ります。</p>
-</div>
-<hr class="pagebreak">
-<div class="matome">
-<h3 id="h3_2">この章のまとめ</h3>
-<ul>
-<li>章の最後（節ではなく）にまとめを入れたいです。この章で説明したことを、あとから見返す役に立つ内容を想定しています。</li>
-<li>あああああああああああああああああ</li>
-<li>あああああああああああああああああ</li>
-<li>あああああああああああああああああ</li>
-<li>あああああああああああああああああ</li>
-</ul>
-</div>
-
+              <ul>
+                <li>モジュール名またはパッケージ名</li>
+                <li>
+                  クラス名
+                  </li></ul></div>
+                
+              
+              <p>複数のクラスをカンマ区切りで指定すると、まとめてインポートできます。</p>
+              <p class="face teacher teacher-laugh">吹き出しを使って時々読者に語りかけ、ポイント、心構え、注意点など、強調したい物事を伝えてください。</p>
+            </section>
+          </section>
+        </section>
+        <section class="level3 test" id="2週間分の日付の一覧を作る">
+          <h3 class="test" id="h3_1">2週間分の日付の一覧を作る</h3>
+          <p>開始日から2週間分の日付を表示するプログラムを書いてみましょう。「2週間分」のように複数のデータを作る場合、for文を使うことはすぐ思いつきます。ただし、dateオブジェクトだけで2週間分の日付を作ろうとするとうまくいきません。<strong>その月の最終日を越えた日付、たとえば33日などを渡すと、バリューエラーが発生してしまうからです</strong>。そこで、開始日のdateオブジェクトを作り、そこに経過日数のtimedeltaオブジェクトを加えて目的の日付を作ります。</p>
+          <section id="標準ライブラリのモジュール抜粋" class="level5">
+            <h5 id="h5_0">標準ライブラリのモジュール（抜粋）</h5>
+            <table>
+              <thead>
+                <tr>
+                  <th>モジュール名</th>
+                  <th>説明</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>csv</td>
+                  <td>CSVファイルの読み込みと書き込みを行う</td>
+                </tr>
+                <tr>
+                  <td>datetime</td>
+                  <td>日時を扱う</td>
+                </tr>
+                <tr>
+                  <td>json</td>
+                  <td>Webでよく用いられるJSON形式のデータを扱う</td>
+                </tr>
+                <tr>
+                  <td>math</td>
+                  <td>三角関数など数値計算用の関数がまとめられている</td>
+                </tr>
+                <tr>
+                  <td>pathlib</td>
+                  <td>ファイルやフォルダの操作を行う</td>
+                </tr>
+                <tr>
+                  <td>random</td>
+                  <td>乱数（デタラメに見える数）を生成する</td>
+                </tr>
+                <tr>
+                  <td>tkinter</td>
+                  <td>GUIアプリケーションを作る</td>
+                </tr>
+                <tr>
+                  <td>zipfile</td>
+                  <td>ZIP形式の圧縮ファイルを扱う</td>
+                </tr>
+              </tbody>
+            </table>
+            <p>
+              </p><div class="figure">
+              
+              <svg width="70.414mm" height="54.751mm" viewBox="0 0 70.414 54.751">
+                <image width="176.036" height="136.878" xlink:href="img0/c0-1-12.png" transform="translate(0,0) scale(0.4)"></image>
+              </svg>
+            <p></p>
+            <ul>
+              <li class="akakome"><span>❶</span>手順［I Agree］をクリック</li>
+              <li class="akakome"><span>❷</span>手順［Cancel］をクリック</li>
+              <li class="aokome">結果</li>
+            </ul>
+            </div>
+            <ul>
+              <li>箇条書きああああああああああああああああああああああああああああああああああああああ</li>
+              <li>箇条書き</li>
+              <li>箇条書き</li>
+              <li>箇条書き</li>
+            </ul>
+            <ol>
+              <li>番号付き箇条書き</li>
+              <li>番号付き箇条書き</li>
+              <li>番号付き箇条書き</li>
+              <li>番号付き箇条書き</li>
+            </ol>
+            <p>
+              </p><div class="column">
+              ##### コラム：コラムタイトル
+              開始日から2週間分の日付を表示するプログラムを書いてみましょう。「2週間分」のように複数のデータを作る場合、for文を使うことはすぐ思いつきます。ただし、dateオブジェクトだけで2週間分の日付を作ろうとするとうまくいきません。<strong>その月の最終日を越えた日付、たとえば33日などを渡すと、バリューエラーが発生してしまうからです</strong>。そこで、開始日のdateオブジェクトを作り、そこに経過日数のtimedeltaオブジェクトを加えて目的の日付を作ります。
+            <p></p>
+            </div>
+            <hr class="pagebreak">
+            <div class="matome">
+          </div></section>
+        </section>
+        <section id="この章のまとめ" class="level3">
+          <h3 id="h3_2">この章のまとめ</h3>
+          <ul>
+            <li>章の最後（節ではなく）にまとめを入れたいです。この章で説明したことを、あとから見返す役に立つ内容を想定しています。</li>
+            <li>あああああああああああああああああ</li>
+            <li>あああああああああああああああああ</li>
+            <li>あああああああああああああああああ</li>
+            <li>あああああああああああああああああ</li>
+          </ul>
+          
+        </section>
+      </section>
+    </section>
   
 
 </body></html>

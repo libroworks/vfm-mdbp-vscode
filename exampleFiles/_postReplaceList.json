@@ -1,6 +1,6 @@
 [
   {
-    "f": "@div:([a-z|0-9 ]+)",
+    "f": "@div:([a-z|0-9|_ ]+)",
     "r": "<div class=\"$1\">"
   },
   {
@@ -44,48 +44,48 @@
     "r": "$1"
   },
   {
-      "f": "<li[^>]*>▶",
-      "r": "<li class=\"aokome\">"
+    "f": "<li[^>]*>▶",
+    "r": "<li class=\"aokome\">"
   },
   {
-      "f": "<li[^>]*>([\u2776-\u277F\u24EB-\u24F4]+)",
-      "r": "<li class=\"akakome\"><span>$1</span>"
+    "f": "<li[^>]*>([\u2776-\u277F\u24EB-\u24F4]+)",
+    "r": "<li class=\"akakome\"><span>$1</span>"
   },
   {
     "f": "<h6 ([^>]*)>実行結果",
     "r": "<h6 $1 class=\"result\">実行結果"
   },
   {
-      "f": "<span class=\"hljs-comment\"([^>]*)>#←",
-      "r": "<span class=\"hljs-comment codered\"$1>"
+    "f": "<span class=\"hljs-comment\"([^>]*)>#←",
+    "r": "<span class=\"hljs-comment codered\"$1>"
   },
   {
-      "f": "<span class=\"hljs-comment\"([^>]*)>//←",
-      "r": "<span class=\"hljs-comment codered\"$1>"
+    "f": "<span class=\"hljs-comment\"([^>]*)>//←",
+    "r": "<span class=\"hljs-comment codered\"$1>"
   },
   {
-      "f": "<span class=\"hljs-comment\"([^>]*)>&lt;!--←",
-      "r": "<span class=\"hljs-comment codered\"$1>"
+    "f": "<span class=\"hljs-comment\"([^>]*)>&lt;!--←",
+    "r": "<span class=\"hljs-comment codered\"$1>"
   },
   {
-      "f": "<p>【著者normal】((?!<\/p>).*)<\/p>",
-      "r": "<p class=\"face teacher\">$1<\/p>"
+    "f": "<p>【著者normal】((?!<\/p>).*)<\/p>",
+    "r": "<p class=\"face teacher\">$1<\/p>"
   },
   {
-      "f": "<p>【著者egao】((?!<\/p>).*)<\/p>",
-      "r": "<p class=\"face teacher teacher-laugh\">$1<\/p>"
+    "f": "<p>【著者egao】((?!<\/p>).*)<\/p>",
+    "r": "<p class=\"face teacher teacher-laugh\">$1<\/p>"
   },
   {
-      "f": "<p>【著者idea】((?!<\/p>).*)<\/p>",
-      "r": "<p class=\"face teacher teacher-idea\">$1<\/p>"
+    "f": "<p>【著者idea】((?!<\/p>).*)<\/p>",
+    "r": "<p class=\"face teacher teacher-idea\">$1<\/p>"
   },
   {
-      "f": "<p>【著者shock】((?!<\/p>).*)<\/p>",
-      "r": "<p class=\"face teacher teacher-shock\">$1<\/p>"
+    "f": "<p>【著者shock】((?!<\/p>).*)<\/p>",
+    "r": "<p class=\"face teacher teacher-shock\">$1<\/p>"
   },
   {
-      "f": "<p>【著者hatena】((?!<\/p>).*)<\/p>",
-      "r": "<p class=\"face teacher teacher-hatena\">$1<\/p>"
+    "f": "<p>【著者hatena】((?!<\/p>).*)<\/p>",
+    "r": "<p class=\"face teacher teacher-hatena\">$1<\/p>"
   },
   {
     "f": "<p>(<div class=\"[^\"]+\">)</p>",
@@ -143,5 +143,4 @@
     "f": "<p><\/p>",
     "r": ""
   }
-
 ]

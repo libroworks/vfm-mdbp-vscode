@@ -110,6 +110,7 @@
     "webpack-cli": "^4.10.0"
   },
   "dependencies": {
+    "@vivliostyle/vfm": "^1.2.2",
     "cheerio": "^1.0.0-rc.12",
     "chokidar": "^3.5.3",
     "colors": "^1.4.0",
@@ -120,6 +121,7 @@
     "faye-websocket": "^0.11.4",
     "fs": "^0.0.1-security",
     "highlight.js": "^11.5.1",
+    "html-whitespace-sensitive-tag-names": "^2.0.0",
     "http": "^0.0.1-security",
     "http-auth": "^4.1.9",
     "http-proxy": "^1.18.1",
