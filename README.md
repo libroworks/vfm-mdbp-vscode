@@ -23,7 +23,7 @@ https://github.com/vivliostyle/vfm
 1. 読み込むCSSファイルを指定するには、Markdownファイルの先頭にFrontmatterを書きます。
 https://vivliostyle.github.io/vfm/#/vfm#frontmatter
 
-Frontmatterの例
+##### Frontmatterの例
 ```md
 ---
 lang: 'ja'
@@ -63,16 +63,19 @@ PDFを出力したい場合は、Webブラウザ側の印刷機能を利用し�
 ![右クリックメニューからの実行](docimg-4.png)
 
 ### Generate Merged PDF（テスト機能）
-Vivliostyle CLIを使ってHTMLを連結して書き出します。
+Vivliostyle CLIを使ってHTMLを連結して書き出します（事前にVivliostyle CLIのインストールが必要な機能です）。
 
 vivliostyle.config.jsというファイルを作業フォルダ内のルートに作って、読み込みhtmlファイルを指定する必要があります。
+
+##### vivliostyle.config.jsの例
 ```
 // @ts-check
 const vivliostyleConfig = {
   entry: [
     // mdを指定するとMDBPの独自仕様部分と画像類が外れる
-    'formattest.html',
-    'formattest_copy.html'
+    'intro.html',
+    'chapter1.html',
+    'chapter2.html'
   ], 
   output: [
     './merged_output.pdf',
@@ -82,7 +85,7 @@ const vivliostyleConfig = {
 module.exports = vivliostyleConfig;
 ```
 
-Vivliostyle CLIの仕様ではentryセクションにMarkdownファイルも指定できますが、VMFでのHTML変換しか行われないため、MDBPが処理している部分が反映されません。MDBPが生成したHTMLファイルを指定するのが無難です。
+Vivliostyle CLIの仕様ではentryセクションにMarkdownファイルも指定できますが、VFMでのHTML変換しか行われないため、MDBPが処理している部分が反映されません。MDBPが生成したHTMLファイルを指定するのを推奨します。
 
 https://docs.vivliostyle.org/ja/vivliostyle-cli#%E6%A7%8B%E6%88%90%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB-vivliostyleconfigjs
 
