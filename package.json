@@ -20,6 +20,7 @@
     "onCommand:vfmdbp-vscode.toggle",
     "onCommand:vfmdbp-vscode.toggleVS",
     "onCommand:vfmdbp-vscode.exportXML",
+    "onCommand:vfmdbp-vscode.previewThisCLI",
     "onCommand:vfmdbp-vscode.shelllTest"
   ],
   "main": "./dist/extension.js",
@@ -48,6 +49,11 @@
       {
         "command": "vfmdbp-vscode.exportXML",
         "title": "Export InDesign XML",
+        "category": "vfmdbp-vscode"
+      },
+      {
+        "command": "vfmdbp-vscode.previewThisCLI",
+        "title": "Preview This File By Vivliostyle CLI",
         "category": "vfmdbp-vscode"
       },
       {
