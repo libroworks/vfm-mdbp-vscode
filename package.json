@@ -7,7 +7,7 @@
   "name": "vfmdbp-vscode",
   "displayName": "vfm_mdbp_vscode",
   "description": "Markdown Book Preview for VSCode with VFM",
-  "version": "0.1.0",
+  "version": "0.1.5",
   "engines": {
     "vscode": "^1.69.0"
   },
@@ -20,8 +20,9 @@
     "onCommand:vfmdbp-vscode.toggle",
     "onCommand:vfmdbp-vscode.toggleVS",
     "onCommand:vfmdbp-vscode.exportXML",
-    "onCommand:vfmdbp-vscode.previewThisCLI",
-    "onCommand:vfmdbp-vscode.shelllTest"
+    "onCommand:vfmdbp-vscode.previewByConfig",
+    "onCommand:vfmdbp-vscode.buildByConfig",
+    "onCommand:vfmdbp-vscode.previewThisCLI"
   ],
   "main": "./dist/extension.js",
   "contributes": {
@@ -52,13 +53,18 @@
         "category": "vfmdbp-vscode"
       },
       {
-        "command": "vfmdbp-vscode.previewThisCLI",
-        "title": "Preview This File By Vivliostyle CLI",
+        "command": "vfmdbp-vscode.previewByConfig",
+        "title": "Preview by config.js",
         "category": "vfmdbp-vscode"
       },
       {
-        "command": "vfmdbp-vscode.shelllTest",
-        "title": "Generate Merged PDF",
+        "command": "vfmdbp-vscode.buildByConfig",
+        "title": "Build PDF by config.js",
+        "category": "vfmdbp-vscode"
+      },
+      {
+        "command": "vfmdbp-vscode.previewThisCLI",
+        "title": "Preview This File By Vivliostyle CLI",
         "category": "vfmdbp-vscode"
       }
     ]

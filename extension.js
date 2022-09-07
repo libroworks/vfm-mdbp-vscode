@@ -22,8 +22,24 @@ function activate(context) {
   context.subscriptions.push(vscode.commands.registerCommand('vfmdbp-vscode.toggle', toggle));
   context.subscriptions.push(vscode.commands.registerCommand('vfmdbp-vscode.toggleVS', toggleVS));
   context.subscriptions.push(vscode.commands.registerCommand('vfmdbp-vscode.exportXML', exportXML));
-  context.subscriptions.push(vscode.commands.registerCommand('vfmdbp-vscode.shelllTest', callShellTest));
-	context.subscriptions.push(vscode.commands.registerCommand('vfmdbp-vscode.previewThisCLI', previewWithCLI));
+  context.subscriptions.push(vscode.commands.registerCommand('vfmdbp-vscode.previewThisCLI', ()=>{
+  const htmlfilepath = convertMD2HTML();
+    if(htmlfilepath){
+      callShell(`vivliostyle preview "${htmlfilepath}"`);
+    }
+  }));
+	context.subscriptions.push(vscode.commands.registerCommand('vfmdbp-vscode.previewByConfig', function(){
+		callShell('vivliostyle preview');
+	}));
+	context.subscriptions.push(vscode.commands.registerCommand('vfmdbp-vscode.buildByConfig', function(){
+		callShell('vivliostyle build');
+	}));
+
+  // 自動更新設定（WorkSpace内のファイルが更新され、それがMarkdownであればHTMLを書き出す）
+  vscode.workspace.onDidSaveTextDocument( event => {
+    convertMD2HTML();
+  });
+
 
   // サーバーの起動終了
   function startServer() {
@@ -60,30 +76,28 @@ function activate(context) {
     markdownBookPreviewServer.exportInDesignXML(mdpath);
   }
 
-  // vivliostyle-cli関連
-  // このMarkdownをプレビュー
-  function previewWithCLI() {
+  // Markdownファイルの変換
+  function convertMD2HTML(){
     const editor = vscode.window.activeTextEditor;
-    if (checkEditorPath(editor) === false) return;
+    if (checkEditorPath(editor) === false) return null;
     // プレビューしたいパスやVSmodeを設定
     const mdpath = editor.document.fileName.replace(/^[a-z]:/, (d) => d.toUpperCase()); 
     console.log(mdpath);
-    const homePath = vscode.workspace.workspaceFolders[0].uri.fsPath;
+    const homePath = MarkdownBookPreviewServer.searchHomepath(mdpath);
     const htmlfilepath = MarkdownBookPreviewConvert.convertMarkdown(mdpath, homePath);
+    return htmlfilepath;
+  }
 
-		callShell(`vivliostyle preview "${htmlfilepath}"`);
-
-    //テキストがセーブされたとき更新
-    vscode.workspace.onDidSaveTextDocument( event => {
-      console.log('onDidSaveTextDocument');
-      const editor = vscode.window.activeTextEditor;
-      if (checkEditorPath(editor) === false) return;
-      // プレビューしたいパスやVSmodeを設定
-      const mdpath = editor.document.fileName.replace(/^[a-z]:/, (d) => d.toUpperCase()); 
-      const homePath = vscode.workspace.workspaceFolders[0].uri.fsPath;
-      const htmlfilepath = MarkdownBookPreviewConvert.convertMarkdown(mdpath, homePath);    
-      console.log(`update ${htmlfilepath}`);
-    });
+  // ターミナルにコマンドを発行する
+  function callShell(shellcommand){
+    const term = vscode.window.activeTerminal?.name === 'vivliostyle-cli-helper' ? vscode.window.activeTerminal : vscode.window.createTerminal('vivliostyle-cli-helper');
+    term.show();
+    // PowerShellかつvivliostyleスクリプトの実行時のみ許可が必要
+    if(vscode.env.shell.includes('powershell') && shellcommand.indexOf('vivliostyle') === 0){
+      term.sendText(`PowerShell -ExecutionPolicy RemoteSigned ${shellcommand}`);
+    } else {
+      term.sendText(shellcommand);
+    }
   }
 
 

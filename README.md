@@ -163,6 +163,14 @@ Markdownの記述を簡単にするために、デザイン都合でHTML構造�
 ]
 ```
 
+### Vivliostyle CLIのサポート（v0.1.5より追加）
+コマンドパネルより、mdbp-vscode: Open Viviostyle Preview CLIを選択すると、Vivliostyle CLIによるプレビューを利用できます。
+Node.jsとVivliostyle CLIのインストールが別途必要ですが、原稿フォルダにViewerを用意したり（ViewerのバージョンはVivliostyle CLIのバージョンに依存）、サーバーを起動したりする必要がなくなります。
+
+https://docs.vivliostyle.org/ja/vivliostyle-cli
+
+vivliostyle.config.jsを用いた複数ファイル書き出しも可能になりました。
+
 ## Requirements
 - VSCode 1.69.0以上
 - 作業フォルダー内にVivliostyle viwerが必要です。
@@ -179,6 +187,9 @@ Users appreciate release notes as you update your extension.
 
 ### 0.1.0
 最初のリリース
+
+### 0.1.5
+プレビュー更新をmdbp-vscode 0.1.5に合わせて修正
 
 -----------------------------------------------------------------------------------------------------------
 
