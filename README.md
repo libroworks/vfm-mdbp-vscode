@@ -191,6 +191,9 @@ Users appreciate release notes as you update your extension.
 ### 0.1.5
 プレビュー更新をmdbp-vscode 0.1.5に合わせて修正
 
+### 0.1.6
+Vivliostyle CLIを利用したPDF書き出しを追加
+
 -----------------------------------------------------------------------------------------------------------
 
 (c)libroworks.co.jp

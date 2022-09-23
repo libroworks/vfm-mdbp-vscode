@@ -28,7 +28,13 @@ function activate(context) {
       callShell(`vivliostyle preview "${htmlfilepath}"`);
     }
   }));
-	context.subscriptions.push(vscode.commands.registerCommand('vfmdbp-vscode.previewByConfig', function(){
+  context.subscriptions.push(vscode.commands.registerCommand('vfmdbp-vscode.buildThisCLI', ()=>{
+    const htmlfilepath = convertMD2HTML();
+      if(htmlfilepath){
+        callShell(`vivliostyle build "${htmlfilepath}"`);
+      }
+    }));
+    context.subscriptions.push(vscode.commands.registerCommand('vfmdbp-vscode.previewByConfig', function(){
 		callShell('vivliostyle preview');
 	}));
 	context.subscriptions.push(vscode.commands.registerCommand('vfmdbp-vscode.buildByConfig', function(){
