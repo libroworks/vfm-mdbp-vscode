@@ -7,7 +7,7 @@
   "name": "vfmdbp-vscode",
   "displayName": "vfm_mdbp_vscode",
   "description": "Markdown Book Preview for VSCode with VFM",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "engines": {
     "vscode": "^1.69.0"
   },
@@ -31,47 +31,47 @@
       {
         "command": "vfmdbp-vscode.startServer",
         "title": "Start Server",
-        "category": "vfmdbp-vscode"
+        "category": "vfmdbookpreview"
       },
       {
         "command": "vfmdbp-vscode.stopServer",
         "title": "Stop Server",
-        "category": "vfmdbp-vscode"
+        "category": "vfmdbookpreview"
       },
       {
         "command": "vfmdbp-vscode.toggle",
         "title": "Open HTML Preview",
-        "category": "vfmdbp-vscode"
+        "category": "vfmdbookpreview"
       },
       {
         "command": "vfmdbp-vscode.toggleVS",
         "title": "Open Vivliostyle Preview",
-        "category": "vfmdbp-vscode"
+        "category": "vfmdbookpreview"
       },
       {
         "command": "vfmdbp-vscode.exportXML",
         "title": "Export InDesign XML",
-        "category": "vfmdbp-vscode"
+        "category": "vfmdbookpreview"
       },
       {
         "command": "vfmdbp-vscode.previewByConfig",
         "title": "Preview by config.js",
-        "category": "vfmdbp-vscode"
+        "category": "vfmdbookpreview"
       },
       {
         "command": "vfmdbp-vscode.buildByConfig",
         "title": "Build PDF by config.js",
-        "category": "vfmdbp-vscode"
+        "category": "vfmdbookpreview"
       },
       {
         "command": "vfmdbp-vscode.previewThisCLI",
         "title": "Preview This File By Vivliostyle CLI",
-        "category": "vfmdbp-vscode"
+        "category": "vfmdbookpreview"
       },
       {
         "command": "vfmdbp-vscode.buildThisCLI",
         "title": "Build PDF This File By Vivliostyle CLI",
-        "category": "vfmdbp-vscode"
+        "category": "vfmdbookpreview"
       }
     ]
   },

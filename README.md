@@ -194,6 +194,10 @@ Users appreciate release notes as you update your extension.
 ### 0.1.6
 Vivliostyle CLIを利用したPDF書き出しを追加
 
+### 0.1.7
+コマンドパレットでオリジナルのMDBPと混同しないようコマンドのカテゴリ名を変更
+
+
 -----------------------------------------------------------------------------------------------------------
 
 (c)libroworks.co.jp
