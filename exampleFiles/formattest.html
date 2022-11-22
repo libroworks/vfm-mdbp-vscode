@@ -22,24 +22,25 @@
             <h4 id="h4_0">datetimeクラスの利用 - h4小見出し</h4>
             <p>Chapter 4でオリジナルの関数をまとめたモジュールを作りましたが、実はPythonには、はじめから多数のモジュールが付属しています。これら<strong>付属のモジュールを総称して「標準ライブラリ」と呼びます</strong>。</p>
             <p>標準ライブラリのモジュールを利用することで、プログラムでできることの範囲をさらに広げることができます。標準ライブラリはimport文でインポートするだけですぐに利用できます。</p>
-            <figure class="language-py">
-              <figcaption>chap5-3-1.py</figcaption>
-              <pre class="language-py"><code class="language-py"><span class="token keyword">from</span> datetime <span class="token keyword">import</span> date<span class="token punctuation">,</span> timedelta
-start <span class="token operator">=</span> date<span class="token punctuation">(</span> <span class="token number">2018</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">,</span> <span class="token number">18</span> <span class="token punctuation">)</span>    <span class="token comment">#←コメントの先頭を←にすると引き出し線に</span>
-<span class="token keyword">for</span> days <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">14</span><span class="token punctuation">)</span><span class="token punctuation">:</span>    <span class="token comment">#←繰り返しのfor文</span>
-    cur <span class="token operator">=</span> start <span class="token operator">+</span> timedelta<span class="token punctuation">(</span> days<span class="token operator">=</span>days <span class="token punctuation">)</span>
-    <span class="token keyword">print</span><span class="token punctuation">(</span> cur <span class="token punctuation">)</span></code></pre>
+            <section class="level6 codenumber" start-number="15" id="chap5-3-1">
+              <h6 class="samplefile" id="h6_0">chap5-3-1</h6>
+              <pre class="language-py"><code class="language-py"><span class="codenum-elem">015</span><span class="token keyword">from</span> datetime <span class="token keyword">import</span> date<span class="token punctuation">,</span> timedelta
+<span class="codenum-elem">016</span>start <span class="token operator">=</span> date<span class="token punctuation">(</span> <span class="token number">2018</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">,</span> <span class="token number">18</span> <span class="token punctuation">)</span>    <span class="token comment">#←コメントの先頭を←にすると引き出し線に</span>
+<span class="codenum-elem">017</span><span class="token keyword">for</span> days <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">14</span><span class="token punctuation">)</span><span class="token punctuation">:</span>    <span class="token comment">#←繰り返しのfor文</span>
+<span class="codenum-elem">018</span>    cur <span class="token operator">=</span> start <span class="token operator">+</span> timedelta<span class="token punctuation">(</span> days<span class="token operator">=</span>days <span class="token punctuation">)</span>
+<span class="codenum-elem">019</span>    <span class="token keyword">print</span><span class="token punctuation">(</span> cur <span class="token punctuation">)</span>
+</code></pre>
 
-            </figure>
-            <figure class="language-console">
-              <figcaption>実行結果</figcaption>
-              <pre class="language-console"><code class="language-console">2018/6/18
+              <figure class="language-console">
+                <figcaption>実行結果</figcaption>
+                <pre class="language-console"><code class="language-console">2018/6/18
 2018/6/18
 2018/6/18
 2018/6/18</code></pre>
 
-            </figure>
-            <p>複数のクラスをカンマ区切りで指定すると、まとめてインポートできます。</p>
+              </figure>
+              <p>複数のクラスをカンマ区切りで指定すると、まとめてインポートできます。</p>
+            </section>
           </section>
         </section>
         <section class="level3 test" id="2週間分の日付の一覧を作る">

@@ -24,8 +24,8 @@ Chapter 4でオリジナルの関数をまとめたモジュールを作りま�
 
 標準ライブラリのモジュールを利用することで、プログラムでできることの範囲をさらに広げることができます。標準ライブラリはimport文でインポートするだけですぐに利用できます。
 
-
-```py title=chap5-3-1.py
+###### chap5-3-1 {.codenumber start-number=15}
+```py
 from datetime import date, timedelta
 start = date( 2018, 6, 18 )    #←コメントの先頭を←にすると引き出し線に
 for days in range(14):    #←繰り返しのfor文
