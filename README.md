@@ -173,29 +173,19 @@ vivliostyle.config.jsを用いた複数ファイル書き出しも可能にな�
 
 ## Requirements
 - VSCode 1.69.0以上
-- 作業フォルダー内にVivliostyle viwerが必要です。
+- 作業フォルダー内にVivliostyle viewerが必要です。
 - TCP8087ポートを使用します。
 
-
-## Extension Settings
-
 ## Known Issues
+- CLIでプレビュー／ビルドを行う場合、本来はViewerは不要ですが、変換コードの一部がViewerの有無をチェックするため、エラーが発生します。
 
 ## Release Notes
 
 Users appreciate release notes as you update your extension.
 
-### 0.1.0
-最初のリリース
+### 0.1.9
+CLIからPDFを出力する際に、原稿のファイル名をPDFファイル名に使用する
 
-### 0.1.5
-プレビュー更新をmdbp-vscode 0.1.5に合わせて修正
-
-### 0.1.6
-Vivliostyle CLIを利用したPDF書き出しを追加
-
-### 0.1.7
-コマンドパレットでオリジナルのMDBPと混同しないようコマンドのカテゴリ名を変更
 
 ### 0.1.8
 実験的なソースコードの連番機能。
@@ -211,6 +201,18 @@ Vivliostyle CLIを利用したPDF書き出しを追加
 ```
 
 **VFMがv2になってsection要素の扱いが変わったときに、修正の必要がある**。
+
+### 0.1.7
+コマンドパレットでオリジナルのMDBPと混同しないようコマンドのカテゴリ名を変更
+
+### 0.1.6
+Vivliostyle CLIを利用したPDF書き出しを追加
+
+### 0.1.5
+プレビュー更新をmdbp-vscode 0.1.5に合わせて修正
+
+### 0.1.0
+最初のリリース
 
 -----------------------------------------------------------------------------------------------------------
 
