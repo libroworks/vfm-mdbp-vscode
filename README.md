@@ -183,6 +183,8 @@ vivliostyle.config.jsを用いた複数ファイル書き出しも可能にな�
 
 Users appreciate release notes as you update your extension.
 
+### 0.1.10
+空のp要素をムリヤリ削除する処理を追加。
 ### 0.1.9
 CLIからPDFを出力する際に、原稿のファイル名をPDFファイル名に使用する
 
