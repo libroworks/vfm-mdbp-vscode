@@ -47,19 +47,18 @@ html {
   src: url("fonts/NotoSansJP-Bold.otf");
 } */
 
-
 /*ページサイズ*/
 @page {
   size: 148mm 210mm;
   /*A5正寸*/
   margin: 18mm 18.5mm 18mm 18.5mm;
-  font-size: 10q;
+  font-size: 10Q;
 
   @bottom-center {
     content: counter(page);
     margin-top: 2.5mm;
     width: 8mm;
-    font-size: 12q;
+    font-size: 12Q;
   }
 }
 
@@ -85,15 +84,15 @@ html {
 body {
   counter-reset: seccount;
   font-family: notosans-r, sans-serif;
-  font-size: 12q;
-  line-height: 21q;
+  font-size: 12Q;
+  line-height: 21Q;
   width: 111mm;
 }
 
 /* 基本要素 */
 p {
-  font-size: 12q;
-  line-height: 21q;
+  font-size: 12Q;
+  line-height: 21Q;
   text-align: justify;
   font-family: notosans-l;
   text-indent: 1em;
@@ -110,8 +109,8 @@ h6 {
 }
 
 h1 {
-  font-size: 36q;
-  line-height: 40q;
+  font-size: 36Q;
+  line-height: 40Q;
   text-align: center;
   margin: 20mm 0;
   /* 柱にする */
@@ -119,7 +118,7 @@ h1 {
 }
 
 .secheader {
-  background: #FEE;
+  background: #fee;
   counter-increment: seccount;
   background: url("img/apron_man1-1smile.png");
   background-size: 18%;
@@ -132,8 +131,8 @@ h1 {
 }
 
 h2 {
-  font-size: 26q;
-  line-height: 30q;
+  font-size: 26Q;
+  line-height: 30Q;
   break-before: page;
   height: 20mm;
   margin-bottom: 2mm;
@@ -149,16 +148,16 @@ h2::before {
 
 .secheader p {
   text-indent: 0;
-  font-size: 11q;
-  line-height: 18q;
+  font-size: 11Q;
+  line-height: 18Q;
   font-family: notosans-m;
   width: 30em;
   margin-left: 1em;
 }
 
 h3 {
-  font-size: 18q;
-  line-height: 22q;
+  font-size: 18Q;
+  line-height: 22Q;
   margin-top: 6mm;
   margin-bottom: 2mm;
   color: #fff;
@@ -172,7 +171,7 @@ h3::before {
 }
 
 h4 {
-  font-size: 13q;
+  font-size: 13Q;
   margin-top: 4mm;
 }
 
@@ -182,13 +181,13 @@ h4::before {
 }
 
 h5 {
-  font-size: 12q;
+  font-size: 12Q;
   margin-top: 4mm;
   margin-bottom: 1mm;
 }
 
 h6 {
-  font-size: 12q;
+  font-size: 12Q;
   margin-top: 4mm;
   margin-bottom: 1mm;
 }
@@ -196,7 +195,7 @@ h6 {
 h6::before {
   content: "CODE";
   background: #888;
-  color: #FFF;
+  color: #fff;
   margin-right: 1mm;
   padding: 0 0.5mm;
 }
@@ -225,41 +224,48 @@ kbd {
   font-family: keyfont;
 }
 
-
 /* コード */
 pre {
-  font-size: 12q;
-  line-height: 21q;
+  font-size: 12Q;
+  line-height: 21Q;
   font-family: inconsolata;
   border: solid 0.5mm #000;
   border-left: solid 7mm #888;
   padding: 1mm;
   margin-bottom: 6mm;
 }
+code {
+  font-family: inconsolata;
+}
+.codenum-elem {
+  position: relative;
+  inset-inline-start: -2.5em;
+  color: #fff;
+}
 
 figcaption {
-  font-size: 12q;
+  font-size: 12Q;
   margin-top: 4mm;
   margin-bottom: 1mm;
 }
 
-figure+figure {
+figure + figure {
   margin-top: -2mm;
 }
 
-figure+figure figcaption {
+figure + figure figcaption {
   margin-top: 0;
 }
 
-.result+pre {
-  background: #DDD;
+.result + pre {
+  background: #ddd;
   border-left: solid 0.5mm #000;
 }
 
 .codered {
   color: #58f;
-  font-size: 10q;
-  line-height: 12q;
+  font-size: 10Q;
+  line-height: 12Q;
   position: relative;
 }
 
@@ -290,7 +296,7 @@ figure+figure figcaption {
 
 .syntax pre {
   border: none;
-  font-size: 14q;
+  font-size: 14Q;
   background: #fff;
   margin: 1mm;
 }
@@ -303,16 +309,16 @@ figure+figure figcaption {
 }
 
 .syntax li {
-  font-size: 11q;
-  line-height: 13q;
+  font-size: 11Q;
+  line-height: 13Q;
   max-width: 9em;
 }
 
 /* 表 */
 table {
   border-collapse: collapse;
-  font-size: 11q;
-  line-height: 16q;
+  font-size: 11Q;
+  line-height: 16Q;
   margin-bottom: 4mm;
 }
 
@@ -351,8 +357,8 @@ th {
   position: absolute;
   right: 0;
   top: 0;
-  font-size: 12q;
-  line-height: 16q;
+  font-size: 12Q;
+  line-height: 16Q;
   font-family: notosans-m;
   list-style-type: none;
   color: #000;
@@ -377,7 +383,7 @@ li.aokome {
   border: dashed 0.25mm #00f;
 }
 
-.figure li>p::before {
+.figure li > p::before {
   content: "リストの最後に空き行入れてください";
   position: absolute;
   color: #fff;
@@ -392,19 +398,19 @@ section.column {
 }
 
 h5.column {
-  font-size: 12q;
+  font-size: 12Q;
   margin: 3mm 0;
 }
 
 section.column p {
-  font-size: 11q;
-  line-height: 18q;
+  font-size: 11Q;
+  line-height: 18Q;
 }
 
 /* 会話のフキダシ */
 .face {
-  font-size: 12q;
-  line-height: 17q;
+  font-size: 12Q;
+  line-height: 17Q;
   background: #cdf;
   border-radius: 2mm;
   padding: 2.5mm 2.5mm;
@@ -417,15 +423,15 @@ section.column p {
   position: relative;
 }
 
-:not(.face)+.face {
+:not(.face) + .face {
   margin-top: 4mm;
 }
 
-.face+:not(.face) {
+.face + :not(.face) {
   margin-bottom: 4mm;
 }
 
-.face+h3 {
+.face + h3 {
   margin-top: 8mm;
 }
 

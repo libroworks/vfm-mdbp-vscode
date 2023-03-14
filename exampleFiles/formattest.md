@@ -4,8 +4,6 @@ title: 'Format Test'
 link:
   - rel: 'stylesheet'
     href: '_css/fullpower.css'
-vfm:
- - math: true
 ---
 
 # Chapter 1　章タイトル
@@ -24,7 +22,7 @@ Chapter 4でオリジナルの関数をまとめたモジュールを作りま�
 
 標準ライブラリのモジュールを利用することで、プログラムでできることの範囲をさらに広げることができます。標準ライブラリはimport文でインポートするだけですぐに利用できます。
 
-###### chap5-3-1 {.codenumber start-number=15}
+###### chap5-3-1 {.codenumber start-number=115}
 ```py
 from datetime import date, timedelta
 start = date( 2018, 6, 18 )    #←コメントの先頭を←にすると引き出し線に
@@ -80,3 +78,4 @@ $$y=x^2+\frac{1}{3}\sqrt{2}$$
 ##### コラム：コラムタイトル{.column}
 開始日から2週間分の日付を表示するプログラムを書いてみましょう。「2週間分」のように複数のデータを作る場合、for文を使うことはすぐ思いつきます。ただし、dateオブジェクトだけで2週間分の日付を作ろうとするとうまくいきません。**その月の最終日を越えた日付、たとえば33日などを渡すと、バリューエラーが発生してしまうからです**。そこで、開始日のdateオブジェクトを作り、そこに経過日数のtimedeltaオブジェクトを加えて目的の日付を作ります。
 
+###### chap5-3-2 {.codenumber start-number=110}

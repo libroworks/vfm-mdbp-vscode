@@ -181,7 +181,8 @@ vivliostyle.config.jsを用いた複数ファイル書き出しも可能にな�
 
 ## Release Notes
 
-Users appreciate release notes as you update your extension.
+### 0.1.11
+VFMを2.1.0にアップデートし、連番機能を修正
 
 ### 0.1.10
 空のp要素をムリヤリ削除する処理を追加。

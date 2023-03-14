@@ -5,7 +5,7 @@
   },
   {
     "f": "@divend",
-    "r": "<\/div>"
+    "r": "</div>"
   },
   {
     "f": "<hr>",
@@ -13,23 +13,15 @@
   },
   {
     "f": "@negative:(\\d+)",
-    "r": "<div style=\"margin-top:-$1mm\"><\/div>"
+    "r": "<div style=\"margin-top:-$1mm\"></div>"
   },
   {
     "f": "@clear",
-    "r": "<div class=\"floatclear\"><\/div>"
+    "r": "<div class=\"floatclear\"></div>"
   },
   {
     "f": "@comment:([^@]*)@commend",
-    "r": "<span class=\"comment\">$1<\/span>"
-  },
-  {
-    "f": "<h6[^>]*>読み下し文",
-    "r": "<h6 class=\"yomikudashi\">読み下し文"
-  },
-  {
-    "f": "<h6[^>]*>chap",
-    "r": "<h6 class=\"samplefile\">chap"
+    "r": "<span class=\"comment\">$1</span>"
   },
   {
     "f": "〔",
@@ -37,7 +29,7 @@
   },
   {
     "f": "〕",
-    "r": "<\/span>"
+    "r": "</span>"
   },
   {
     "f": "<p>(<div class=\"[^\"]+\">)</p>",
@@ -68,40 +60,40 @@
     "r": "<span class=\"hljs-comment codered\"$1>"
   },
   {
-    "f": "<p>【著者normal】((?!<\/p>).*)<\/p>",
-    "r": "<p class=\"face teacher\">$1<\/p>"
+    "f": "<p>【著者normal】((?!</p>).*)</p>",
+    "r": "<p class=\"face teacher\">$1</p>"
   },
   {
-    "f": "<p>【著者egao】((?!<\/p>).*)<\/p>",
-    "r": "<p class=\"face teacher teacher-laugh\">$1<\/p>"
+    "f": "<p>【著者egao】((?!</p>).*)</p>",
+    "r": "<p class=\"face teacher teacher-laugh\">$1</p>"
   },
   {
-    "f": "<p>【著者idea】((?!<\/p>).*)<\/p>",
-    "r": "<p class=\"face teacher teacher-idea\">$1<\/p>"
+    "f": "<p>【著者idea】((?!</p>).*)</p>",
+    "r": "<p class=\"face teacher teacher-idea\">$1</p>"
   },
   {
-    "f": "<p>【著者shock】((?!<\/p>).*)<\/p>",
-    "r": "<p class=\"face teacher teacher-shock\">$1<\/p>"
+    "f": "<p>【著者shock】((?!</p>).*)</p>",
+    "r": "<p class=\"face teacher teacher-shock\">$1</p>"
   },
   {
-    "f": "<p>【著者hatena】((?!<\/p>).*)<\/p>",
-    "r": "<p class=\"face teacher teacher-hatena\">$1<\/p>"
+    "f": "<p>【著者hatena】((?!</p>).*)</p>",
+    "r": "<p class=\"face teacher teacher-hatena\">$1</p>"
   },
   {
     "f": "<p>(<div class=\"[^\"]+\">)</p>",
     "r": "$1"
   },
   {
-    "f": "<p><\/div><\/p>",
-    "r": "<\/div>"
+    "f": "<p></div></p>",
+    "r": "</div>"
   },
   {
-    "f": "<p><\/div>",
-    "r": "<\/div>"
+    "f": "<p></div>",
+    "r": "</div>"
   },
   {
-    "f": "<\/div><\/p>",
-    "r": "<\/div>"
+    "f": "</div></p>",
+    "r": "</div>"
   },
   {
     "f": "(<div class=\"[^\"]+\">)</p>",
@@ -120,7 +112,7 @@
     "r": "$1"
   },
   {
-    "f": "<p>(<svg [^>]+>)<\/p>",
+    "f": "<p>(<svg [^>]+>)</p>",
     "r": "$1"
   },
   {
@@ -128,19 +120,19 @@
     "r": "$1"
   },
   {
-    "f": "(<image [^>]+>)<\/p>",
+    "f": "(<image [^>]+>)</p>",
     "r": "$1"
   },
   {
-    "f": "<p>(<\/svg>)",
+    "f": "<p>(</svg>)",
     "r": "$1"
   },
   {
-    "f": "(<\/svg>)<\/p>",
+    "f": "(</svg>)</p>",
     "r": "$1"
   },
   {
-    "f": "<p><\/p>",
+    "f": "<p></p>",
     "r": ""
   }
 ]
