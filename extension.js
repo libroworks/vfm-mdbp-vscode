@@ -34,12 +34,14 @@ function activate(context) {
   );
   context.subscriptions.push(
     vscode.commands.registerCommand("vfmdbp-vscode.previewByConfig", function () {
-      callShell("vivliostyle preview");
+      // callShell("vivliostyle preview");
+      callByConfig("vivliostyle preview");
     })
   );
   context.subscriptions.push(
     vscode.commands.registerCommand("vfmdbp-vscode.buildByConfig", function () {
-      callShell("vivliostyle build");
+      // callShell("vivliostyle build");
+      callByConfig("vivliostyle build");
     })
   );
   context.subscriptions.push(
@@ -57,6 +59,13 @@ function activate(context) {
   vscode.workspace.onDidSaveTextDocument((event) => {
     convertMD2HTML();
   });
+
+  // 複数build，previwe用の処理
+  //（vivliostyle.config.js内のHTMLリストを取得し，それをMarkdownと見なしてすべて変換する）
+  function callByConfig(command) {
+    // 今後の実装
+    callShell(command);
+  }
 
   // InDesign用のXMLを書き出す
   function exportXML() {

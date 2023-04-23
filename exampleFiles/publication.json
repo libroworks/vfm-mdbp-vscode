@@ -6,15 +6,9 @@
   "type": "Book",
   "conformsTo": "https://github.com/vivliostyle/vivliostyle-cli",
   "author": "",
-  "dateModified": "2022-11-17T03:47:34.353Z",
+  "dateModified": "2023-04-23T16:10:59.489Z",
   "name": "merged_output.pdf",
   "readingOrder": [
-    {
-      "url": "toc.html",
-      "name": "目次",
-      "rel": "contents",
-      "type": "LinkedResource"
-    },
     {
       "url": "formattest.html",
       "name": ""
