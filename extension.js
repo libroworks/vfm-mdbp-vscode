@@ -1,8 +1,7 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
-const vscode = require('vscode');
-const { MarkdownBookPreviewServer } = require('./lib/markdown-book-preview-server');
-const { MarkdownBookPreviewConvert } = require('./lib/markdown-book-preview-convert');
+const vscode = require("vscode");
+const { MarkdownBookPreviewConvert } = require("./lib/markdown-book-preview-convert");
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
@@ -11,19 +10,13 @@ const { MarkdownBookPreviewConvert } = require('./lib/markdown-book-preview-conv
  * @param {vscode.ExtensionContext} context
  */
 function activate(context) {
-  const markdownBookPreviewServer = new MarkdownBookPreviewServer();
-
   // Use the console to output diagnostic information (console.log) and errors (console.error)
   // This line of code will only be executed once when your extension is activated
   console.log('Congratulations, your extension "vfmdbp-vscode" is now active!');
 
-  context.subscriptions.push(vscode.commands.registerCommand('vfmdbp-vscode.startServer', startServer));
-  context.subscriptions.push(vscode.commands.registerCommand('vfmdbp-vscode.stopServer', stopServer));
-  context.subscriptions.push(vscode.commands.registerCommand('vfmdbp-vscode.toggle', toggle));
-  context.subscriptions.push(vscode.commands.registerCommand('vfmdbp-vscode.toggleVS', toggleVS));
-  context.subscriptions.push(vscode.commands.registerCommand('vfmdbp-vscode.exportXML', exportXML));
+  context.subscriptions.push(vscode.commands.registerCommand("vfmdbp-vscode.exportXML", exportXML));
   context.subscriptions.push(
-    vscode.commands.registerCommand('vfmdbp-vscode.previewThisCLI', () => {
+    vscode.commands.registerCommand("vfmdbp-vscode.previewThisCLI", () => {
       const htmlfilepath = convertMD2HTML();
       if (htmlfilepath) {
         callShell(`vivliostyle preview "${htmlfilepath}"`);
@@ -31,23 +24,32 @@ function activate(context) {
     })
   );
   context.subscriptions.push(
-    vscode.commands.registerCommand('vfmdbp-vscode.buildThisCLI', () => {
+    vscode.commands.registerCommand("vfmdbp-vscode.buildThisCLI", () => {
       const htmlfilepath = convertMD2HTML();
       if (htmlfilepath) {
-        // callShell(`vivliostyle build "${htmlfilepath}"`);
-        const outputpath = htmlfilepath.replace(/.html$/, '.pdf');
+        const outputpath = htmlfilepath.replace(/.html$/, ".pdf");
         callShell(`vivliostyle build "${htmlfilepath}" -o "${outputpath}"`);
       }
     })
   );
   context.subscriptions.push(
-    vscode.commands.registerCommand('vfmdbp-vscode.previewByConfig', function () {
-      callShell('vivliostyle preview');
+    vscode.commands.registerCommand("vfmdbp-vscode.previewByConfig", function () {
+      callShell("vivliostyle preview");
     })
   );
   context.subscriptions.push(
-    vscode.commands.registerCommand('vfmdbp-vscode.buildByConfig', function () {
-      callShell('vivliostyle build');
+    vscode.commands.registerCommand("vfmdbp-vscode.buildByConfig", function () {
+      callShell("vivliostyle build");
+    })
+  );
+  context.subscriptions.push(
+    vscode.commands.registerCommand("vfmdbp-vscode.installCLI", function () {
+      console.log(vscode.env.shell);
+      if (vscode.env.shell.startsWith("C:\\")) {
+        callShell("npm install -g @vivliostyle/cli");
+      } else {
+        callShell("sudo npm install -g @vivliostyle/cli");
+      }
     })
   );
 
@@ -56,39 +58,15 @@ function activate(context) {
     convertMD2HTML();
   });
 
-  // サーバーの起動終了
-  function startServer() {
-    markdownBookPreviewServer.startWebServer();
-  }
-  function stopServer() {
-    markdownBookPreviewServer.stopWebServer();
-  }
-
-  // 生のHTMLで開く
-  function toggle(vsmode = false) {
-    console.log('MarkdownBookPreview was toggled!');
-    const editor = vscode.window.activeTextEditor;
-    if (checkEditorPath(editor) === false) return;
-    // プレビューしたいパスやVSmodeを設定
-    const mdpath = editor.document.fileName;
-    console.log(mdpath);
-    markdownBookPreviewServer.setTargetMarkdownFile(mdpath, vsmode);
-  }
-
-  // Vivliostyleで開く
-  function toggleVS() {
-    console.log('Vivliostyle Mode');
-    toggle(true);
-  }
-
   // InDesign用のXMLを書き出す
   function exportXML() {
-    console.log('MarkdownBookPreview export XML');
+    console.log("MarkdownBookPreview export XML");
     const editor = vscode.window.activeTextEditor;
     if (checkEditorPath(editor) === false) return;
     // プレビューしたいパスやVSmodeを設定
     const mdpath = editor.document.fileName;
-    markdownBookPreviewServer.exportInDesignXML(mdpath);
+    const htmlfilepath = convertMD2HTML(mdpath);
+    MarkdownBookPreviewConvert.exportInDesignXML(htmlfilepath);
   }
 
   // Markdownファイルの変換
@@ -98,17 +76,17 @@ function activate(context) {
     // プレビューしたいパスやVSmodeを設定
     const mdpath = editor.document.fileName.replace(/^[a-z]:/, (d) => d.toUpperCase());
     console.log(mdpath);
-    const homePath = MarkdownBookPreviewServer.searchHomepath(mdpath);
+    const homePath = MarkdownBookPreviewConvert.searchHomepath(mdpath);
     const htmlfilepath = MarkdownBookPreviewConvert.convertMarkdown(mdpath, homePath);
     return htmlfilepath;
   }
 
   // ターミナルにコマンドを発行する
   function callShell(shellcommand) {
-    const term = vscode.window.activeTerminal?.name === 'vivliostyle-cli-helper' ? vscode.window.activeTerminal : vscode.window.createTerminal('vivliostyle-cli-helper');
+    const term = vscode.window.activeTerminal?.name === "vivliostyle-cli-helper" ? vscode.window.activeTerminal : vscode.window.createTerminal("vivliostyle-cli-helper");
     term.show();
     // PowerShellかつvivliostyleスクリプトの実行時のみ許可が必要
-    if (vscode.env.shell.includes('powershell') && shellcommand.indexOf('vivliostyle') === 0) {
+    if (vscode.env.shell.includes("powershell") && shellcommand.indexOf("vivliostyle") === 0) {
       term.sendText(`PowerShell -ExecutionPolicy RemoteSigned ${shellcommand}`);
     } else {
       term.sendText(shellcommand);
@@ -120,11 +98,11 @@ function activate(context) {
     if (editor === null || editor === undefined) return false;
     const path = editor.document.fileName;
     if (!path) {
-      vscode.window.showWarningMessage('ファイルを保存してから実行してください');
+      vscode.window.showWarningMessage("ファイルを保存してから実行してください");
       return false;
     }
-    if (!path.endsWith('.md')) {
-      vscode.window.showWarningMessage('Mardownファイルではありません');
+    if (!path.endsWith(".md")) {
+      vscode.window.showWarningMessage("Mardownファイルではありません");
       return false;
     }
     return true;
@@ -132,23 +110,10 @@ function activate(context) {
 
   // ターミナルにコマンドを発行する
   function callShell(shellcommand) {
-    const term = vscode.window.activeTerminal?.name === 'vivliostyle-cli-helper' ? vscode.window.activeTerminal : vscode.window.createTerminal('vivliostyle-cli-helper');
+    const term = vscode.window.activeTerminal?.name === "vivliostyle-cli-helper" ? vscode.window.activeTerminal : vscode.window.createTerminal("vivliostyle-cli-helper");
     term.show();
     // PowerShellかつvivliostyleスクリプトの実行時のみ許可が必要
-    if (vscode.env.shell.includes('powershell') && shellcommand.indexOf('vivliostyle') === 0) {
-      term.sendText(`PowerShell -ExecutionPolicy RemoteSigned ${shellcommand}`);
-    } else {
-      term.sendText(shellcommand);
-    }
-  }
-
-  // Shellコマンド発行テスト
-  function callShellTest() {
-    const term = vscode.window.createTerminal();
-    const shell = vscode.env.shell;
-    const shellcommand = 'vivliostyle build';
-    term.show();
-    if (shell.includes('powershell')) {
+    if (vscode.env.shell.includes("powershell") && shellcommand.indexOf("vivliostyle") === 0) {
       term.sendText(`PowerShell -ExecutionPolicy RemoteSigned ${shellcommand}`);
     } else {
       term.sendText(shellcommand);

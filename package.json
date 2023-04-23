@@ -7,7 +7,7 @@
   "name": "vfmdbp-vscode",
   "displayName": "vfm_mdbp_vscode",
   "description": "Markdown Book Preview for VSCode with VFM",
-  "version": "0.1.11",
+  "version": "0.2.0",
   "engines": {
     "vscode": "^1.75.0"
   },
@@ -19,49 +19,81 @@
   "contributes": {
     "commands": [
       {
-        "command": "vfmdbp-vscode.startServer",
-        "title": "Start Server",
-        "category": "vfmdbookpreview"
-      },
-      {
-        "command": "vfmdbp-vscode.stopServer",
-        "title": "Stop Server",
-        "category": "vfmdbookpreview"
-      },
-      {
-        "command": "vfmdbp-vscode.toggle",
-        "title": "Open HTML Preview",
-        "category": "vfmdbookpreview"
-      },
-      {
-        "command": "vfmdbp-vscode.toggleVS",
-        "title": "Open Vivliostyle Preview",
-        "category": "vfmdbookpreview"
-      },
-      {
         "command": "vfmdbp-vscode.exportXML",
         "title": "Export InDesign XML",
         "category": "vfmdbookpreview"
       },
       {
+        "command": "vfmdbp-vscode.installCLI",
+        "title": "install/update vivliostyle-cli",
+        "category": "vivliostyle-cli-helper"
+      },
+      {
         "command": "vfmdbp-vscode.previewByConfig",
-        "title": "Preview by config.js",
+        "title": "連結プレビューvivliostyle preview (with config)",
         "category": "vfmdbookpreview"
       },
       {
         "command": "vfmdbp-vscode.buildByConfig",
-        "title": "Build PDF by config.js",
+        "title": "連結ビルドvivliostyle build (with config)",
         "category": "vfmdbookpreview"
       },
       {
         "command": "vfmdbp-vscode.previewThisCLI",
-        "title": "Preview This File By Vivliostyle CLI",
+        "title": "これプレビューvivliostyle preview (Current File)",
         "category": "vfmdbookpreview"
       },
       {
         "command": "vfmdbp-vscode.buildThisCLI",
-        "title": "Build PDF This File By Vivliostyle CLI",
+        "title": "これビルドvivliostyle build (Current File)",
         "category": "vfmdbookpreview"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "submenu": "vfmbookpreview-submenu1",
+          "group": "vfmdbookpreview",
+          "when": "resourceLangId == markdown || resourceLangId == html"
+        }
+      ],
+      "vfmbookpreview-submenu1": [
+        {
+          "command": "vfmdbp-vscode.exportXML",
+          "group": "2_vivliostyle-cli",
+          "when": "resourceLangId == markdown || resourceLangId == html"
+        },
+        {
+          "command": "vfmdbp-vscode.previewByConfig",
+          "group": "1_vivliostyle-cli",
+          "when": "resourceLangId == markdown || resourceLangId == html"
+        },
+        {
+          "command": "vfmdbp-vscode.buildByConfig",
+          "group": "1_vivliostyle-cli",
+          "when": "resourceLangId == markdown || resourceLangId == html"
+        },
+        {
+          "command": "vfmdbp-vscode.previewThisCLI",
+          "group": "0_vivliostyle-cli",
+          "when": "resourceLangId == markdown || resourceLangId == html"
+        },
+        {
+          "command": "vfmdbp-vscode.buildThisCLI",
+          "group": "0_vivliostyle-cli",
+          "when": "resourceLangId == markdown || resourceLangId == html"
+        },
+        {
+          "command": "vfmdbp-vscode.installCLI",
+          "group": "2_vivliostyle-cli",
+          "when": "resourceLangId == markdown || resourceLangId == html"
+        }
+      ]
+    },
+    "submenus": [
+      {
+        "id": "vfmbookpreview-submenu1",
+        "label": "vfmdbookpreview"
       }
     ]
   },
