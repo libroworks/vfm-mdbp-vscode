@@ -10,9 +10,9 @@ MDBP（MarkDown-Book-Preview）は書籍の原稿作成に適したMarkdownプ�
 - 簡易的にソースコードに行番号を振る機能を加えている
 - Adobe InDesignの構造ウィンドウで読み込み可能なXMLファイルを書き出せる
 
-![MDBPの使用中画面](docimg-1.png)
+![MDBPの使用中画面](docimg-n1.png)
 
-![右クリックメニューからの実行](docimg-2.png)
+![右クリックメニューからの実行](docimg-n2.png)
 
 ## 事前準備
 1. Vivliostyle CLIの実行に必要なNode.jsをインストールします。バージョン16以上の安定版をインストールしてください。<br>
