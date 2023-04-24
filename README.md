@@ -1,27 +1,36 @@
 # vfm-mdbp-vscode README
-MDBP（MarkDown-Book-Preview）は書籍の原稿作成に適したMarkdownプレビューの機能拡張です。 [Vivliostyle Viewer](https://vivliostyle.org/download/)と組み合わせて書籍の体裁で表示し、原稿データをInDesign向けのXMLファイルとして書き出す機能を持ちます。
+MDBP（MarkDown-Book-Preview）は書籍の原稿作成に適したMarkdownプレビューの機能拡張です。 [Vivliostyle](https://vivliostyle.org/download/)と組み合わせて書籍の体裁で表示し、原稿データをInDesign向けのXMLファイルとして書き出す機能を持ちます。
 
-MarkdownパーサーをVFM（Vivliostyle Flavored Markdown）に変更したバージョンです。
-
-https://vivliostyle.github.io/vfm/#/ja/vfm
-
-https://github.com/vivliostyle/vfm
+[『Web技術で「本」が作れるCSS組版 Vivliostyle入門』（リブロワークス著，Vivliostyle監修，C&R研究所2023年5月刊）](https://www.c-r.com/book/detail/1493)のために作成した，vivliosytle-cli-helperに，独自機能を盛り込んだものです。
 
 ## Features
-- 任意の組版用CSSを読み込める
+- 組版用CSSによって書籍のリアルタイムプレビュー，PDF書き出しを行える
 - 置換リストを使用してHTML変換後にテキスト置換を行える。これはMarkdownの不足を補うために使用する
 - 画像ファイル名にsvgimgという拡張指定を追加すると、スクリーンショットの拡大縮小やトリミングが行える
-- HTMLを実ファイルとして書き出すので、簡易的なHTML生成ツールとしても使用できる
-- Vivliostyle Viwerを使用した書籍プレビューが可能
-- ファイルの更新を監視してプレビューを更新するため、別のテキストエディタで作業しビューワとしてのみ使うことも可能
+- 簡易的にソースコードに行番号を振る機能を加えている
+- Adobe InDesignの構造ウィンドウで読み込み可能なXMLファイルを書き出せる
 
 ![MDBPの使用中画面](docimg-1.png)
 
-![コマンドパレットからの実行](docimg-2.png)
+![右クリックメニューからの実行](docimg-2.png)
 
-### 事前準備
-1. 読み込むCSSファイルを指定するには、Markdownファイルの先頭にFrontmatterを書きます。
-https://vivliostyle.github.io/vfm/#/vfm#frontmatter
+## 事前準備
+1. Vivliostyle CLIの実行に必要なNode.jsをインストールします。バージョン16以上の安定版をインストールしてください。<br>
+[Node.js日本語ページ](https://nodejs.org/ja)
+
+
+2. ターミナルから以下のコマンドを実行してVivliostyle CLIの最新版をインストールします。これはMDBPの右クリックメニューからも実行できます。
+
+```
+npm install -g @vivliostyle/cli
+```
+
+## 基本的な使い方
+1. VSCodeでフォルダーを開いてください。そこがWebサーバーのルートになります。
+2. フォルダー内のMarkdownファイルを開き、右クリックして［これプレビューvivliostyle preview (Current File)］を選択します。
+3. あとはフォルダー内（サブフォルダーも含む）でファイルの更新が発生すると、自動的にWebブラウザのプレビューが更新されます。※フォルダー内を監視しているので、VSCode以外でファイルを保存した場合でも更新されます。
+4. プレビューを停止したい場合は，VSCodeのターミナルをクリックして，Ctrl + C（macOSはcontrol + C）キーを押します。
+5. 読み込むCSSファイルを指定するには、Markdownファイルの先頭にFrontmatterを書きます。
 
 ##### Frontmatterの例
 ```md
@@ -36,65 +45,62 @@ vfm:
 ---
 ```
 
+この動作はVFM（Vivliostyle Fravored Markdown）の仕様に基づくものです。詳しくは解説ページを参照してください。
 
-2. フォルダ内にVivliostyle Viewerのviwerフォルダを配置してください。
+https://vivliostyle.github.io/vfm/#/vfm#frontmatter
 
-- Vivliostyle Viewerのダウンロード
-https://vivliostyle.org/download/
+https://vivliostyle.github.io/vfm/#/ja/vfm
 
-## How to Use
-1. まずVSCodeでフォルダーを開いてください。そこがWebサーバーのルートになります。
-2. フォルダー内のMarkdownファイルを開き、コマンドパレットで、Start Serverを選択します。
-3. Open HTMLまたはVivliostyle Previewを選択すると、Webブラウザでプレビューが表示されます。
-4. あとはフォルダー内（サブフォルダーも含む）でファイルの更新が発生すると、自動的にWebブラウザのプレビューが更新されます。※フォルダー内を監視しているので、VSCode以外でファイルを保存した場合でも更新されます。
+https://github.com/vivliostyle/vfm
 
-### Start Server / Stop Server
-プレビュー用のLive Serverを起動／終了します。
 
-### Open HTML preview
-CSSを適用したHTMLをVivliostyleを使わずに表示します。ページ区切りを気にせずに原稿を書きたいときに使います。
+## コマンド解説
+### ▶［これビルドvivliostyle build (Current File)］
+現在エディタで開いているMarkdownまたはHTMLファイルをもとに，Vivliostyleを使ってPDFを書き出します。Markdownファイルの拡張子を変えたPDFが，同じ階層に書き出されます。
 
-### Open Vivliostyle Preview
-Vivliostyleを使って書籍風に表示します。
+プレビューを実行している場合は，いったんCtrl + C（macOSはcontrol + C）キーで中止してください。
 
-### PDFの印刷
-PDFを出力したい場合は、Webブラウザ側の印刷機能を利用します。Chromeを利用する場合は、「送信先」を「PDFに保存」、「余白」を「なし」、「背景のグラフィック」をオンにしてください。
+### ▶［これプレビューvivliostyle preview (Current File)］
+現在エディタで開いているMarkdownまたはHTMLファイルをもとに，Vivliostyleを使って紙面のプレビューを表示します。
 
-![右クリックメニューからの実行](docimg-4.png)
+### ▶［連結ビルドvivliostyle build (with config)］
+**※この機能は調整中です**
 
-### Generate Merged PDF（テスト機能）
-Vivliostyle CLIを使ってHTMLを連結して書き出します（事前にVivliostyle CLIのインストールが必要な機能です）。
-
-vivliostyle.config.jsというファイルを作業フォルダ内のルートに作って、読み込みhtmlファイルを指定する必要があります。
+vivliostyle.config.jsに指定したHTMLファイルを連結して，PDFを書き出します。vivliostyle.config.jsは作業フォルダ内のルートに作ってください。
 
 ##### vivliostyle.config.jsの例
 ```
-// @ts-check
-const vivliostyleConfig = {
+module.exports = {
   entry: [
-    // mdを指定するとMDBPの独自仕様部分と画像類が外れる
+    // mdを指定するとMDBPの独自仕様処理が行われない
     'intro.html',
     'chapter1.html',
     'chapter2.html'
-  ], 
-  output: [
-    './merged_output.pdf',
   ],
 };
-
-module.exports = vivliostyleConfig;
 ```
 
-Vivliostyle CLIの仕様ではentryセクションにMarkdownファイルも指定できますが、VFMでのHTML変換しか行われないため、MDBPが処理している部分が反映されません。MDBPが生成したHTMLファイルを指定するのを推奨します。
-
-https://docs.vivliostyle.org/ja/vivliostyle-cli#%E6%A7%8B%E6%88%90%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB-vivliostyleconfigjs
+Vivliostyle CLIの仕様ではentryセクションにMarkdownファイルも指定できますが、VFMでのHTML変換しか行われないため、MDBPの独自処理が反映されません。HTMLファイルのみ指定してください。
 
 
+### ▶［連結プレビューvivliostyle preview (with config)］
+**※この機能は調整中です**
 
-### Export InDesign XML（未テスト）
-InDesignの［構造］パネルで読み込み可能なXMLファイルを書き出します。XMLタグを任意のスタイルとマッピング可能です。また、画像のリンクを活かした自動配置、InDesign上のスクリプトと組み合わせた表の自動作成が可能です。
+vivliostyle.config.jsに指定したHTMLファイルを連結して，プレビューを表示します。連結ビルドとほぼ同じです。
 
 
+### ▶［Export InDesign XML］
+InDesignの［構造］パネルで読み込み可能なXMLファイルを書き出します。
+
+### ▶［install/update vivliostyle-cli］
+Vivliostyle CLI最新版のインストールを行います。ターミナルから以下のコマンドを実行するのに相当します。
+
+```
+npm install -g @vivliostyle/cli
+```
+
+
+## その他の機能
 ### 置換リスト
 置換リストは`_postReplaceList.json`というJSONファイル内に記述します。
 
@@ -163,26 +169,30 @@ Markdownの記述を簡単にするために、デザイン都合でHTML構造�
 ]
 ```
 
-### Vivliostyle CLIのサポート（v0.1.5より追加）
-コマンドパネルより、mdbp-vscode: Open Viviostyle Preview CLIを選択すると、Vivliostyle CLIによるプレビューを利用できます。
-Node.jsとVivliostyle CLIのインストールが別途必要ですが、原稿フォルダにViewerを用意したり（ViewerのバージョンはVivliostyle CLIのバージョンに依存）、サーバーを起動したりする必要がなくなります。
+### ソースコードに行番号を付ける機能
+コードの前に次の形式で書くと、直後のpre &gt; code内を改行コードで分割し、`<span class="codenum-elem">000</span>`を追加する。
+```
+###### sampe1.html {.codenumber start-number=15}
+`` `
+コード
+コード
+コード
+`` `
+```
 
-https://docs.vivliostyle.org/ja/vivliostyle-cli
-
-vivliostyle.config.jsを用いた複数ファイル書き出しも可能になりました。
 
 ## Requirements
 - VSCode 1.69.0以上
 - 作業フォルダー内にVivliostyle viewerが必要です。
 - TCP8087ポートを使用します。
 
-## Known Issues
-- CLIでプレビュー／ビルドを行う場合、本来はViewerは不要ですが、変換コードの一部がViewerの有無をチェックするため、エラーが発生します。
 
 ## Release Notes
 ### 0.2.0
 大幅変更。vivliostyle CLIに依存する形に変更し，独自のLive Serverを削除。
-機能をシンプルにするよう調整。
+機能をシンプルにするよう調整。ひとまず「これプレビュー」など最低限の機能を使えるように実装。
+
+連結プレビュー，連結ビルド機能は実装中。
 
 
 ### 0.1.11
@@ -197,17 +207,6 @@ CLIからPDFを出力する際に、原稿のファイル名をPDFファイル�
 ### 0.1.8
 実験的なソースコードの連番機能。
 
-コードの前に次の形式で書くと、直後のpre &gt; code内を改行コードで分割し、`<span class="codenum-elem">000</span>`を追加する。
-```
-###### sampe1.html {.codenumber start-number=15}
-`` `
-コード
-コード
-コード
-`` `
-```
-
-**VFMがv2になってsection要素の扱いが変わったときに、修正の必要がある**。
 
 ### 0.1.7
 コマンドパレットでオリジナルのMDBPと混同しないようコマンドのカテゴリ名を変更
