@@ -36,12 +36,9 @@ npm install -g @vivliostyle/cli
 ```md
 ---
 lang: 'ja'
-title: 'Format Test'
 link:
   - rel: 'stylesheet'
     href: '_css/fullpower.css'
-vfm:
- - math: true
 ---
 ```
 
