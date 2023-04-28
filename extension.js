@@ -113,7 +113,7 @@ function activate(context) {
       return false;
     }
     if (!path.endsWith(".md")) {
-      vscode.window.showWarningMessage("Mardownファイルではありません");
+      // vscode.window.showWarningMessage("Mardownファイルではありません");
       return false;
     }
     return true;
