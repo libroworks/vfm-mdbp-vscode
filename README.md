@@ -61,8 +61,6 @@ https://github.com/vivliostyle/vfm
 現在エディタで開いているMarkdownまたはHTMLファイルをもとに，Vivliostyleを使って紙面のプレビューを表示します。
 
 ### ▶［連結ビルドvivliostyle build (with config)］
-**※この機能は調整中です**
-
 vivliostyle.config.jsに指定したHTMLファイルを連結して，PDFを書き出します。vivliostyle.config.jsは作業フォルダ内のルートに作ってください。
 
 ##### vivliostyle.config.jsの例
@@ -79,11 +77,17 @@ module.exports = {
 
 Vivliostyle CLIの仕様ではentryセクションにMarkdownファイルも指定できますが、VFMでのHTML変換しか行われないため、MDBPの独自処理が反映されません。HTMLファイルのみ指定してください。
 
+Markdown変換が必要な場合は，vivliostyle.mdbplist.jsonを記述し，変換したいMarkdownファイル名を列挙してください。vivliostle previewまたはbuildの実行前に，MDBPによるMD→HTML変換がまとめて行われます。
+
+###### vivliostyle.mdbplist.jsonの例
+```
+["intro.md", "chapter1.md", "chapter2.md"]
+```
+
+
 
 ### ▶［連結プレビューvivliostyle preview (with config)］
-**※この機能は調整中です**
-
-vivliostyle.config.jsに指定したHTMLファイルを連結して，プレビューを表示します。連結ビルドとほぼ同じです。
+vivliostyle.config.jsに指定したHTMLファイルを連結して，プレビューを表示します。使用方法は連結ビルドと同じです。
 
 
 ### ▶［Export InDesign XML］
@@ -118,6 +122,9 @@ npm install -g @vivliostyle/cli
     },
 ……後略……
 ```
+サンプル置換リスト
+
+<script src="https://gist.github.com/lwohtsu/7abb3f9e1a1c8e06b600f8ef915a10e7.js"></script>
 
 ### 画像のトリミング
 IT書でスクリーンショットは欠かせません。いちいちグラフィックスソフトでトリミングしたり、拡大縮小率を厳密に指定するのは手間なので、画像ファイル名のあとに簡単な指示を入れることで、指定できるようにしました。
@@ -185,6 +192,11 @@ Markdownの記述を簡単にするために、デザイン都合でHTML構造�
 
 
 ## Release Notes
+### 0.2.3
+画像のリンク切れ時にメッセージを表示するよう改良
+
+連結プレビュー，連結ビルドを実装
+
 ### 0.2.2
 ドキュメントが更新できていなかったので，マイナーアップデート。
 

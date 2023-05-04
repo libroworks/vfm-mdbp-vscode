@@ -56,16 +56,16 @@ function activate(context) {
   );
 
   // 自動更新設定（WorkSpace内のファイルが更新され、それがMarkdownであればHTMLを書き出す）
-  vscode.workspace.onDidSaveTextDocument((event) => {
+  vscode.workspace.onDidSaveTextDocument(() => {
     convertMD2HTML();
   });
 
   // 複数build，previwe用の処理
   //（jsonのMarkdownリストを取得し，それをMarkdownと見なしてすべて変換する）
   function callByConfig(command) {
-    // 今後の実装
-    // mdbplist.jsonを探して読み込む
-    // 全ファイルをHTML変換する
+    // 全ファイルをMD→HTML変換する
+    MarkdownBookPreviewConvert.convertByMarkdownList();
+    // previewまたはbuildを実行
     callShell(command);
   }
 
@@ -87,7 +87,7 @@ function activate(context) {
     // プレビューしたいパスやVSmodeを設定
     const mdpath = editor.document.fileName.replace(/^[a-z]:/, (d) => d.toUpperCase());
     console.log(mdpath);
-    const homePath = MarkdownBookPreviewConvert.searchHomepath(mdpath);
+    const homePath = MarkdownBookPreviewConvert.searchHomepath(mdpath, "_postReplaceList.json");
     const htmlfilepath = MarkdownBookPreviewConvert.convertMarkdown(mdpath, homePath);
     return htmlfilepath;
   }
