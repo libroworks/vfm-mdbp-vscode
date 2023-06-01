@@ -124,7 +124,7 @@ npm install -g @vivliostyle/cli
 ```
 サンプル置換リスト
 
-<script src="https://gist.github.com/lwohtsu/7abb3f9e1a1c8e06b600f8ef915a10e7.js"></script>
+https://gist.github.com/lwohtsu/7abb3f9e1a1c8e06b600f8ef915a10e7
 
 ### 画像のトリミング
 IT書でスクリーンショットは欠かせません。いちいちグラフィックスソフトでトリミングしたり、拡大縮小率を厳密に指定するのは手間なので、画像ファイル名のあとに簡単な指示を入れることで、指定できるようにしました。
