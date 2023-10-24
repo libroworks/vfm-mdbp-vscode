@@ -392,19 +392,29 @@ li.aokome {
 }
 
 /* コラム */
-section.column {
+section:has(> .column) {
   border: solid 0.5mm #000;
   padding: 2mm;
+  margin-block: 4mm;
 }
 
-h5.column {
-  font-size: 12Q;
-  margin: 3mm 0;
-}
-
-section.column p {
+section:has(> .column) p {
   font-size: 11Q;
   line-height: 18Q;
+}
+
+.bordered {
+  border: solid 0.5mm #f00;
+  padding: 2mm;
+  margin-block: 4mm;
+}
+
+h5 {
+  color: #00f;
+  margin-block: 0 2mm;
+}
+.red {
+  color: #f00;
 }
 
 /* 会話のフキダシ */
