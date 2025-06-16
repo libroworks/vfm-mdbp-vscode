@@ -188,11 +188,12 @@ Markdownの記述を簡単にするために、デザイン都合でHTML構造�
 ## Requirements
 - VSCode 1.69.0以上
 - Node.js v16以上
-~~- 作業フォルダー内にVivliostyle viewerが必要です。~~
-~~- TCP8087ポートを使用します。~~
 
 
 ## Release Notes
+### 0.2.9
+暫定処理として8.xより上がインストールされないよう固定
+
 ### 0.2.8
 vfmを2.2.1にアップデート
 

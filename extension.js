@@ -48,9 +48,9 @@ function activate(context) {
     vscode.commands.registerCommand("vfmdbp-vscode.installCLI", function () {
       console.log(vscode.env.shell);
       if (vscode.env.shell.startsWith("C:\\")) {
-        callShell("npm install -g @vivliostyle/cli");
+        callShell("npm install -g @vivliostyle/cli@8");
       } else {
-        callShell("sudo npm install -g @vivliostyle/cli");
+        callShell("sudo npm install -g @vivliostyle/cli@8");
       }
     })
   );
