@@ -7,9 +7,9 @@
   "name": "vfmdbp-vscode",
   "displayName": "vfm_mdbp_vscode",
   "description": "Markdown Book Preview for VSCode with VFM",
-  "version": "0.2.9",
+  "version": "0.2.10",
   "engines": {
-    "vscode": "^1.75.0"
+    "vscode": "^1.100.0"
   },
   "categories": [
     "Other"
@@ -47,6 +47,11 @@
         "command": "vfmdbp-vscode.buildThisCLI",
         "title": "これビルドvivliostyle build (Current File)",
         "category": "vfmdbookpreview"
+      },
+      {
+        "command": "vfmdbp-vscode.convertMD2HTMLonly",
+        "title": "HTMLのみを更新",
+        "category": "vfmdbookpreview"
       }
     ],
     "menus": {
@@ -72,6 +77,11 @@
           "command": "vfmdbp-vscode.buildByConfig",
           "group": "1_vivliostyle-cli",
           "when": "resourceLangId == markdown || resourceLangId == html"
+        },
+        {
+          "command": "vfmdbp-vscode.convertMD2HTMLonly",
+          "group": "1_vivliostyle-cli",
+          "when": "resourceLangId == markdown"
         },
         {
           "command": "vfmdbp-vscode.previewThisCLI",

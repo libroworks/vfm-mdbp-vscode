@@ -24,6 +24,12 @@ function activate(context) {
     })
   );
   context.subscriptions.push(
+    vscode.commands.registerCommand("vfmdbp-vscode.convertMD2HTMLonly", () => {
+      const htmlfilepath = convertMD2HTML();
+      vscode.env.openExternal(htmlfilepath);
+    })
+  );
+  context.subscriptions.push(
     vscode.commands.registerCommand("vfmdbp-vscode.buildThisCLI", () => {
       const htmlfilepath = convertMD2HTML();
       if (htmlfilepath) {

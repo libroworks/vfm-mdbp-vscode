@@ -186,11 +186,14 @@ Markdownの記述を簡単にするために、デザイン都合でHTML構造�
 
 
 ## Requirements
-- VSCode 1.69.0以上
-- Node.js v16以上
+- VSCode 1.100.0以上
+- Node.js v20以上
 
 
 ## Release Notes
+### 0.3.0
+HTMLだけを更新する機能を追加（VFMだけ使用）
+
 ### 0.2.9
 暫定処理として8.xより上がインストールされないよう固定
 

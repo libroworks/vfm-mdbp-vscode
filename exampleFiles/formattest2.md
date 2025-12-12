@@ -6,7 +6,7 @@ link:
     href: '_css/fullpower.css'
 ---
 
-# Chapter 2　章タイトル
+# Chapter 2　章タイトルテスト
 
 基本コンセプト
 - その言語の魅力、面白さを伝える
