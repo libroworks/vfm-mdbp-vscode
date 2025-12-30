@@ -12,10 +12,6 @@
  * Licensed under the MIT License.
  */
 
-/*! formdata-polyfill. MIT License. Jimmy Wärting <https://jimmy.warting.se/opensource> */
-
-/*! ws. MIT License. Einar Otto Stangvik <einaros@gmail.com> */
-
 /**
  * Prism: Lightweight, robust, elegant syntax highlighting
  *
@@ -23,6 +19,14 @@
  * @author Lea Verou <https://lea.verou.me>
  * @namespace
  * @public
+ */
+
+/**
+ * derived from `remark-sectionize`.
+ * original: 2019 Jake Low
+ * modified: 2020 Yasuaki Uechi, 2021 and later is Akabeko
+ * @license MIT
+ * @see https://github.com/jake-low/remark-sectionize
  */
 
 /**
