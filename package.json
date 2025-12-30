@@ -7,7 +7,7 @@
   "name": "vfmdbp-vscode",
   "displayName": "vfm_mdbp_vscode",
   "description": "Markdown Book Preview for VSCode with VFM",
-  "version": "0.2.10",
+  "version": "0.3.1",
   "engines": {
     "vscode": "^1.100.0"
   },
@@ -26,6 +26,11 @@
       {
         "command": "vfmdbp-vscode.installCLI",
         "title": "install/update vivliostyle-cli",
+        "category": "vivliostyle-cli-helper"
+      },
+      {
+        "command": "vfmdbp-vscode.installCLI8",
+        "title": "install/update vivliostyle-cli(v8)",
         "category": "vivliostyle-cli-helper"
       },
       {
@@ -97,6 +102,11 @@
           "command": "vfmdbp-vscode.installCLI",
           "group": "2_vivliostyle-cli",
           "when": "resourceLangId == markdown || resourceLangId == html"
+        },
+        {
+          "command": "vfmdbp-vscode.installCLI8",
+          "group": "2_vivliostyle-cli",
+          "when": "resourceLangId == markdown || resourceLangId == html"
         }
       ]
     },
@@ -129,7 +139,7 @@
     "webpack-cli": "^5.1.4"
   },
   "dependencies": {
-    "@vivliostyle/vfm": "^2.2.1",
+    "@vivliostyle/vfm": "^2.5.0",
     "cheerio": "^1.0.0-rc.12",
     "chokidar": "^3.5.3",
     "colors": "^1.4.0",
