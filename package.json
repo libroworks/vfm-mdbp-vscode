@@ -9,7 +9,8 @@
   "description": "Markdown Book Preview for VSCode with VFM",
   "version": "0.3.6",
   "engines": {
-    "vscode": "^1.100.0"
+    "vscode": "^1.100.0",
+    "node": ">=22"
   },
   "categories": [
     "Other"
@@ -126,43 +127,20 @@
     "test": "node ./test/runTest.js"
   },
   "devDependencies": {
-    "@types/glob": "^7.2.0",
-    "@types/mocha": "^9.1.1",
-    "@types/node": "14.x",
-    "@types/vscode": "^1.75.0",
-    "@vscode/test-electron": "^2.1.3",
-    "eslint": "^8.14.0",
-    "glob": "^8.0.1",
-    "mocha": "^9.2.2",
-    "typescript": "^4.6.4",
-    "webpack": "^5.73.0",
-    "webpack-cli": "^5.1.4"
+    "@types/mocha": "^10.0.10",
+    "@types/node": "^20.19.24",
+    "@types/vscode": "1.100.0",
+    "@vscode/test-electron": "^3.1.0",
+    "eslint": "^10.8.1",
+    "glob": "^13.0.6",
+    "mocha": "^11.8.0",
+    "webpack": "^5.109.2",
+    "webpack-cli": "^7.2.2"
   },
   "dependencies": {
-    "@vivliostyle/vfm": "^2.5.0",
-    "cheerio": "^1.0.0-rc.12",
-    "chokidar": "^3.5.3",
-    "colors": "^1.4.0",
-    "connect": "^3.7.0",
-    "cors": "^2.8.5",
-    "emitter": "^0.0.2",
-    "event-stream": "^4.0.1",
-    "faye-websocket": "^0.11.4",
-    "fs": "^0.0.1-security",
-    "highlight.js": "^11.5.1",
-    "html-whitespace-sensitive-tag-names": "^2.0.0",
-    "http": "^0.0.1-security",
-    "http-auth": "^4.1.9",
-    "http-proxy": "^1.18.1",
-    "image-size": "^1.0.1",
-    "lodash": "^4.17.21",
-    "marked": "^4.0.18",
-    "morgan": "^1.10.0",
-    "opn": "^6.0.0",
-    "os": "^0.1.2",
-    "path": "^0.12.7",
-    "proxy-middleware": "^0.15.0",
-    "send": "^0.18.0",
-    "serve-index": "^1.9.1"
+    "@vivliostyle/vfm": "latest",
+    "cheerio": "^1.2.0",
+    "html-whitespace-sensitive-tag-names": "2.0.0",
+    "image-size": "^2.0.2"
   }
 }
