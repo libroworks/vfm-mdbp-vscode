@@ -238,7 +238,7 @@ code {
   font-family: inconsolata;
 }
 .codenum-elem {
-  position: relative;
+  position: absolute;
   inset-inline-start: -2.5em;
   color: #fff;
 }

@@ -1,0 +1,21 @@
+{
+  "@context": [
+    "https://schema.org",
+    "https://www.w3.org/ns/pub-context"
+  ],
+  "type": "Book",
+  "conformsTo": "https://github.com/vivliostyle/vivliostyle-cli",
+  "name": "merged_output.pdf",
+  "dateModified": "2026-08-24T10:10:11.849Z",
+  "readingOrder": [
+    {
+      "url": "formattest.html",
+      "name": "Format Test"
+    },
+    {
+      "url": "formattest2.html"
+    }
+  ],
+  "resources": [],
+  "links": []
+}
