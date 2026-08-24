@@ -6,7 +6,7 @@
   "type": "Book",
   "conformsTo": "https://github.com/vivliostyle/vivliostyle-cli",
   "name": "merged_output.pdf",
-  "dateModified": "2026-08-24T10:10:11.849Z",
+  "dateModified": "2026-08-24T10:42:16.458Z",
   "readingOrder": [
     {
       "url": "formattest.html",

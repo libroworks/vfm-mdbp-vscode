@@ -3,6 +3,15 @@ const cheerio = require("cheerio");
 const { convertHtmlToInDesignXml } = require("../../lib/indesign-xml-converter");
 
 suite("InDesign XML converter", () => {
+  test("wraps every converted element in body directly below story", () => {
+    const xml = convertHtmlToInDesignXml("<html><body><section><p>content</p></section></body></html>");
+    const $ = cheerio.load(xml, { xmlMode: true, decodeEntities: true });
+
+    assert.strictEqual($("story").children().length, 1);
+    assert.strictEqual($("story").children().get(0).tagName, "body");
+    assert.strictEqual($("story > body > section > p").text(), "content");
+  });
+
   test("preserves code indentation, blank lines, and trailing newline exactly", () => {
     const code = "function sample() {\n  if (true) {\n    return 1;\n  }\n\n}\n";
     const html = `<html><body>\n  <pre class="language-js"><code class="language-js">${code}</code></pre>\n</body></html>`;
