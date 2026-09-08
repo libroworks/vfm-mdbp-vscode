@@ -1,157 +1,175 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
+const path = require("path");
 const vscode = require("vscode");
 const { MarkdownBookPreviewConvert } = require("./lib/markdown-book-preview-convert");
 
-// this method is called when your extension is activated
-// your extension is activated the very first time the command is executed
+const MESSAGE_PREFIX = "MDBP";
 
-/**
- * @param {vscode.ExtensionContext} context
- */
+/** @param {vscode.ExtensionContext} context */
 function activate(context) {
-  // Use the console to output diagnostic information (console.log) and errors (console.error)
-  // This line of code will only be executed once when your extension is activated
-  console.log('Congratulations, your extension "vfmdbp-vscode" is now active!');
+  const terminals = new Map();
 
-  context.subscriptions.push(vscode.commands.registerCommand("vfmdbp-vscode.exportXML", exportXML));
-  context.subscriptions.push(
-    vscode.commands.registerCommand("vfmdbp-vscode.previewThisCLI", () => {
-      const htmlfilepath = convertMD2HTML();
-      if (htmlfilepath) {
-        callShell(`vivliostyle preview "${htmlfilepath}"`);
-      }
-    })
-  );
-  context.subscriptions.push(
-    vscode.commands.registerCommand("vfmdbp-vscode.convertMD2HTMLonly", () => {
-      const htmlfilepath = convertMD2HTML();
-      vscode.env.openExternal(htmlfilepath);
-    })
-  );
-  context.subscriptions.push(
-    vscode.commands.registerCommand("vfmdbp-vscode.buildThisCLI", () => {
-      const htmlfilepath = convertMD2HTML();
-      if (htmlfilepath) {
-        const outputpath = htmlfilepath.replace(/.html$/, ".pdf");
-        callShell(`vivliostyle build "${htmlfilepath}" -o "${outputpath}"`);
-      }
-    })
-  );
-  context.subscriptions.push(
-    vscode.commands.registerCommand("vfmdbp-vscode.previewByConfig", function () {
-      // callShell("vivliostyle preview");
-      callByConfig("vivliostyle preview");
-    })
-  );
-  context.subscriptions.push(
-    vscode.commands.registerCommand("vfmdbp-vscode.buildByConfig", function () {
-      // callShell("vivliostyle build");
-      callByConfig("vivliostyle build");
-    })
-  );
-  context.subscriptions.push(
-    vscode.commands.registerCommand("vfmdbp-vscode.installCLI", function () {
-      console.log(vscode.env.shell);
-      if (vscode.env.shell.startsWith("C:\\")) {
-        callShell("npm install -g @vivliostyle/cli");
-      } else {
-        callShell("sudo npm install -g @vivliostyle/cli");
-      }
-    })
-  );
-  context.subscriptions.push(
-    vscode.commands.registerCommand("vfmdbp-vscode.installCLI8", function () {
-      console.log(vscode.env.shell);
-      if (vscode.env.shell.startsWith("C:\\")) {
-        callShell("npm install -g @vivliostyle/cli@8");
-      } else {
-        callShell("sudo npm install -g @vivliostyle/cli@8");
-      }
-    })
-  );
-
-  // 自動更新設定（WorkSpace内のファイルが更新され、それがMarkdownであればHTMLを書き出す）
-  vscode.workspace.onDidSaveTextDocument(() => {
-    convertMD2HTML();
+  registerCommand("vfmdbp-vscode.exportXML", "InDesign XMLの書き出し", () => {
+    const document = requireActiveMarkdownDocument();
+    const htmlPath = convertDocument(document);
+    const xmlPath = MarkdownBookPreviewConvert.exportInDesignXML(htmlPath);
+    return `XMLを書き出しました: ${xmlPath}`;
   });
 
-  // 複数build，previwe用の処理
-  //（jsonのMarkdownリストを取得し，それをMarkdownと見なしてすべて変換する）
-  function callByConfig(command) {
-    // 全ファイルをMD→HTML変換する
-    MarkdownBookPreviewConvert.convertByMarkdownList();
-    // previewまたはbuildを実行
-    callShell(command);
+  registerCommand("vfmdbp-vscode.previewThisCLI", "現在のファイルのプレビュー", () => {
+    const document = requireActiveMarkdownDocument();
+    const htmlPath = convertDocument(document);
+    callShell(`vivliostyle preview "${htmlPath}"`, getDocumentRoot(document));
+    return `プレビューを開始しました: ${htmlPath}`;
+  });
+
+  registerCommand("vfmdbp-vscode.convertMD2HTMLonly", "HTMLの更新", async () => {
+    const document = requireActiveMarkdownDocument();
+    const htmlPath = convertDocument(document);
+    const opened = await vscode.env.openExternal(vscode.Uri.file(htmlPath));
+    if (!opened) throw new Error(`HTMLファイルを開けません: ${htmlPath}`);
+    return `HTMLを更新しました: ${htmlPath}`;
+  });
+
+  registerCommand("vfmdbp-vscode.buildThisCLI", "現在のファイルのPDFビルド", () => {
+    const document = requireActiveMarkdownDocument();
+    const htmlPath = convertDocument(document);
+    const outputPath = htmlPath.replace(/\.html$/i, ".pdf");
+    callShell(`vivliostyle build "${htmlPath}" -o "${outputPath}"`, getDocumentRoot(document));
+    return `PDFビルドを開始しました: ${outputPath}`;
+  });
+
+  registerCommand("vfmdbp-vscode.previewByConfig", "設定ファイルによる連結プレビュー", () => {
+    const rootPath = getOperationRoot();
+    const convertedFiles = MarkdownBookPreviewConvert.convertByMarkdownList(rootPath);
+    callShell("vivliostyle preview", rootPath);
+    return `連結プレビューを開始しました（${convertedFiles.length}ファイルを更新）: ${rootPath}`;
+  });
+
+  registerCommand("vfmdbp-vscode.buildByConfig", "設定ファイルによる連結PDFビルド", () => {
+    const rootPath = getOperationRoot();
+    const convertedFiles = MarkdownBookPreviewConvert.convertByMarkdownList(rootPath);
+    callShell("vivliostyle build", rootPath);
+    return `連結PDFビルドを開始しました（${convertedFiles.length}ファイルを更新）: ${rootPath}`;
+  });
+
+  registerCommand("vfmdbp-vscode.installCLI", "Vivliostyle CLIのインストール", () => {
+    callShell(getInstallCommand("npm install -g @vivliostyle/cli"), getOptionalOperationRoot());
+    return "Vivliostyle CLIのインストールを開始しました";
+  });
+
+  registerCommand("vfmdbp-vscode.installCLI8", "Vivliostyle CLI v8のインストール", () => {
+    callShell(getInstallCommand("npm install -g @vivliostyle/cli@8"), getOptionalOperationRoot());
+    return "Vivliostyle CLI v8のインストールを開始しました";
+  });
+
+  context.subscriptions.push(
+    vscode.workspace.onDidSaveTextDocument((document) => {
+      if (!isMarkdownDocument(document)) return;
+      try {
+        convertDocument(document);
+      } catch (error) {
+        showFailure("保存時のHTML更新", error);
+      }
+    })
+  );
+
+  context.subscriptions.push(
+    vscode.window.onDidCloseTerminal((terminal) => {
+      for (const [key, value] of terminals) {
+        if (value === terminal) terminals.delete(key);
+      }
+    })
+  );
+
+  function registerCommand(commandId, action, handler) {
+    context.subscriptions.push(vscode.commands.registerCommand(commandId, () => runCommand(action, handler)));
   }
 
-  // InDesign用のXMLを書き出す
-  function exportXML() {
-    console.log("MarkdownBookPreview export XML");
-    const editor = vscode.window.activeTextEditor;
-    if (checkEditorPath(editor) === false) return;
-    // プレビューしたいパスやVSmodeを設定
-    const mdpath = editor.document.fileName;
-    const htmlfilepath = convertMD2HTML(mdpath);
-    MarkdownBookPreviewConvert.exportInDesignXML(htmlfilepath);
+  async function runCommand(action, handler) {
+    try {
+      const message = await handler();
+      if (message) await vscode.window.showInformationMessage(`${MESSAGE_PREFIX}: ${message}`);
+    } catch (error) {
+      showFailure(action, error);
+    }
   }
 
-  // Markdownファイルの変換
-  function convertMD2HTML() {
-    const editor = vscode.window.activeTextEditor;
-    if (checkEditorPath(editor) === false) return null;
-    // プレビューしたいパスやVSmodeを設定
-    const mdpath = editor.document.fileName.replace(/^[a-z]:/, (d) => d.toUpperCase());
-    console.log(mdpath);
-    const homePath = MarkdownBookPreviewConvert.searchHomepath(mdpath, "_postReplaceList.json");
-    const htmlfilepath = MarkdownBookPreviewConvert.convertMarkdown(mdpath, homePath);
-    return htmlfilepath;
-  }
+  function callShell(shellCommand, cwd) {
+    const terminalKey = cwd ? path.resolve(cwd) : "__default__";
+    let terminal = terminals.get(terminalKey);
+    if (!terminal || terminal.exitStatus) {
+      terminal = vscode.window.createTerminal({ name: "vivliostyle-cli-helper", ...(cwd ? { cwd } : {}) });
+      terminals.set(terminalKey, terminal);
+    }
 
-  // ターミナルにコマンドを発行する
-  function callShell(shellcommand) {
-    const term = vscode.window.activeTerminal?.name === "vivliostyle-cli-helper" ? vscode.window.activeTerminal : vscode.window.createTerminal("vivliostyle-cli-helper");
-    term.show();
-    // PowerShellかつvivliostyleスクリプトの実行時のみ許可が必要
-    if (vscode.env.shell.includes("powershell") && shellcommand.indexOf("vivliostyle") === 0) {
-      term.sendText(`PowerShell -ExecutionPolicy RemoteSigned ${shellcommand}`);
+    terminal.show();
+    const shell = (vscode.env.shell || "").toLowerCase();
+    if (shell.includes("powershell") && shellCommand.startsWith("vivliostyle")) {
+      terminal.sendText(`PowerShell -ExecutionPolicy RemoteSigned ${shellCommand}`);
     } else {
-      term.sendText(shellcommand);
-    }
-  }
-
-  // チェック
-  function checkEditorPath(editor) {
-    if (editor === null || editor === undefined) return false;
-    const path = editor.document.fileName;
-    if (!path) {
-      vscode.window.showWarningMessage("ファイルを保存してから実行してください");
-      return false;
-    }
-    if (!path.endsWith(".md")) {
-      // vscode.window.showWarningMessage("Mardownファイルではありません");
-      return false;
-    }
-    return true;
-  }
-
-  // ターミナルにコマンドを発行する
-  function callShell(shellcommand) {
-    const term = vscode.window.activeTerminal?.name === "vivliostyle-cli-helper" ? vscode.window.activeTerminal : vscode.window.createTerminal("vivliostyle-cli-helper");
-    term.show();
-    // PowerShellかつvivliostyleスクリプトの実行時のみ許可が必要
-    if (vscode.env.shell.includes("powershell") && shellcommand.indexOf("vivliostyle") === 0) {
-      term.sendText(`PowerShell -ExecutionPolicy RemoteSigned ${shellcommand}`);
-    } else {
-      term.sendText(shellcommand);
+      terminal.sendText(shellCommand);
     }
   }
 }
 
-// this method is called when your extension is deactivated
+function convertDocument(document) {
+  if (!isMarkdownDocument(document)) throw new Error("保存済みのMarkdownファイルを選択してください");
+  const markdownPath = normalizeWindowsDriveLetter(document.fileName);
+  const rootPath = getDocumentRoot(document);
+  const homePath = MarkdownBookPreviewConvert.searchHomepath(markdownPath, "_postReplaceList.json", rootPath);
+  return MarkdownBookPreviewConvert.convertMarkdown(markdownPath, homePath);
+}
+
+function requireActiveMarkdownDocument() {
+  const document = vscode.window.activeTextEditor?.document;
+  if (!document) throw new Error("アクティブなエディターがありません");
+  if (!isMarkdownDocument(document)) throw new Error("保存済みのMarkdownファイルを選択してください");
+  return document;
+}
+
+function isMarkdownDocument(document) {
+  return Boolean(document && document.uri.scheme === "file" && document.fileName && document.fileName.toLowerCase().endsWith(".md"));
+}
+
+function getDocumentRoot(document) {
+  const workspaceFolder = vscode.workspace.getWorkspaceFolder(document.uri);
+  return workspaceFolder?.uri.fsPath || path.dirname(document.fileName);
+}
+
+function getOperationRoot() {
+  const rootPath = getOptionalOperationRoot();
+  if (rootPath) return rootPath;
+  throw new Error("対象フォルダーを特定できません。ファイルまたはワークスペースを開いてください");
+}
+
+function getOptionalOperationRoot() {
+  const document = vscode.window.activeTextEditor?.document;
+  if (document?.uri.scheme === "file" && document.fileName) return getDocumentRoot(document);
+
+  const workspaceFolders = vscode.workspace.workspaceFolders || [];
+  if (workspaceFolders.length === 1) return workspaceFolders[0].uri.fsPath;
+  return undefined;
+}
+
+function getInstallCommand(command) {
+  return (vscode.env.shell || "").startsWith("C:\\") ? command : `sudo ${command}`;
+}
+
+function normalizeWindowsDriveLetter(filePath) {
+  return filePath.replace(/^[a-z]:/, (drive) => drive.toUpperCase());
+}
+
+function showFailure(action, error) {
+  const detail = error instanceof Error ? error.message : String(error);
+  return vscode.window.showErrorMessage(`${MESSAGE_PREFIX}: ${action}に失敗しました — ${detail}`);
+}
+
 function deactivate() {}
 
 module.exports = {
   activate,
   deactivate,
+  convertDocument,
+  getDocumentRoot,
+  isMarkdownDocument,
 };

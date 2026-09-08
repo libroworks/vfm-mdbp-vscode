@@ -1,39 +1,103 @@
-<?xml version="1.0" encoding="UTF-8"?><story xmlns:aid5="http://ns.adobe.com/AdobeInDesign/5.0/" xmlns:aid="http://ns.adobe.com/AdobeInDesign/4.0/"><body><section_level1><h1_level1>Chapter 1&#x3000;&#x7ae0;&#x30bf;&#x30a4;&#x30c8;&#x30eb;</h1_level1>
-<p_level1>&#x57fa;&#x672c;&#x30b3;&#x30f3;&#x30bb;&#x30d7;&#x30c8;</p_level1><ul>
+<?xml version="1.0" encoding="UTF-8"?><story xmlns:aid5="http://ns.adobe.com/AdobeInDesign/5.0/" xmlns:aid="http://ns.adobe.com/AdobeInDesign/4.0/"><body>
+<section_level1>
+<h1_level1>Chapter 1&#x3000;&#x7ae0;&#x30bf;&#x30a4;&#x30c8;&#x30eb;</h1_level1>
+<p_level1>&#x57fa;&#x672c;&#x30b3;&#x30f3;&#x30bb;&#x30d7;&#x30c8;</p_level1>
+<ul>
 <ul_li_level1>&#x305d;&#x306e;&#x8a00;&#x8a9e;&#x306e;&#x9b45;&#x529b;&#x3001;&#x9762;&#x767d;&#x3055;&#x3092;&#x4f1d;&#x3048;&#x308b;</ul_li_level1>
-<ul_li_level1>&#x5185;&#x5bb9;&#x306f;&#x30ac;&#x30c1;&#x3067;&#x3082;&#x3001;&#x30c7;&#x30b6;&#x30a4;&#x30f3;&#x306f;&#x67d4;&#x3089;&#x304b;</ul_li_level1></ul><section_level2>
+<ul_li_level1>&#x5185;&#x5bb9;&#x306f;&#x30ac;&#x30c1;&#x3067;&#x3082;&#x3001;&#x30c7;&#x30b6;&#x30a4;&#x30f3;&#x306f;&#x67d4;&#x3089;&#x304b;</ul_li_level1>
+</ul>
+<section_level2>
 <h2_level2>&#x7bc0;&#x30bf;&#x30a4;&#x30c8;&#x30eb; - Start With Viliostyle</h2_level2>
-<p_level2>&#x30ea;&#x30fc;&#x30c9;&#x6587;&#x3002;&#x8aad;&#x8005;&#x306b;&#x8a71;&#x3057;&#x304b;&#x3051;&#x308b;&#x611f;&#x3058;&#x3067;&#x3001;&#x3053;&#x306e;&#x7bc0;&#x3067;&#x8aac;&#x660e;&#x3059;&#x308b;&#x3053;&#x3068;&#x3092;&#x77e5;&#x308b;&#x3068;&#x3001;&#x4f55;&#x304c;&#x3067;&#x304d;&#x308b;&#x3088;&#x3046;&#x306b;&#x306a;&#x308b;&#x306e;&#x304b;&#x3092;&#x4f1d;&#x3048;&#x3066;&#x304f;&#x3060;&#x3055;&#x3044;&#x3002;&#x3042;&#x3042;&#x3042;&#x3042;&#x3042;&#x3042;&#x3042;&#x3042;&#x3042;&#x3042;&#x3042;&#x3042;&#x3042;&#x3042;&#x3042;&#x3042;&#x3042;&#x3042;&#x3042;&#x3042;&#x3042;&#x3042;&#x3042;&#x3042;&#x3042;&#x3042;&#x3042;&#x3042;&#x3042;&#x3042;&#x3042;&#x3044;&#x3042;&#x3042;</p_level2><section_level3>
-<h3_level3>&#x30e2;&#x30b8;&#x30e5;&#x30fc;&#x30eb;&#x3092;&#x5229;&#x7528;&#x3059;&#x308b; - h3&#x4e2d;&#x898b;&#x51fa;&#x3057;</h3_level3><section_level4>
+<p_level2>&#x30ea;&#x30fc;&#x30c9;&#x6587;&#x3002;&#x8aad;&#x8005;&#x306b;&#x8a71;&#x3057;&#x304b;&#x3051;&#x308b;&#x611f;&#x3058;&#x3067;&#x3001;&#x3053;&#x306e;&#x7bc0;&#x3067;&#x8aac;&#x660e;&#x3059;&#x308b;&#x3053;&#x3068;&#x3092;&#x77e5;&#x308b;&#x3068;&#x3001;&#x4f55;&#x304c;&#x3067;&#x304d;&#x308b;&#x3088;&#x3046;&#x306b;&#x306a;&#x308b;&#x306e;&#x304b;&#x3092;&#x4f1d;&#x3048;&#x3066;&#x304f;&#x3060;&#x3055;&#x3044;&#x3002;&#x3042;&#x3042;&#x3042;&#x3042;&#x3042;&#x3042;&#x3042;&#x3042;&#x3042;&#x3042;&#x3042;&#x3042;&#x3042;&#x3042;&#x3042;&#x3042;&#x3042;&#x3042;&#x3042;&#x3042;&#x3042;&#x3042;&#x3042;&#x3042;&#x3042;&#x3042;&#x3042;&#x3042;&#x3042;&#x3042;&#x3042;&#x3044;&#x3042;&#x3042;</p_level2>
+<section_level3>
+<h3_level3>&#x30e2;&#x30b8;&#x30e5;&#x30fc;&#x30eb;&#x3092;&#x5229;&#x7528;&#x3059;&#x308b; - h3&#x4e2d;&#x898b;&#x51fa;&#x3057;</h3_level3>
+<section_level4>
 <h4_level4>datetime&#x30af;&#x30e9;&#x30b9;&#x306e;&#x5229;&#x7528; - h4&#x5c0f;&#x898b;&#x51fa;&#x3057;</h4_level4>
 <p_level4>Chapter 4&#x3067;&#x30aa;&#x30ea;&#x30b8;&#x30ca;&#x30eb;&#x306e;&#x95a2;&#x6570;&#x3092;&#x307e;&#x3068;&#x3081;&#x305f;&#x30e2;&#x30b8;&#x30e5;&#x30fc;&#x30eb;&#x3092;&#x4f5c;&#x308a;&#x307e;&#x3057;&#x305f;&#x304c;&#x3001;&#x5b9f;&#x306f;Python&#x306b;&#x306f;&#x3001;&#x306f;&#x3058;&#x3081;&#x304b;&#x3089;&#x591a;&#x6570;&#x306e;&#x30e2;&#x30b8;&#x30e5;&#x30fc;&#x30eb;&#x304c;&#x4ed8;&#x5c5e;&#x3057;&#x3066;&#x3044;&#x307e;&#x3059;&#x3002;&#x3053;&#x308c;&#x3089;<strong>&#x4ed8;&#x5c5e;&#x306e;&#x30e2;&#x30b8;&#x30e5;&#x30fc;&#x30eb;&#x3092;&#x7dcf;&#x79f0;&#x3057;&#x3066;&#x300c;&#x6a19;&#x6e96;&#x30e9;&#x30a4;&#x30d6;&#x30e9;&#x30ea;&#x300d;&#x3068;&#x547c;&#x3073;&#x307e;&#x3059;</strong>&#x3002;</p_level4>
-<p_level4>&#x6a19;&#x6e96;&#x30e9;&#x30a4;&#x30d6;&#x30e9;&#x30ea;&#x306e;&#x30e2;&#x30b8;&#x30e5;&#x30fc;&#x30eb;&#x3092;&#x5229;&#x7528;&#x3059;&#x308b;&#x3053;&#x3068;&#x3067;&#x3001;&#x30d7;&#x30ed;&#x30b0;&#x30e9;&#x30e0;&#x3067;&#x3067;&#x304d;&#x308b;&#x3053;&#x3068;&#x306e;&#x7bc4;&#x56f2;&#x3092;&#x3055;&#x3089;&#x306b;&#x5e83;&#x3052;&#x308b;&#x3053;&#x3068;&#x304c;&#x3067;&#x304d;&#x307e;&#x3059;&#x3002;&#x6a19;&#x6e96;&#x30e9;&#x30a4;&#x30d6;&#x30e9;&#x30ea;&#x306f;import&#x6587;&#x3067;&#x30a4;&#x30f3;&#x30dd;&#x30fc;&#x30c8;&#x3059;&#x308b;&#x3060;&#x3051;&#x3067;&#x3059;&#x3050;&#x306b;&#x5229;&#x7528;&#x3067;&#x304d;&#x307e;&#x3059;&#x3002;</p_level4><section_level6>
+<p_level4>&#x6a19;&#x6e96;&#x30e9;&#x30a4;&#x30d6;&#x30e9;&#x30ea;&#x306e;&#x30e2;&#x30b8;&#x30e5;&#x30fc;&#x30eb;&#x3092;&#x5229;&#x7528;&#x3059;&#x308b;&#x3053;&#x3068;&#x3067;&#x3001;&#x30d7;&#x30ed;&#x30b0;&#x30e9;&#x30e0;&#x3067;&#x3067;&#x304d;&#x308b;&#x3053;&#x3068;&#x306e;&#x7bc4;&#x56f2;&#x3092;&#x3055;&#x3089;&#x306b;&#x5e83;&#x3052;&#x308b;&#x3053;&#x3068;&#x304c;&#x3067;&#x304d;&#x307e;&#x3059;&#x3002;&#x6a19;&#x6e96;&#x30e9;&#x30a4;&#x30d6;&#x30e9;&#x30ea;&#x306f;import&#x6587;&#x3067;&#x30a4;&#x30f3;&#x30dd;&#x30fc;&#x30c8;&#x3059;&#x308b;&#x3060;&#x3051;&#x3067;&#x3059;&#x3050;&#x306b;&#x5229;&#x7528;&#x3067;&#x304d;&#x307e;&#x3059;&#x3002;</p_level4>
+<section_level6>
 <h6_codenumber>chap5-3-1</h6_codenumber>
 <pre_language-py><code_language-py><span_codenum-elem>115</span_codenum-elem><span_token_keyword>from</span_token_keyword> datetime <span_token_keyword>import</span_token_keyword> date<span_token_punctuation>,</span_token_punctuation> timedelta
 <span_codenum-elem>116</span_codenum-elem>start <span_token_operator>=</span_token_operator> date<span_token_punctuation>(</span_token_punctuation> <span_token_number>2018</span_token_number><span_token_punctuation>,</span_token_punctuation> <span_token_number>6</span_token_number><span_token_punctuation>,</span_token_punctuation> <span_token_number>18</span_token_number> <span_token_punctuation>)</span_token_punctuation>    <span_token_comment>#&#x2190;&#x30b3;&#x30e1;&#x30f3;&#x30c8;&#x306e;&#x5148;&#x982d;&#x3092;&#x2190;&#x306b;&#x3059;&#x308b;&#x3068;&#x5f15;&#x304d;&#x51fa;&#x3057;&#x7dda;&#x306b;</span_token_comment>
 <span_codenum-elem>117</span_codenum-elem><span_token_keyword>for</span_token_keyword> days <span_token_keyword>in</span_token_keyword> <span_token_builtin>range</span_token_builtin><span_token_punctuation>(</span_token_punctuation><span_token_number>14</span_token_number><span_token_punctuation>)</span_token_punctuation><span_token_punctuation>:</span_token_punctuation>    <span_token_comment>#&#x2190;&#x7e70;&#x308a;&#x8fd4;&#x3057;&#x306e;for&#x6587;</span_token_comment>
 <span_codenum-elem>118</span_codenum-elem>    cur <span_token_operator>=</span_token_operator> start <span_token_operator>+</span_token_operator> timedelta<span_token_punctuation>(</span_token_punctuation> days<span_token_operator>=</span_token_operator>days <span_token_punctuation>)</span_token_punctuation>
 <span_codenum-elem>119</span_codenum-elem>    <span_token_keyword>print</span_token_keyword><span_token_punctuation>(</span_token_punctuation> cur <span_token_punctuation>)</span_token_punctuation>
-</code_language-py></pre_language-py><figure_language-console><figcaption>&#x5b9f;&#x884c;&#x7d50;&#x679c;</figcaption>
+</code_language-py></pre_language-py>
+
+<figure_language-console>
+<figcaption>&#x5b9f;&#x884c;&#x7d50;&#x679c;</figcaption>
 <pre_language-console><code_language-console>2018/6/18
 2018/6/18
 2018/6/18
-2018/6/18</code_language-console></pre_language-console></figure_language-console>
-<p_level6>&#x8907;&#x6570;&#x306e;&#x30af;&#x30e9;&#x30b9;&#x3092;&#x30ab;&#x30f3;&#x30de;&#x533a;&#x5207;&#x308a;&#x3067;&#x6307;&#x5b9a;&#x3059;&#x308b;&#x3068;&#x3001;&#x307e;&#x3068;&#x3081;&#x3066;&#x30a4;&#x30f3;&#x30dd;&#x30fc;&#x30c8;&#x3067;&#x304d;&#x307e;&#x3059;&#x3002;</p_level6></section_level6></section_level4></section_level3><section_level3>
+2018/6/18</code_language-console></pre_language-console>
+
+</figure_language-console>
+<p_level6>&#x8907;&#x6570;&#x306e;&#x30af;&#x30e9;&#x30b9;&#x3092;&#x30ab;&#x30f3;&#x30de;&#x533a;&#x5207;&#x308a;&#x3067;&#x6307;&#x5b9a;&#x3059;&#x308b;&#x3068;&#x3001;&#x307e;&#x3068;&#x3081;&#x3066;&#x30a4;&#x30f3;&#x30dd;&#x30fc;&#x30c8;&#x3067;&#x304d;&#x307e;&#x3059;&#x3002;</p_level6>
+</section_level6>
+</section_level4>
+</section_level3>
+<section_level3>
 <h3_test>2&#x9031;&#x9593;&#x5206;&#x306e;&#x65e5;&#x4ed8;&#x306e;&#x4e00;&#x89a7;&#x3092;&#x4f5c;&#x308b;</h3_test>
 <p_level3>&#x958b;&#x59cb;&#x65e5;&#x304b;&#x3089;2&#x9031;&#x9593;&#x5206;&#x306e;&#x65e5;&#x4ed8;&#x3092;&#x8868;&#x793a;&#x3059;&#x308b;&#x30d7;&#x30ed;&#x30b0;&#x30e9;&#x30e0;&#x3092;&#x66f8;&#x3044;&#x3066;&#x307f;&#x307e;&#x3057;&#x3087;&#x3046;&#x3002;&#x300c;2&#x9031;&#x9593;&#x5206;&#x300d;&#x306e;&#x3088;&#x3046;&#x306b;&#x8907;&#x6570;&#x306e;&#x30c7;&#x30fc;&#x30bf;&#x3092;&#x4f5c;&#x308b;&#x5834;&#x5408;&#x3001;for&#x6587;&#x3092;&#x4f7f;&#x3046;&#x3053;&#x3068;&#x306f;&#x3059;&#x3050;&#x601d;&#x3044;&#x3064;&#x304d;&#x307e;&#x3059;&#x3002;&#x305f;&#x3060;&#x3057;&#x3001;date&#x30aa;&#x30d6;&#x30b8;&#x30a7;&#x30af;&#x30c8;&#x3060;&#x3051;&#x3067;2&#x9031;&#x9593;&#x5206;&#x306e;&#x65e5;&#x4ed8;&#x3092;&#x4f5c;&#x308d;&#x3046;&#x3068;&#x3059;&#x308b;&#x3068;&#x3046;&#x307e;&#x304f;&#x3044;&#x304d;&#x307e;&#x305b;&#x3093;&#x3002;<strong>&#x305d;&#x306e;&#x6708;&#x306e;&#x6700;&#x7d42;&#x65e5;&#x3092;&#x8d8a;&#x3048;&#x305f;&#x65e5;&#x4ed8;&#x3001;&#x305f;&#x3068;&#x3048;&#x3070;33&#x65e5;&#x306a;&#x3069;&#x3092;&#x6e21;&#x3059;&#x3068;&#x3001;&#x30d0;&#x30ea;&#x30e5;&#x30fc;&#x30a8;&#x30e9;&#x30fc;&#x304c;&#x767a;&#x751f;&#x3057;&#x3066;&#x3057;&#x307e;&#x3046;&#x304b;&#x3089;&#x3067;&#x3059;</strong>&#x3002;&#x305d;&#x3053;&#x3067;&#x3001;&#x958b;&#x59cb;&#x65e5;&#x306e;date&#x30aa;&#x30d6;&#x30b8;&#x30a7;&#x30af;&#x30c8;&#x3092;&#x4f5c;&#x308a;&#x3001;&#x305d;&#x3053;&#x306b;&#x7d4c;&#x904e;&#x65e5;&#x6570;&#x306e;timedelta&#x30aa;&#x30d6;&#x30b8;&#x30a7;&#x30af;&#x30c8;&#x3092;&#x52a0;&#x3048;&#x3066;&#x76ee;&#x7684;&#x306e;&#x65e5;&#x4ed8;&#x3092;&#x4f5c;&#x308a;&#x307e;&#x3059;&#x3002;<span_math_inline>\(x^2\)</span_math_inline></p_level3>
-<p_level3><span_math_display>&#x24;&#x24;y=x^2+\frac{1}{3}\sqrt{2}&#x24;&#x24;</span_math_display></p_level3><section_level5>
-<h5_level5>&#x6a19;&#x6e96;&#x30e9;&#x30a4;&#x30d6;&#x30e9;&#x30ea;&#x306e;&#x30e2;&#x30b8;&#x30e5;&#x30fc;&#x30eb;&#xff08;&#x629c;&#x7c8b;&#xff09;</h5_level5><table><tr><td>&#x30e2;&#x30b8;&#x30e5;&#x30fc;&#x30eb;&#x540d;</td><td>&#x8aac;&#x660e;</td></tr><tr><td>csv</td><td>CSV&#x30d5;&#x30a1;&#x30a4;&#x30eb;&#x306e;&#x8aad;&#x307f;&#x8fbc;&#x307f;&#x3068;&#x66f8;&#x304d;&#x8fbc;&#x307f;&#x3092;&#x884c;&#x3046;</td></tr><tr><td>datetime</td><td>&#x65e5;&#x6642;&#x3092;&#x6271;&#x3046;</td></tr><tr><td>json</td><td>Web&#x3067;&#x3088;&#x304f;&#x7528;&#x3044;&#x3089;&#x308c;&#x308b;JSON&#x5f62;&#x5f0f;&#x306e;&#x30c7;&#x30fc;&#x30bf;&#x3092;&#x6271;&#x3046;</td></tr><tr><td>math</td><td>&#x4e09;&#x89d2;&#x95a2;&#x6570;&#x306a;&#x3069;&#x6570;&#x5024;&#x8a08;&#x7b97;&#x7528;&#x306e;&#x95a2;&#x6570;&#x304c;&#x307e;&#x3068;&#x3081;&#x3089;&#x308c;&#x3066;&#x3044;&#x308b;</td></tr><tr><td>pathlib</td><td>&#x30d5;&#x30a1;&#x30a4;&#x30eb;&#x3084;&#x30d5;&#x30a9;&#x30eb;&#x30c0;&#x306e;&#x64cd;&#x4f5c;&#x3092;&#x884c;&#x3046;</td></tr><tr><td>random</td><td>&#x4e71;&#x6570;&#xff08;&#x30c7;&#x30bf;&#x30e9;&#x30e1;&#x306b;&#x898b;&#x3048;&#x308b;&#x6570;&#xff09;&#x3092;&#x751f;&#x6210;&#x3059;&#x308b;</td></tr><tr><td>tkinter</td><td>GUI&#x30a2;&#x30d7;&#x30ea;&#x30b1;&#x30fc;&#x30b7;&#x30e7;&#x30f3;&#x3092;&#x4f5c;&#x308b;</td></tr><tr><td>zipfile</td><td>ZIP&#x5f62;&#x5f0f;&#x306e;&#x5727;&#x7e2e;&#x30d5;&#x30a1;&#x30a4;&#x30eb;&#x3092;&#x6271;&#x3046;</td></tr></table><ul>
+<p_level3><span_math_display>&#x24;&#x24;y=x^2+\frac{1}{3}\sqrt{2}&#x24;&#x24;</span_math_display></p_level3>
+<section_level5>
+<h5_level5>&#x6a19;&#x6e96;&#x30e9;&#x30a4;&#x30d6;&#x30e9;&#x30ea;&#x306e;&#x30e2;&#x30b8;&#x30e5;&#x30fc;&#x30eb;&#xff08;&#x629c;&#x7c8b;&#xff09;</h5_level5>
+<table>
+<tr>
+<td>&#x30e2;&#x30b8;&#x30e5;&#x30fc;&#x30eb;&#x540d;</td>
+<td>&#x8aac;&#x660e;</td>
+</tr>
+<tr>
+<td>csv</td>
+<td>CSV&#x30d5;&#x30a1;&#x30a4;&#x30eb;&#x306e;&#x8aad;&#x307f;&#x8fbc;&#x307f;&#x3068;&#x66f8;&#x304d;&#x8fbc;&#x307f;&#x3092;&#x884c;&#x3046;</td>
+</tr>
+<tr>
+<td>datetime</td>
+<td>&#x65e5;&#x6642;&#x3092;&#x6271;&#x3046;</td>
+</tr>
+<tr>
+<td>json</td>
+<td>Web&#x3067;&#x3088;&#x304f;&#x7528;&#x3044;&#x3089;&#x308c;&#x308b;JSON&#x5f62;&#x5f0f;&#x306e;&#x30c7;&#x30fc;&#x30bf;&#x3092;&#x6271;&#x3046;</td>
+</tr>
+<tr>
+<td>math</td>
+<td>&#x4e09;&#x89d2;&#x95a2;&#x6570;&#x306a;&#x3069;&#x6570;&#x5024;&#x8a08;&#x7b97;&#x7528;&#x306e;&#x95a2;&#x6570;&#x304c;&#x307e;&#x3068;&#x3081;&#x3089;&#x308c;&#x3066;&#x3044;&#x308b;</td>
+</tr>
+<tr>
+<td>pathlib</td>
+<td>&#x30d5;&#x30a1;&#x30a4;&#x30eb;&#x3084;&#x30d5;&#x30a9;&#x30eb;&#x30c0;&#x306e;&#x64cd;&#x4f5c;&#x3092;&#x884c;&#x3046;</td>
+</tr>
+<tr>
+<td>random</td>
+<td>&#x4e71;&#x6570;&#xff08;&#x30c7;&#x30bf;&#x30e9;&#x30e1;&#x306b;&#x898b;&#x3048;&#x308b;&#x6570;&#xff09;&#x3092;&#x751f;&#x6210;&#x3059;&#x308b;</td>
+</tr>
+<tr>
+<td>tkinter</td>
+<td>GUI&#x30a2;&#x30d7;&#x30ea;&#x30b1;&#x30fc;&#x30b7;&#x30e7;&#x30f3;&#x3092;&#x4f5c;&#x308b;</td>
+</tr>
+<tr>
+<td>zipfile</td>
+<td>ZIP&#x5f62;&#x5f0f;&#x306e;&#x5727;&#x7e2e;&#x30d5;&#x30a1;&#x30a4;&#x30eb;&#x3092;&#x6271;&#x3046;</td>
+</tr>
+</table>
+<ul>
 <ul_li_level5>&#x7b87;&#x6761;&#x66f8;&#x304d;&#x3042;&#x3042;&#x3042;&#x3042;&#x3042;&#x3042;&#x3042;&#x3042;&#x3042;&#x3042;&#x3042;&#x3042;&#x3042;&#x3042;&#x3042;&#x3042;&#x3042;&#x3042;&#x3042;&#x3042;&#x3042;&#x3042;&#x3042;&#x3042;&#x3042;&#x3042;&#x3042;&#x3042;&#x3042;&#x3042;&#x3042;&#x3042;&#x3042;&#x3042;&#x3042;&#x3042;&#x3042;&#x3042;</ul_li_level5>
 <ul_li_level5>&#x7b87;&#x6761;&#x66f8;&#x304d;</ul_li_level5>
 <ul_li_level5>&#x7b87;&#x6761;&#x66f8;&#x304d;</ul_li_level5>
-<ul_li_level5>&#x7b87;&#x6761;&#x66f8;&#x304d;</ul_li_level5></ul><ol>
+<ul_li_level5>&#x7b87;&#x6761;&#x66f8;&#x304d;</ul_li_level5>
+</ul>
+<ol>
 <ol_li_level5>&#x756a;&#x53f7;&#x4ed8;&#x304d;&#x7b87;&#x6761;&#x66f8;&#x304d;</ol_li_level5>
 <ol_li_level5>&#x756a;&#x53f7;&#x4ed8;&#x304d;&#x7b87;&#x6761;&#x66f8;&#x304d;</ol_li_level5>
 <ol_li_level5>&#x756a;&#x53f7;&#x4ed8;&#x304d;&#x7b87;&#x6761;&#x66f8;&#x304d;</ol_li_level5>
-<ol_li_level5>&#x756a;&#x53f7;&#x4ed8;&#x304d;&#x7b87;&#x6761;&#x66f8;&#x304d;</ol_li_level5></ol></section_level5><section_level5>
+<ol_li_level5>&#x756a;&#x53f7;&#x4ed8;&#x304d;&#x7b87;&#x6761;&#x66f8;&#x304d;</ol_li_level5>
+</ol>
+</section_level5>
+<section_level5>
 <h5_column>&#x30b3;&#x30e9;&#x30e0;&#xff1a;&#x30b3;&#x30e9;&#x30e0;&#x30bf;&#x30a4;&#x30c8;&#x30eb;</h5_column>
-<p_level5>&#x958b;&#x59cb;&#x65e5;&#x304b;&#x3089;2&#x9031;&#x9593;&#x5206;&#x306e;&#x65e5;&#x4ed8;&#x3092;&#x8868;&#x793a;&#x3059;&#x308b;&#x30d7;&#x30ed;&#x30b0;&#x30e9;&#x30e0;&#x3092;&#x66f8;&#x3044;&#x3066;&#x307f;&#x307e;&#x3057;&#x3087;&#x3046;&#x3002;&#x300c;2&#x9031;&#x9593;&#x5206;&#x300d;&#x306e;&#x3088;&#x3046;&#x306b;&#x8907;&#x6570;&#x306e;&#x30c7;&#x30fc;&#x30bf;&#x3092;&#x4f5c;&#x308b;&#x5834;&#x5408;&#x3001;for&#x6587;&#x3092;&#x4f7f;&#x3046;&#x3053;&#x3068;&#x306f;&#x3059;&#x3050;&#x601d;&#x3044;&#x3064;&#x304d;&#x307e;&#x3059;&#x3002;&#x305f;&#x3060;&#x3057;&#x3001;date&#x30aa;&#x30d6;&#x30b8;&#x30a7;&#x30af;&#x30c8;&#x3060;&#x3051;&#x3067;2&#x9031;&#x9593;&#x5206;&#x306e;&#x65e5;&#x4ed8;&#x3092;&#x4f5c;&#x308d;&#x3046;&#x3068;&#x3059;&#x308b;&#x3068;&#x3046;&#x307e;&#x304f;&#x3044;&#x304d;&#x307e;&#x305b;&#x3093;&#x3002;<strong>&#x305d;&#x306e;&#x6708;&#x306e;&#x6700;&#x7d42;&#x65e5;&#x3092;&#x8d8a;&#x3048;&#x305f;&#x65e5;&#x4ed8;&#x3001;&#x305f;&#x3068;&#x3048;&#x3070;33&#x65e5;&#x306a;&#x3069;&#x3092;&#x6e21;&#x3059;&#x3068;&#x3001;&#x30d0;&#x30ea;&#x30e5;&#x30fc;&#x30a8;&#x30e9;&#x30fc;&#x304c;&#x767a;&#x751f;&#x3057;&#x3066;&#x3057;&#x307e;&#x3046;&#x304b;&#x3089;&#x3067;&#x3059;</strong>&#x3002;&#x305d;&#x3053;&#x3067;&#x3001;&#x958b;&#x59cb;&#x65e5;&#x306e;date&#x30aa;&#x30d6;&#x30b8;&#x30a7;&#x30af;&#x30c8;&#x3092;&#x4f5c;&#x308a;&#x3001;&#x305d;&#x3053;&#x306b;&#x7d4c;&#x904e;&#x65e5;&#x6570;&#x306e;timedelta&#x30aa;&#x30d6;&#x30b8;&#x30a7;&#x30af;&#x30c8;&#x3092;&#x52a0;&#x3048;&#x3066;&#x76ee;&#x7684;&#x306e;&#x65e5;&#x4ed8;&#x3092;&#x4f5c;&#x308a;&#x307e;&#x3059;&#x3002;</p_level5></section_level5><section_level6>
+<p_level5>&#x958b;&#x59cb;&#x65e5;&#x304b;&#x3089;2&#x9031;&#x9593;&#x5206;&#x306e;&#x65e5;&#x4ed8;&#x3092;&#x8868;&#x793a;&#x3059;&#x308b;&#x30d7;&#x30ed;&#x30b0;&#x30e9;&#x30e0;&#x3092;&#x66f8;&#x3044;&#x3066;&#x307f;&#x307e;&#x3057;&#x3087;&#x3046;&#x3002;&#x300c;2&#x9031;&#x9593;&#x5206;&#x300d;&#x306e;&#x3088;&#x3046;&#x306b;&#x8907;&#x6570;&#x306e;&#x30c7;&#x30fc;&#x30bf;&#x3092;&#x4f5c;&#x308b;&#x5834;&#x5408;&#x3001;for&#x6587;&#x3092;&#x4f7f;&#x3046;&#x3053;&#x3068;&#x306f;&#x3059;&#x3050;&#x601d;&#x3044;&#x3064;&#x304d;&#x307e;&#x3059;&#x3002;&#x305f;&#x3060;&#x3057;&#x3001;date&#x30aa;&#x30d6;&#x30b8;&#x30a7;&#x30af;&#x30c8;&#x3060;&#x3051;&#x3067;2&#x9031;&#x9593;&#x5206;&#x306e;&#x65e5;&#x4ed8;&#x3092;&#x4f5c;&#x308d;&#x3046;&#x3068;&#x3059;&#x308b;&#x3068;&#x3046;&#x307e;&#x304f;&#x3044;&#x304d;&#x307e;&#x305b;&#x3093;&#x3002;<strong>&#x305d;&#x306e;&#x6708;&#x306e;&#x6700;&#x7d42;&#x65e5;&#x3092;&#x8d8a;&#x3048;&#x305f;&#x65e5;&#x4ed8;&#x3001;&#x305f;&#x3068;&#x3048;&#x3070;33&#x65e5;&#x306a;&#x3069;&#x3092;&#x6e21;&#x3059;&#x3068;&#x3001;&#x30d0;&#x30ea;&#x30e5;&#x30fc;&#x30a8;&#x30e9;&#x30fc;&#x304c;&#x767a;&#x751f;&#x3057;&#x3066;&#x3057;&#x307e;&#x3046;&#x304b;&#x3089;&#x3067;&#x3059;</strong>&#x3002;&#x305d;&#x3053;&#x3067;&#x3001;&#x958b;&#x59cb;&#x65e5;&#x306e;date&#x30aa;&#x30d6;&#x30b8;&#x30a7;&#x30af;&#x30c8;&#x3092;&#x4f5c;&#x308a;&#x3001;&#x305d;&#x3053;&#x306b;&#x7d4c;&#x904e;&#x65e5;&#x6570;&#x306e;timedelta&#x30aa;&#x30d6;&#x30b8;&#x30a7;&#x30af;&#x30c8;&#x3092;&#x52a0;&#x3048;&#x3066;&#x76ee;&#x7684;&#x306e;&#x65e5;&#x4ed8;&#x3092;&#x4f5c;&#x308a;&#x307e;&#x3059;&#x3002;</p_level5>
+</section_level5>
+<section_level6>
 <h6_codenumber>&#x30c6;&#x30b9;&#x30c8;&#x7528;&#x306e;&#x3061;&#x3087;&#x3063;&#x3068;&#x9577;&#x3081;&#x306e;&#x30b3;&#x30fc;&#x30c9;</h6_codenumber>
 <pre_language-js><code_language-js><span_codenum-elem>110</span_codenum-elem><span_token_keyword>class</span_token_keyword> <span_token_class-name>MarkdownBookPreviewConvert</span_token_class-name> <span_token_punctuation>{</span_token_punctuation>
 <span_codenum-elem>111</span_codenum-elem>  <span_token_comment>// markdown&#x30d5;&#x30a1;&#x30a4;&#x30eb;&#x3092;&#x5909;&#x63db;</span_token_comment>
@@ -79,4 +143,12 @@
 <span_codenum-elem>151</span_codenum-elem>    <span_token_punctuation>}</span_token_punctuation>
 <span_codenum-elem>152</span_codenum-elem>  <span_token_punctuation>}</span_token_punctuation>
 <span_codenum-elem>153</span_codenum-elem><span_token_punctuation>}</span_token_punctuation>
-</code_language-js></pre_language-js></section_level6></section_level3></section_level2></section_level1></body></story>
+</code_language-js></pre_language-js>
+
+</section_level6>
+</section_level3>
+</section_level2>
+</section_level1>
+
+
+</body></story>

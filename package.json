@@ -124,7 +124,8 @@
     "webpack-dev": "webpack --mode development --watch",
     "lint": "eslint .",
     "pretest": "npm run lint",
-    "test": "node ./test/runTest.js"
+    "test": "node ./test/runTest.js",
+    "test:unit": "mocha --ui tdd test/suite/indesign-xml-converter.test.js test/suite/svgimg-transformer.test.js"
   },
   "devDependencies": {
     "@types/mocha": "^10.0.10",

@@ -68,14 +68,62 @@ $$y=x^2+\frac{1}{3}\sqrt{2}$$
 1. 番号付き箇条書き
 1. 番号付き箇条書き
 
-@div:figure
+<!-- @div:figure
 ![](img0/c0-1-12.png?svgimg=40)
 - ❶手順［I Agree］をクリック
 - ❷手順［Cancel］をクリック
 - ▶結果
-@divend
+@divend -->
 
 ##### コラム：コラムタイトル{.column}
 開始日から2週間分の日付を表示するプログラムを書いてみましょう。「2週間分」のように複数のデータを作る場合、for文を使うことはすぐ思いつきます。ただし、dateオブジェクトだけで2週間分の日付を作ろうとするとうまくいきません。**その月の最終日を越えた日付、たとえば33日などを渡すと、バリューエラーが発生してしまうからです**。そこで、開始日のdateオブジェクトを作り、そこに経過日数のtimedeltaオブジェクトを加えて目的の日付を作ります。
 
-###### chap5-3-2 {.codenumber start-number=110}
+#####
+
+###### テスト用のちょっと長めのコード {.codenumber start-number=110}
+```js
+class MarkdownBookPreviewConvert {
+  // markdownファイルを変換
+  static convertMarkdown(mdpath, homepath) {
+    const workdir = path.dirname(mdpath);
+
+    //書き出しファイル名
+    const htmlfilepath = mdpath.replace(".md", ".html");
+
+    // ファイルを読み込み
+    let src;
+    try {
+      src = fs.readFileSync(mdpath, "utf-8");
+    } catch (err) {
+      vscode.window.showErrorMessage("File Open Error" 
+      + err.message);
+      throw new Error("cannot open file.");
+    }
+
+    // 画像のsvg変換
+    src = MarkdownBookPreviewConvert.svgimg(src, workdir);
+
+    // vfmで変換
+    // let html = marked(src);
+    let html = stringify(src);
+
+    // 強引な後処理 閉じpreの後に改行
+    html = html.replace(/<\/pre>/g, "</pre>\n");
+
+    // _postReplaceList.jsonがあれば後置換を実行
+    try {
+      const replisttext = fs.readFileSync(path.join(homepath, 
+      "_postReplaceList.json"), "utf-8");
+      const replist = JSON.parse(replisttext);
+      for (let i = 0; i < replist.length; i++) {
+        html = html.replace(new RegExp(replist[i].f, "g"), 
+        replist[i].r);
+      }
+    } catch (err) {
+      vscode.window.showInformationMessage("Replist Not Found" 
+      + err.message);
+      console.log("no replist");
+    }
+  }
+}
+```
