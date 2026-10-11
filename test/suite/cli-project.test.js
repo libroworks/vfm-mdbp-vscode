@@ -3,7 +3,7 @@ const fs = require("fs");
 const os = require("os");
 const path = require("path");
 const Module = require("module");
-const { generateConfig, findConfigRoot, currentFileConfig, exportHtml, EXISTS_MESSAGE } = require("../../lib/cli-project");
+const { generateConfig, findConfigRoot, currentFileConfig, exportHtml, installDependencies, EXISTS_MESSAGE } = require("../../lib/cli-project");
 
 suite("CLI project generation", () => {
   function fixture(callback) {
@@ -12,6 +12,14 @@ suite("CLI project generation", () => {
     finally { fs.rmSync(directory, { recursive: true, force: true }); }
   }
   const assets = path.resolve(__dirname, "../../cli-runtime");
+
+  test("reports the helper manifest path when setup files are missing", async () => {
+    const root = fs.mkdtempSync(path.join(os.tmpdir(), "mdbp-install-"));
+    try {
+      await assert.rejects(installDependencies(root), (error) =>
+        error.message.includes(path.join(root, ".mdbp-cli", "package.json")));
+    } finally { fs.rmSync(root, { recursive: true, force: true }); }
+  });
 
   test("refuses an existing config before writing any helper files", () => fixture((root) => {
     fs.writeFileSync(path.join(root, "vivliostyle.config.js"), "manual config");
