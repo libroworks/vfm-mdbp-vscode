@@ -1,0 +1,485 @@
+@charset "UTF-8";
+
+/*リセット*/
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  text-spacing: auto;
+}
+
+/* フォントはcss/fontsフォルダのファイルを直接参照 */
+@font-face {
+  font-family: keyfont;
+  src: url("fonts/keyboard-JP-Regular.otf");
+}
+
+@font-face {
+  font-family: inconsolata;
+  src: url("fonts/Inconsolata-Regular.ttf");
+}
+
+@font-face {
+  font-family: inconsolata-b;
+  src: url("fonts/Inconsolata-Bold.ttf");
+}
+
+@font-face {
+  font-family: notosans-l;
+  src: url("fonts/NotoSansJP-Light.otf");
+}
+
+@font-face {
+  font-family: notosans-r;
+  src: url("fonts/NotoSansJP-Regular.otf");
+}
+
+@font-face {
+  font-family: notosans-m;
+  src: url("fonts/NotoSansJP-Medium.otf");
+}
+
+/* @font-face {
+  font-family: notosans-b;
+  src: url("fonts/NotoSansJP-Bold.otf");
+} */
+
+/*ページサイズ*/
+@page {
+  size: 148mm 210mm;
+  /*A5正寸*/
+  margin: 18mm 18.5mm 18mm 18.5mm;
+  font-size: 10Q;
+
+  @bottom-center {
+    content: counter(page);
+    margin-top: 2.5mm;
+    width: 8mm;
+    font-size: 12Q;
+  }
+}
+
+@page: right {
+  @top-right {
+    content: string(heading, first);
+  }
+}
+
+@page: nth(1) {
+  @top-right {
+    content: none;
+  }
+}
+
+/* 強制改ページ指定*/
+.pagebreak {
+  visibility: hidden;
+  page-break-after: always;
+  margin-top: -4mm;
+}
+
+body {
+  counter-reset: seccount;
+  font-family: notosans-r, sans-serif;
+  font-size: 12Q;
+  line-height: 21Q;
+  width: 111mm;
+}
+
+/* 基本要素 */
+p {
+  font-size: 12Q;
+  line-height: 21Q;
+  text-align: justify;
+  font-family: notosans-l;
+  text-indent: 1em;
+}
+
+/* 見出し類 */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-spacing: none;
+}
+
+h1 {
+  font-size: 36Q;
+  line-height: 40Q;
+  text-align: center;
+  margin: 20mm 0;
+  /* 柱にする */
+  string-set: heading content();
+}
+
+.secheader {
+  background: #fee;
+  counter-increment: seccount;
+  background: url("img/apron_man1-1smile.png");
+  background-size: 18%;
+  background-repeat: no-repeat;
+  background-position: right bottom;
+  height: 40mm;
+  border: solid 0.5mm #000;
+  padding: 2mm;
+  margin-bottom: 6mm;
+}
+
+h2 {
+  font-size: 26Q;
+  line-height: 30Q;
+  break-before: page;
+  height: 20mm;
+  margin-bottom: 2mm;
+  margin-left: 20mm;
+}
+
+h2::before {
+  content: "XX-" counter(seccount, decimal-leading-zero);
+  margin-right: 3mm;
+  margin-left: -20mm;
+  color: #58f;
+}
+
+.secheader p {
+  text-indent: 0;
+  font-size: 11Q;
+  line-height: 18Q;
+  font-family: notosans-m;
+  width: 30em;
+  margin-left: 1em;
+}
+
+h3 {
+  font-size: 18Q;
+  line-height: 22Q;
+  margin-top: 6mm;
+  margin-bottom: 2mm;
+  color: #fff;
+  background: #58f;
+  padding: 0.5mm;
+}
+
+h3::before {
+  content: "●";
+  color: #fff;
+}
+
+h4 {
+  font-size: 13Q;
+  margin-top: 4mm;
+}
+
+h4::before {
+  content: "●";
+  color: #58f;
+}
+
+h5 {
+  font-size: 12Q;
+  margin-top: 4mm;
+  margin-bottom: 1mm;
+}
+
+h6 {
+  font-size: 12Q;
+  margin-top: 4mm;
+  margin-bottom: 1mm;
+}
+
+h6::before {
+  content: "CODE";
+  background: #888;
+  color: #fff;
+  margin-right: 1mm;
+  padding: 0 0.5mm;
+}
+
+h6.result::before {
+  content: none;
+}
+
+h6.result {
+  margin-top: -3mm;
+}
+
+ul,
+ol {
+  margin: 4mm 0 4mm 2em;
+  font-family: notosans-m;
+}
+
+strong {
+  /* text-decoration: underline;
+    text-decoration-color: #22f; */
+  border-bottom: dashed 0.25mm #22f;
+}
+
+kbd {
+  font-family: keyfont;
+}
+
+/* コード */
+pre {
+  font-size: 12Q;
+  line-height: 21Q;
+  font-family: inconsolata;
+  border: solid 0.5mm #000;
+  border-left: solid 7mm #888;
+  padding: 1mm;
+  margin-bottom: 6mm;
+}
+code {
+  font-family: inconsolata;
+}
+.codenum-elem {
+  position: absolute;
+  inset-inline-start: -2.5em;
+  color: #fff;
+}
+
+figcaption {
+  font-size: 12Q;
+  margin-top: 4mm;
+  margin-bottom: 1mm;
+}
+
+figure + figure {
+  margin-top: -2mm;
+}
+
+figure + figure figcaption {
+  margin-top: 0;
+}
+
+.result + pre {
+  background: #ddd;
+  border-left: solid 0.5mm #000;
+}
+
+.codered {
+  color: #58f;
+  font-size: 10Q;
+  line-height: 12Q;
+  position: relative;
+}
+
+.codered::before {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 5mm;
+  top: 1mm;
+  left: -5mm;
+  border-bottom: dashed 0.25mm #58f;
+}
+
+/* 構文（syntax） */
+.syntax {
+  padding: 1mm;
+  background: #cdf;
+  margin: 4mm 0;
+}
+
+.syntax h6 {
+  margin-top: 0;
+}
+
+.syntax h6::before {
+  content: "Syntax";
+}
+
+.syntax pre {
+  border: none;
+  font-size: 14Q;
+  background: #fff;
+  margin: 1mm;
+}
+
+.syntax ul {
+  display: flex;
+  margin: 0;
+  list-style: none;
+  justify-content: space-around;
+}
+
+.syntax li {
+  font-size: 11Q;
+  line-height: 13Q;
+  max-width: 9em;
+}
+
+/* 表 */
+table {
+  border-collapse: collapse;
+  font-size: 11Q;
+  line-height: 16Q;
+  margin-bottom: 4mm;
+}
+
+td,
+th {
+  border: solid 0.5mm #888;
+  padding: 1mm;
+  min-width: 7em;
+}
+
+th {
+  font-family: notosans-m;
+  color: #ffffff;
+  background-color: #7e7e7e;
+}
+
+/* 図版領域 */
+.figure {
+  display: flex;
+  flex-direction: row;
+  /*横並びにする*/
+  align-items: flex-end;
+  /*縦に伸ばさない*/
+  flex-wrap: wrap;
+  position: relative;
+  margin-top: 4mm;
+  margin-bottom: 4mm;
+}
+
+.figure svg {
+  border: solid 0.2mm #eee;
+}
+
+/* 図中文字 */
+.figure ul {
+  position: absolute;
+  right: 0;
+  top: 0;
+  font-size: 12Q;
+  line-height: 16Q;
+  font-family: notosans-m;
+  list-style-type: none;
+  color: #000;
+  max-width: 13em;
+  margin: 0;
+  padding-left: 0;
+}
+
+.figure li {
+  margin-bottom: 3.5mm;
+  border: solid 0.25mm #f00;
+  padding: 0.25mm 1mm;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.figure .akakome::first-letter {
+  color: #f00;
+}
+
+li.aokome {
+  /* text-indent: -1em; */
+  border: dashed 0.25mm #00f;
+}
+
+.figure li > p::before {
+  content: "リストの最後に空き行入れてください";
+  position: absolute;
+  color: #fff;
+  background: #f00;
+  right: 0;
+}
+
+/* コラム */
+section:has(> .column) {
+  border: solid 0.5mm #000;
+  padding: 2mm;
+  margin-block: 4mm;
+}
+
+section:has(> .column) p {
+  font-size: 11Q;
+  line-height: 18Q;
+}
+
+.bordered {
+  border: solid 0.5mm #f00;
+  padding: 2mm;
+  margin-block: 4mm;
+}
+
+h5 {
+  color: #00f;
+  margin-block: 0 2mm;
+}
+.red {
+  color: #f00;
+}
+
+/* 会話のフキダシ */
+.face {
+  font-size: 12Q;
+  line-height: 17Q;
+  background: #cdf;
+  border-radius: 2mm;
+  padding: 2.5mm 2.5mm;
+  max-width: 85mm;
+  width: 85mm;
+  margin-bottom: 2mm;
+  margin-left: 18mm;
+  margin-right: 18mm;
+  text-indent: 0;
+  position: relative;
+}
+
+:not(.face) + .face {
+  margin-top: 4mm;
+}
+
+.face + :not(.face) {
+  margin-bottom: 4mm;
+}
+
+.face + h3 {
+  margin-top: 8mm;
+}
+
+.face::after {
+  content: "◀";
+  background: url("img/apron_man1-1smile.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  display: block;
+  width: 17mm;
+  height: 14mm;
+  position: absolute;
+  top: -2mm;
+  left: -18mm;
+  text-align: right;
+  line-height: 14mm;
+}
+
+.teacher-laugh::after {
+  background: url("img/apron_man1-4laugh.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.teacher-idea::after {
+  background: url("img/apron_man2-1idea.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.teacher-shock::after {
+  background: url("img/apron_man2-2shock.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.teacher-hatena::after {
+  background: url("img/apron_man3-1question.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+}

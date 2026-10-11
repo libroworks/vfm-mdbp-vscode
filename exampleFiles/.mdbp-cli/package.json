@@ -1,0 +1,10 @@
+{
+  "name": "mdbp-cli-runtime",
+  "private": true,
+  "dependencies": {
+    "@vivliostyle/cli": "11.2.0",
+    "@vivliostyle/vfm": "2.7.2",
+    "cheerio": "1.2.0",
+    "image-size": "2.0.2"
+  }
+}

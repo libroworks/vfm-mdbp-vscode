@@ -239,7 +239,7 @@ code {
 }
 .codenum-elem {
   position: absolute;
-  inset-inline-start: -2.5em;
+  inset-inline-start: 1mm;
   color: #fff;
 }
 

@@ -15,7 +15,7 @@ MDBP（MarkDown-Book-Preview）は書籍の原稿作成に適したMarkdownプ�
 ![右クリックメニューからの実行](docimg-n2.png)
 
 ## 事前準備
-1. Vivliostyle CLIの実行に必要なNode.jsをインストールします。バージョン16以上の安定版をインストールしてください。<br>
+1. Vivliostyle CLIの実行に必要なNode.js 22以上をインストールしてください。<br>
 [Node.js日本語ページ](https://nodejs.org/ja)
 
 
@@ -27,8 +27,8 @@ npm install -g @vivliostyle/cli
 
 ## 基本的な使い方
 1. VSCodeでフォルダーを開いてください。そこがWebサーバーのルートになります。
-2. フォルダー内のMarkdownファイルを開き、右クリックして［これプレビューvivliostyle preview (Current File)］を選択します。
-3. あとはフォルダー内（サブフォルダーも含む）でファイルの更新が発生すると、自動的にWebブラウザのプレビューが更新されます。※フォルダー内を監視しているので、VSCode以外でファイルを保存した場合でも更新されます。
+2. Markdownを開いて右クリックし、［vivliostyle.config.jsを生成］を実行します。依存パッケージのインストール完了後に［これプレビューvivliostyle preview (Current File)］を実行します。
+3. 原稿を保存するとCLI側でプレビューが更新されます。置換JSON・DOM操作JSON・svgimg画像の寸法を変更した場合は、プレビューを再起動してください。
 4. プレビューを停止したい場合は，VSCodeのターミナルをクリックして，Ctrl + C（macOSはcontrol + C）キーを押します。
 5. 読み込むCSSファイルを指定するには、Markdownファイルの先頭にFrontmatterを書きます。
 
@@ -60,36 +60,48 @@ https://github.com/vivliostyle/vfm
 ### ▶［これプレビューvivliostyle preview (Current File)］
 現在エディタで開いているMarkdownまたはHTMLファイルをもとに，Vivliostyleを使って紙面のプレビューを表示します。
 
-### ▶［連結ビルドvivliostyle build (with config)］
-vivliostyle.config.jsに指定したHTMLファイルを連結して，PDFを書き出します。vivliostyle.config.jsは作業フォルダ内のルートに作ってください。
+### ▶［vivliostyle.config.jsを生成］
 
-##### vivliostyle.config.jsの例
-```
-module.exports = {
-  entry: [
-    // mdを指定するとMDBPの独自仕様処理が行われない
-    'intro.html',
-    'chapter1.html',
-    'chapter2.html'
-  ],
-};
-```
+Markdownを開いて実行すると、ワークスペースのルート（フォルダーを開いていない場合は原稿のフォルダー）に設定を生成します。
+`entry`の初期値は現在のMarkdownです。章の追加と順番は`entry`だけで指定します。
 
-Vivliostyle CLIの仕様ではentryセクションにMarkdownファイルも指定できますが、VFMでのHTML変換しか行われないため、MDBPの独自処理が反映されません。HTMLファイルのみ指定してください。
+既存の`vivliostyle.config.js`がある場合は何も書き出さず、手動で削除してから再実行するようメッセージを表示します。
 
-Markdown変換が必要な場合は，vivliostyle.mdbplist.jsonを記述し，変換したいMarkdownファイル名を列挙してください。vivliostle previewまたはbuildの実行前に，MDBPによるMD→HTML変換がまとめて行われます。
+変換モジュールと専用の依存パッケージ定義を`.mdbp-cli/`へ生成し、ターミナルでインストールを開始します。
+インストール完了後にプレビュー／ビルドを実行してください。生成環境はCLI 11.2.0、VFM 2.7.2を使用します。CLI v8はこの経路の対象外です。
 
-###### vivliostyle.mdbplist.jsonの例
-```
-["intro.md", "chapter1.md", "chapter2.md"]
+MDBPなしで実行する場合も、プロジェクトのルートで次のコマンドを使用できます。
+
+```sh
+npm install --prefix .mdbp-cli
+npm exec --prefix .mdbp-cli -- vivliostyle preview --config vivliostyle.config.js
+npm exec --prefix .mdbp-cli -- vivliostyle build --config vivliostyle.config.js
 ```
 
+設定と`.mdbp-cli/`内のソース・package.json・package-lock.jsonは原稿と一緒に管理してください。
+`.mdbp-cli/node_modules/`、`.mdbp-cli/current-*.config.cjs`、`.vivliostyle/`、`.vivliostyle-current/`は生成物です。
 
+### ▶［連結ビルド／連結プレビュー (with config)］
 
-### ▶［連結プレビューvivliostyle preview (with config)］
-vivliostyle.config.jsに指定したHTMLファイルを連結して，プレビューを表示します。使用方法は連結ビルドと同じです。
+現在のファイルのフォルダーからワークスペースのルートまで上に探した`vivliostyle.config.js`を使用します。
+`entry`に指定したMarkdownをCLIが変換し、svgimg、置換、連番、行番号などの独自処理も適用します。
+既存の手書き設定も実行できますが、独自処理を使う場合は`documentProcessor`の指定が必要です。
+`vivliostyle.mdbplist.json`による一覧指定は廃止しました。
 
+### 現在のファイルのプレビュー／ビルド
 
+設定生成で作成した`.mdbp-cli/`の変換モジュールを使用します。
+現在のMarkdownまたはHTMLだけを対象にした実行用設定を生成し、CLIを起動します。
+書籍用設定の`entry`は変更しません。PDFは原稿と同じフォルダーに生成します。
+
+実行前に対象原稿を保存します。連結実行では対象ワークスペース内の変更を保存します。
+保存時にMDBPがHTMLを自動生成する処理は廃止しました。原稿の更新はCLIのプレビューが扱います。
+「HTMLのみ更新」とMarkdownからのXML出力も、同じプロジェクト側変換モジュールをCLIから実行します。
+設定生成と依存パッケージのインストールが必要です。HTMLは原稿と同じフォルダーへ出力します。
+HTML生成の完了後にブラウザーを開くか、既存のXML変換器でXMLを生成します。
+HTMLファイルからXMLを出力する場合は、保存したHTMLを直接使用します。
+拡張機能内部の旧Markdown変換器とVFM依存は削除済みです。VFMはプロジェクト側の`.mdbp-cli/`だけで使用します。
+このリポジトリーの`exampleFiles/vivliostyle.config.js`を直接使う場合は、先にルートで`npm install --prefix cli-runtime`を実行してください。
 ### ▶［Export InDesign XML］
 InDesignの［構造］パネルで読み込み可能なXMLファイルを書き出します。
 

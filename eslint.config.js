@@ -1,9 +1,9 @@
 module.exports = [
   {
-    ignores: [".vscode-test/**", "dist/**", "exampleFiles/**", "node_modules/**"],
+    ignores: [".vscode-test/**", "dist/**", "exampleFiles/**", "node_modules/**", "prototype/**/output/**"],
   },
   {
-    files: ["**/*.js"],
+    files: ["**/*.js", "cli-runtime/*.cjs"],
     languageOptions: {
       ecmaVersion: 2021,
       sourceType: "commonjs",
@@ -26,5 +26,13 @@ module.exports = [
       "no-unused-vars": "warn",
       "valid-typeof": "warn",
     },
+  },
+  {
+    files: ["prototype/cli-one-chapter/*.js"],
+    languageOptions: { sourceType: "module" },
+  },
+  {
+    files: ["cli-runtime/*.cjs"],
+    rules: { "no-unused-vars": ["warn", { args: "none" }] },
   },
 ];

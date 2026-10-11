@@ -5,15 +5,20 @@
   ],
   "type": "Book",
   "conformsTo": "https://github.com/vivliostyle/vivliostyle-cli",
-  "name": "merged_output.pdf",
-  "dateModified": "2026-08-24T10:42:16.458Z",
+  "name": "output.pdf",
+  "dateModified": "2026-10-11T14:59:28.272Z",
   "readingOrder": [
     {
-      "url": "formattest.html",
+      "url": "toc.html",
+      "name": "merged_output.pdf"
+    },
+    {
+      "url": "formattest2.html",
       "name": "Format Test"
     },
     {
-      "url": "formattest2.html"
+      "url": "formattest.html",
+      "name": "Format Test"
     }
   ],
   "resources": [],

@@ -1,0 +1,18 @@
+{
+  "@context": [
+    "https://schema.org",
+    "https://www.w3.org/ns/pub-context"
+  ],
+  "type": "Book",
+  "conformsTo": "https://github.com/vivliostyle/vivliostyle-cli",
+  "name": "Format Test",
+  "dateModified": "2026-10-11T15:35:52.935Z",
+  "readingOrder": [
+    {
+      "url": "formattest2.html",
+      "name": "Format Test"
+    }
+  ],
+  "resources": [],
+  "links": []
+}

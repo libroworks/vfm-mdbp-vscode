@@ -1,0 +1,15 @@
+{
+  "name": "mdbp-independent-cli-prototype",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "vivliostyle build --config vivliostyle.config.js",
+    "preview": "vivliostyle preview --config vivliostyle.config.js",
+    "verify": "node verify.cjs"
+  },
+  "dependencies": {
+    "@vivliostyle/cli": "11.2.0",
+    "cheerio": "1.2.0",
+    "image-size": "2.0.2"
+  }
+}

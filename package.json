@@ -7,7 +7,7 @@
   "name": "vfmdbp-vscode",
   "displayName": "vfm_mdbp_vscode",
   "description": "Markdown Book Preview for VSCode with VFM",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "engines": {
     "vscode": "^1.140.0",
     "node": ">=22"
@@ -58,6 +58,11 @@
         "command": "vfmdbp-vscode.convertMD2HTMLonly",
         "title": "HTMLのみを更新",
         "category": "vfmdbookpreview"
+      },
+      {
+        "command": "vfmdbp-vscode.generateConfig",
+        "title": "vivliostyle.config.jsを生成",
+        "category": "vfmdbookpreview"
       }
     ],
     "menus": {
@@ -100,13 +105,18 @@
           "when": "resourceLangId == markdown || resourceLangId == html"
         },
         {
+          "command": "vfmdbp-vscode.generateConfig",
+          "group": "2_vivliostyle-cli@1",
+          "when": "resourceLangId == markdown"
+        },
+        {
           "command": "vfmdbp-vscode.installCLI",
-          "group": "2_vivliostyle-cli",
+          "group": "2_vivliostyle-cli@2",
           "when": "resourceLangId == markdown || resourceLangId == html"
         },
         {
           "command": "vfmdbp-vscode.installCLI8",
-          "group": "2_vivliostyle-cli",
+          "group": "2_vivliostyle-cli@3",
           "when": "resourceLangId == markdown || resourceLangId == html"
         }
       ]
@@ -125,9 +135,10 @@
     "lint": "eslint .",
     "pretest": "npm run lint",
     "test": "node ./test/runTest.js",
-    "test:unit": "mocha --ui tdd test/suite/indesign-xml-converter.test.js test/suite/svgimg-transformer.test.js"
+    "test:unit": "mocha --ui tdd test/suite/indesign-xml-converter.test.js test/suite/svgimg-transformer.test.js test/suite/cli-project.test.js"
   },
   "devDependencies": {
+    "image-size": "^2.0.2",
     "@types/mocha": "^10.0.10",
     "@types/node": "^20.19.24",
     "@types/vscode": "1.140.0",
@@ -139,9 +150,7 @@
     "webpack-cli": "^7.2.2"
   },
   "dependencies": {
-    "@vivliostyle/vfm": "latest",
     "cheerio": "^1.2.0",
-    "html-whitespace-sensitive-tag-names": "2.0.0",
-    "image-size": "^2.0.2"
+    "html-whitespace-sensitive-tag-names": "2.0.0"
   }
 }

@@ -1,6 +1,6 @@
 const assert = require("assert");
 const path = require("path");
-const { transformSvgImages } = require("../../lib/svgimg-transformer");
+const { transformSvgImages } = require("../../cli-runtime/svgimg-transformer.cjs");
 
 const imageDirectory = path.resolve(__dirname, "../../exampleFiles/img0");
 

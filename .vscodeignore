@@ -9,4 +9,7 @@ vsc-extension-quickstart.md
 **/.eslintrc.json
 exampleFiles/**
 node_modules
+**/node_modules/**
 lib
+prototype/**
+.vsce-cache/**
