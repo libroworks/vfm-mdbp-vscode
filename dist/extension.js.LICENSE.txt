@@ -26,6 +26,14 @@
  */
 
 /**
+ * derived from `remark-sectionize`.
+ * original: 2019 Jake Low
+ * modified: 2020 Yasuaki Uechi, 2021 and later is Akabeko
+ * @license MIT
+ * @see https://github.com/jake-low/remark-sectionize
+ */
+
+/**
  * derived from `remark-slug`.
  * original: Copyright (c) 2015 Titus Wormer <tituswormer@gmail.com>
  * modified: 2021 and later is Akabeko
