@@ -1,6 +1,6 @@
 const path = require("path");
 const fs = require("fs");
-const { generateConfig, findConfigRoot, currentFileConfig, exportHtml } = require("./lib/cli-project");
+const { generateConfig, findConfigRoot, currentFileConfig, exportHtml, installDependencies } = require("./lib/cli-project");
 const vscode = require("vscode");
 const { convertHtmlToInDesignXml } = require("./lib/indesign-xml-converter");
 
@@ -9,6 +9,9 @@ const MESSAGE_PREFIX = "MDBP";
 /** @param {vscode.ExtensionContext} context */
 function activate(context) {
   const terminals = new Map();
+  const installations = new Map();
+  const output = vscode.window.createOutputChannel("MDBP セットアップ");
+  context.subscriptions.push(output);
 
   registerCommand("vfmdbp-vscode.exportXML", "InDesign XMLの書き出し", async () => {
     const document = requireActiveSourceDocument();
@@ -23,17 +26,18 @@ function activate(context) {
     const document = requireActiveMarkdownDocument();
     const root = getDocumentRoot(document);
     const configPath = generateConfig(root, document.fileName, path.join(context.extensionPath, "cli-runtime"));
+    if (!(await setupProject(root))) return;
     const configDocument = await vscode.workspace.openTextDocument(configPath);
     await vscode.window.showTextDocument(configDocument);
-    callShell('npm install --prefix ".mdbp-cli"', root);
-    return `設定を生成しました: ${configPath}。ターミナルで依存パッケージのインストールが完了してからプレビュー／ビルドを実行してください。`;
+    const choice = await vscode.window.showInformationMessage("MDBP: 設定生成とインストールが完了しました。", "プレビューを開始");
+    if (choice === "プレビューを開始") await launchCLI("preview", root, configPath);
   });
 
   registerCommand("vfmdbp-vscode.previewThisCLI", "現在のファイルのプレビュー", async () => {
     const document = requireActiveSourceDocument();
     await saveDocument(document);
     const root = findConfigRoot(path.dirname(document.fileName), getDocumentRoot(document));
-    launchCLI("preview", root, currentFileConfig(root, document.fileName));
+    await launchCLI("preview", root, currentFileConfig(root, document.fileName));
   });
 
   registerCommand("vfmdbp-vscode.convertMD2HTMLonly", "HTMLの更新", async () => {
@@ -48,19 +52,19 @@ function activate(context) {
     const document = requireActiveSourceDocument();
     await saveDocument(document);
     const root = findConfigRoot(path.dirname(document.fileName), getDocumentRoot(document));
-    launchCLI("build", root, currentFileConfig(root, document.fileName));
+    await launchCLI("build", root, currentFileConfig(root, document.fileName));
   });
 
   registerCommand("vfmdbp-vscode.previewByConfig", "設定ファイルによる連結プレビュー", async () => {
     await saveProjectDocuments();
     const root = operationConfigRoot();
-    launchCLI("preview", root, path.join(root, "vivliostyle.config.js"));
+    await launchCLI("preview", root, path.join(root, "vivliostyle.config.js"));
   });
 
   registerCommand("vfmdbp-vscode.buildByConfig", "設定ファイルによる連結PDFビルド", async () => {
     await saveProjectDocuments();
     const root = operationConfigRoot();
-    launchCLI("build", root, path.join(root, "vivliostyle.config.js"));
+    await launchCLI("build", root, path.join(root, "vivliostyle.config.js"));
   });
 
   function operationConfigRoot() {
@@ -69,14 +73,38 @@ function activate(context) {
     return findConfigRoot(document?.uri.scheme === "file" ? path.dirname(document.fileName) : root, root);
   }
 
-  function launchCLI(action, root, configPath) {
+  async function setupProject(root) {
+    if (installations.has(root)) return installations.get(root);
+    const promise = (async () => {
+      while (true) {
+        try {
+          await vscode.window.withProgress({ location: vscode.ProgressLocation.Notification,
+            title: "MDBP: 依存パッケージをインストールしています", cancellable: false }, async () => {
+            output.appendLine(`セットアップ: ${root}`);
+            await installDependencies(root, (text) => output.append(String(text)));
+          });
+          return true;
+        } catch (error) {
+          output.appendLine(error.message);
+          output.show(true);
+          const choice = await vscode.window.showErrorMessage(error.message, "再試行");
+          if (choice !== "再試行") return false;
+        }
+      }
+    })();
+    installations.set(root, promise);
+    try { return await promise; }
+    finally { installations.delete(root); }
+  }
+
+  async function launchCLI(action, root, configPath) {
     const helper = path.join(root, ".mdbp-cli");
-    const local = path.join(helper, "node_modules", ".bin", process.platform === "win32" ? "vivliostyle.cmd" : "vivliostyle");
+    const local = path.join(helper, "node_modules/@vivliostyle/cli/dist/cli.js");
     const generated = fs.existsSync(path.join(helper, "package.json"));
-    if (generated && !fs.existsSync(local)) {
-      throw new Error('プロジェクトフォルダーで npm install --prefix ".mdbp-cli" を実行してください。');
+    if (generated && (installations.has(root) || !fs.existsSync(local))) {
+      if (!(await setupProject(root))) return;
     }
-    const command = generated ? `npm exec --prefix ${shellQuote(helper)} -- vivliostyle` : "vivliostyle";
+    const command = generated ? `node ${shellQuote(local)}` : "vivliostyle";
     callShell(`${command} ${action} --config ${shellQuote(configPath)}`, root);
     return undefined;
   }

@@ -64,6 +64,7 @@ suite("CLI project generation", () => {
     const sent = [];
     const errors = [];
     const opened = [];
+    let installAttempts = 0;
     let conversions = 0;
     let failConversion = false;
     const document = { fileName: path.join(root, "chapter.md"), uri: { scheme: "file" }, isDirty: true,
@@ -74,8 +75,12 @@ suite("CLI project generation", () => {
         openTextDocument: async () => document },
       env: { shell: "powershell.exe", openExternal: async (uri) => { opened.push(uri); return true; } },
       Uri: { file: (fileName) => fileName },
+      ProgressLocation: { Notification: 15 },
       window: { activeTextEditor: { document }, showTextDocument: async () => {},
-        showInformationMessage: async () => {}, showErrorMessage: async (message) => { errors.push(message); },
+        createOutputChannel: () => ({ append() {}, appendLine() {}, show() {}, dispose() {} }),
+        withProgress: async (options, task) => task(),
+        showInformationMessage: async (message, action) => action,
+        showErrorMessage: async (message, retry) => { if (retry) return retry; errors.push(message); },
         onDidCloseTerminal: () => ({}), createTerminal: () => ({ show() {}, sendText: (command) => sent.push(command) }) },
     };
     const originalLoad = Module._load;
@@ -86,6 +91,15 @@ suite("CLI project generation", () => {
         if (name === "vscode") return mock;
         if (name === "./lib/cli-project") return {
           ...require("../../lib/cli-project"),
+          async installDependencies(project) {
+            assert.equal(project, root);
+            assert.equal(sent.length, 0, "Preview must wait for installation");
+            installAttempts++;
+            if (installAttempts === 1) throw new Error("Installation failed; retry");
+            const cli = path.join(root, ".mdbp-cli/node_modules/@vivliostyle/cli/dist/cli.js");
+            fs.mkdirSync(path.dirname(cli), { recursive: true });
+            fs.writeFileSync(cli, "");
+          },
           async exportHtml(project, source) {
             assert.equal(project, root);
             assert.equal(document.isDirty, false);
@@ -103,17 +117,15 @@ suite("CLI project generation", () => {
       Module._load = originalLoad;
       extension.activate({ extensionPath: path.resolve(__dirname, "../.."), subscriptions: [] });
       await registered.get("vfmdbp-vscode.generateConfig")();
-      assert.match(sent[0], /npm.cmd install/);
-      const bin = path.join(root, ".mdbp-cli/node_modules/.bin");
-      fs.mkdirSync(bin, { recursive: true });
-      fs.writeFileSync(path.join(bin, process.platform === "win32" ? "vivliostyle.cmd" : "vivliostyle"), "");
+      assert.equal(installAttempts, 2);
+      assert.match(sent[0], /^node /);
       for (const id of ["previewByConfig", "buildByConfig", "previewThisCLI", "buildThisCLI"]) {
         await registered.get(`vfmdbp-vscode.${id}`)();
       }
       assert.equal(errors.length, 0, errors.join("\n"));
       assert.equal(document.isDirty, false);
       assert.equal(sent.length, 5);
-      assert.ok(sent.slice(1).every((command) => command.includes("--config") && command.includes("npm.cmd exec")));
+      assert.ok(sent.every((command) => command.includes("--config") && command.startsWith("node ") && command.includes("cli.js")));
       assert.ok(!fs.existsSync(path.join(root, "chapter.html")));
       await registered.get("vfmdbp-vscode.convertMD2HTMLonly")();
       assert.deepEqual(opened, [path.join(root, "chapter.html")]);
