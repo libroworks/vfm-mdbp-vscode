@@ -4,7 +4,7 @@ const { createDocumentProcessor } = require("./.mdbp-cli/document-processor.cjs"
 const root = path.resolve(__dirname, ".");
 module.exports = {
   entryContext: root,
-  entry: ["formattest2.md"],
+  entry: ["formattest.md"],
   workspaceDir: path.resolve(root, ".vivliostyle"),
   output: "./output.pdf",
   documentProcessor: createDocumentProcessor(root),

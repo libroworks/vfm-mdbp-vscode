@@ -2,10 +2,17 @@ const path = require("node:path");
 const { VFM } = require("@vivliostyle/vfm");
 const { transformSvgImages } = require("./svgimg-transformer.cjs");
 const { postprocessHtml } = require("./html-postprocess.cjs");
+const { mermaidPlugin } = require("./mermaid-transformer.cjs");
 
 // Wrap the parser and serializer so string replacements retain legacy ordering.
 function createDocumentProcessor(root) {
-  return (options, metadata) => VFM(options, metadata).use(function () {
+  return (options, metadata) => VFM({
+    ...options,
+    editPlugins(plugins) {
+      const edited = options?.editPlugins ? options.editPlugins(plugins) : plugins;
+      return { ...edited, mdastPlugins: [...edited.mdastPlugins, mermaidPlugin] };
+    },
+  }, metadata).use(function () {
     const originalParser = this.Parser;
     const originalCompiler = this.Compiler;
     this.Parser = function (markdown, file) {

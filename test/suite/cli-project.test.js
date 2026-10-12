@@ -36,6 +36,7 @@ suite("CLI project generation", () => {
     assert.ok(!source.includes(root));
     assert.ok(!source.includes("mdbplist"));
     assert.ok(fs.existsSync(path.join(root, ".mdbp-cli", "svgimg-transformer.cjs")));
+    assert.ok(fs.existsSync(path.join(root, ".mdbp-cli", "mermaid-transformer.cjs")));
     assert.equal(findConfigRoot(path.dirname(chapter), root), root);
     const current = currentFileConfig(root, chapter);
     assert.match(fs.readFileSync(current, "utf8"), /chapter.pdf/);

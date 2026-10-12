@@ -52,6 +52,21 @@ https://github.com/vivliostyle/vfm
 
 
 ## コマンド解説
+### Mermaidの図版
+
+`mermaid`コードブロックは、プレビュー・HTML出力・PDF生成時にインラインSVGへ変換します。
+
+````md
+```mermaid
+flowchart LR
+  A[原稿] --> B[HTML] --> C[PDF]
+```
+````
+
+Mermaidが含まれる原稿だけ描画用ブラウザーを起動します。初回セットアップではMermaid CLIとそのブラウザーもインストールするため、時間がかかることがあります。変換できない図は警告を出し、元のコードブロックを残します。
+
+以前生成したプロジェクトで使う場合は、拡張の`cli-runtime/`内の`document-processor.cjs`、`mermaid-transformer.cjs`、`package.json`をプロジェクトの`.mdbp-cli/`へコピーし、プロジェクトのルートで`npm.cmd install --prefix .mdbp-cli`（macOSでは`npm install --prefix .mdbp-cli`）を実行してください。設定ファイルの章順は維持できます。
+
 ### ▶［これビルドvivliostyle build (Current File)］
 現在エディタで開いているMarkdownまたはHTMLファイルをもとに，Vivliostyleを使ってPDFを書き出します。Markdownファイルの拡張子を変えたPDFが，同じ階層に書き出されます。
 

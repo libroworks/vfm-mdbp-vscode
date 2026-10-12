@@ -135,7 +135,7 @@
     "lint": "eslint .",
     "pretest": "npm run lint",
     "test": "node ./test/runTest.js",
-    "test:unit": "mocha --ui tdd test/suite/indesign-xml-converter.test.js test/suite/svgimg-transformer.test.js test/suite/cli-project.test.js"
+    "test:unit": "mocha --ui tdd test/suite/indesign-xml-converter.test.js test/suite/svgimg-transformer.test.js test/suite/cli-project.test.js test/suite/mermaid-transformer.test.js"
   },
   "devDependencies": {
     "image-size": "^2.0.2",
