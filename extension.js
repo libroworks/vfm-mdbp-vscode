@@ -1,6 +1,6 @@
 const path = require("path");
 const fs = require("fs");
-const { generateConfig, findConfigRoot, currentFileConfig, exportHtml, installDependencies } = require("./lib/cli-project");
+const { generateConfig, findConfigRoot, currentFileConfig, exportHtml, installDependencies, validateProject, terminalCommand } = require("./lib/cli-project");
 const vscode = require("vscode");
 const { convertHtmlToInDesignXml } = require("./lib/indesign-xml-converter");
 
@@ -98,9 +98,12 @@ function activate(context) {
   }
 
   async function launchCLI(action, root, configPath) {
+    const generated = validateProject(root);
+    if (!fs.existsSync(configPath) || !fs.statSync(configPath).isFile()) {
+      throw new Error("実行する設定ファイルが見つかりません。先に設定生成を実行してください。");
+    }
     const helper = path.join(root, ".mdbp-cli");
     const local = path.join(helper, "node_modules/@vivliostyle/cli/dist/cli.js");
-    const generated = fs.existsSync(path.join(helper, "package.json"));
     if (generated && (installations.has(root) || !fs.existsSync(local))) {
       if (!(await setupProject(root))) return;
     }
@@ -150,9 +153,7 @@ function activate(context) {
 
     terminal.show();
     const shell = (vscode.env.shell || "").toLowerCase();
-    terminal.sendText(shell.includes("powershell") || shell.includes("pwsh")
-      ? shellCommand.replace(/^npm /, "npm.cmd ").replace(/^vivliostyle /, "vivliostyle.cmd ")
-      : shellCommand);
+    terminal.sendText(terminalCommand(shellCommand, shell));
   }
 }
 
@@ -203,7 +204,7 @@ function getOptionalOperationRoot() {
 }
 
 function getInstallCommand(command) {
-  return (vscode.env.shell || "").startsWith("C:\\") ? command : `sudo ${command}`;
+  return process.platform === "win32" ? command : `sudo ${command}`;
 }
 
 function showFailure(action, error) {

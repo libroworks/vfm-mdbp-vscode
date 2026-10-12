@@ -4,8 +4,8 @@ const { createDocumentProcessor } = require("./document-processor.cjs");
 const root = path.resolve(__dirname, "..");
 module.exports = {
   entryContext: root,
-  entry: ["formattest.md"],
-  workspaceDir: path.resolve(root, ".vivliostyle-current/17931675-ff8c-44db-b88b-3d6e3cf389a9"),
-  output: "c:\\Users\\yuichiro_ohtsu\\Documents\\GitHub\\vfm-mdbp-vscode\\exampleFiles\\formattest.pdf",
+  entry: ["formattest2.md"],
+  workspaceDir: path.resolve(root, ".vivliostyle-current/385de4036b15825b26f701ea"),
+  output: "c:\\Users\\yuichiro_ohtsu\\Documents\\GitHub\\vfm-mdbp-vscode\\exampleFiles\\formattest2.pdf",
   documentProcessor: createDocumentProcessor(root),
 };

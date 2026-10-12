@@ -3,7 +3,7 @@ const fs = require("fs");
 const os = require("os");
 const path = require("path");
 const Module = require("module");
-const { generateConfig, findConfigRoot, currentFileConfig, exportHtml, installDependencies, EXISTS_MESSAGE } = require("../../lib/cli-project");
+const { generateConfig, findConfigRoot, currentFileConfig, exportHtml, installDependencies, validateProject, terminalCommand, EXISTS_MESSAGE } = require("../../lib/cli-project");
 
 suite("CLI project generation", () => {
   function fixture(callback) {
@@ -39,8 +39,26 @@ suite("CLI project generation", () => {
     assert.equal(findConfigRoot(path.dirname(chapter), root), root);
     const current = currentFileConfig(root, chapter);
     assert.match(fs.readFileSync(current, "utf8"), /chapter.pdf/);
-    assert.notEqual(currentFileConfig(root, chapter), current);
+    const modified = fs.statSync(current).mtimeMs;
+    assert.equal(currentFileConfig(root, chapter), current);
+    assert.equal(fs.statSync(current).mtimeMs, modified);
+    assert.notEqual(currentFileConfig(root, path.join(root, "other/chapter.md")), current);
     assert.equal(fs.readFileSync(config, "utf8"), source);
+  }));
+
+  test("uses cmd only for Windows PowerShell", () => {
+    assert.equal(terminalCommand("npm install", "pwsh", "darwin"), "npm install");
+    assert.equal(terminalCommand("npm install", "powershell", "win32"), "npm.cmd install");
+    assert.equal(terminalCommand("vivliostyle preview", "pwsh", "darwin"), "vivliostyle preview");
+  });
+
+  test("requires config and complete runtime while allowing handwritten config", () => fixture((root) => {
+    assert.throws(() => validateProject(root), /vivliostyle.config.js/);
+    fs.writeFileSync(path.join(root, "vivliostyle.config.js"), "module.exports = {};");
+    assert.equal(validateProject(root), false);
+    assert.throws(() => currentFileConfig(root, path.join(root, "chapter.md")), /設定生成/);
+    fs.mkdirSync(path.join(root, ".mdbp-cli"));
+    assert.throws(() => validateProject(root), /package.json/);
   }));
 
   test("supports projects that explicitly use ES modules", () => fixture((root) => {
