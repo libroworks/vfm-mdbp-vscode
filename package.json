@@ -61,7 +61,7 @@
       },
       {
         "command": "vfmdbp-vscode.generateConfig",
-        "title": "vivliostyle.config.jsを生成",
+        "title": "vivliostyle.config.js設定ファイルを生成",
         "category": "vfmdbookpreview"
       }
     ],
@@ -112,11 +112,6 @@
         {
           "command": "vfmdbp-vscode.installCLI",
           "group": "2_vivliostyle-cli@2",
-          "when": "resourceLangId == markdown || resourceLangId == html"
-        },
-        {
-          "command": "vfmdbp-vscode.installCLI8",
-          "group": "2_vivliostyle-cli@3",
           "when": "resourceLangId == markdown || resourceLangId == html"
         }
       ]
