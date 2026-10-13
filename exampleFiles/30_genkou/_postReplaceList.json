@@ -1,0 +1,146 @@
+[
+  {
+    "f": ":{3,}\\{\\.?([a-z|0-9|\\-|_|\\s]+)\\}",
+    "r": "<div class=\"$1\">"
+  },
+  {
+    "f": ":{3,}",
+    "r": "</div>"
+  },
+  {
+    "f": "@div:([a-z|0-9|_ ]+)",
+    "r": "<div class=\"$1\">"
+  },
+  {
+    "f": "@divend",
+    "r": "</div>"
+  },
+  {
+    "f": "<hr>",
+    "r": "<hr class=\"pagebreak\">"
+  },
+  {
+    "f": "@negative:(\\d+)",
+    "r": "<div style=\"margin-top:-$1mm\"></div>"
+  },
+  {
+    "f": "@clear",
+    "r": "<div class=\"floatclear\"></div>"
+  },
+  {
+    "f": "@comment:([^@]*)@commend",
+    "r": "<span class=\"comment\">$1</span>"
+  },
+  {
+    "f": "〔",
+    "r": "<span class=\"yk-strong\">"
+  },
+  {
+    "f": "〕",
+    "r": "</span>"
+  },
+  {
+    "f": "<p>(<div class=\"[^\"]+\">)</p>",
+    "r": "$1"
+  },
+  {
+    "f": "<li[^>]*>▶",
+    "r": "<li class=\"aokome\">"
+  },
+  {
+    "f": "<li[^>]*>([\u2776-\u277F\u24EB-\u24F4]+)",
+    "r": "<li class=\"akakome\"><span>$1</span>"
+  },
+  {
+    "f": "<h6 ([^>]*)>実行結果",
+    "r": "<h6 $1 class=\"result\">実行結果"
+  },
+  {
+    "f": "<span class=\"hljs-comment\"([^>]*)>#←",
+    "r": "<span class=\"hljs-comment codered\"$1>"
+  },
+  {
+    "f": "<span class=\"hljs-comment\"([^>]*)>//←",
+    "r": "<span class=\"hljs-comment codered\"$1>"
+  },
+  {
+    "f": "<span class=\"hljs-comment\"([^>]*)>&lt;!--←",
+    "r": "<span class=\"hljs-comment codered\"$1>"
+  },
+  {
+    "f": "<p>【著者normal】((?!</p>).*)</p>",
+    "r": "<p class=\"face teacher\">$1</p>"
+  },
+  {
+    "f": "<p>【著者egao】((?!</p>).*)</p>",
+    "r": "<p class=\"face teacher teacher-laugh\">$1</p>"
+  },
+  {
+    "f": "<p>【著者idea】((?!</p>).*)</p>",
+    "r": "<p class=\"face teacher teacher-idea\">$1</p>"
+  },
+  {
+    "f": "<p>【著者shock】((?!</p>).*)</p>",
+    "r": "<p class=\"face teacher teacher-shock\">$1</p>"
+  },
+  {
+    "f": "<p>【著者hatena】((?!</p>).*)</p>",
+    "r": "<p class=\"face teacher teacher-hatena\">$1</p>"
+  },
+  {
+    "f": "<p>(<div class=\"[^\"]+\">)</p>",
+    "r": "$1"
+  },
+  {
+    "f": "<p></div></p>",
+    "r": "</div>"
+  },
+  {
+    "f": "<p></div>",
+    "r": "</div>"
+  },
+  {
+    "f": "</div></p>",
+    "r": "</div>"
+  },
+  {
+    "f": "(<div class=\"[^\"]+\">)</p>",
+    "r": "$1"
+  },
+  {
+    "f": "<p>(<div class=\"[^\"]+\">)",
+    "r": "$1"
+  },
+  {
+    "f": "(<hr class=\"[^\"]+\">)</p>",
+    "r": "$1"
+  },
+  {
+    "f": "<p>(<hr class=\"[^\"]+\">)",
+    "r": "$1"
+  },
+  {
+    "f": "<p>(<svg [^>]+>)</p>",
+    "r": "$1"
+  },
+  {
+    "f": "<p>(<image [^>]+>)",
+    "r": "$1"
+  },
+  {
+    "f": "(<image [^>]+>)</p>",
+    "r": "$1"
+  },
+  {
+    "f": "<p>(</svg>)",
+    "r": "$1"
+  },
+  {
+    "f": "(</svg>)</p>",
+    "r": "$1"
+  },
+  {
+    "f": "<p></p>",
+    "r": ""
+  }
+]

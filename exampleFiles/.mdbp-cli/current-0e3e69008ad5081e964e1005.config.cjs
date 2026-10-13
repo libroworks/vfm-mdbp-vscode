@@ -6,6 +6,7 @@ module.exports = {
   entryContext: root,
   entry: ["formattest.md"],
   workspaceDir: path.resolve(root, ".vivliostyle-current/0e3e69008ad5081e964e1005"),
+  copyAsset: { includeFileExtensions: ["JPG", "JPEG", "PNG", "GIF", "SVG", "WEBP", "APNG"] },
   output: "c:\\Users\\yuichiro_ohtsu\\Documents\\GitHub\\vfm-mdbp-vscode\\exampleFiles\\formattest.pdf",
   documentProcessor: createDocumentProcessor(root),
 };
