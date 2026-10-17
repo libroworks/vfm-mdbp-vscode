@@ -27,7 +27,7 @@ npm install -g @vivliostyle/cli
 
 ## 基本的な使い方
 1. VSCodeでフォルダーを開いてください。そこがWebサーバーのルートになります。
-2. Markdownを開いて右クリックし、［vivliostyle.config.jsを生成］を実行します。依存パッケージのインストール完了後に［これプレビューvivliostyle preview (Current File)］を実行します。
+2. Markdownを開いて右クリックし、［mdbp環境の構築（最初に実行）］を実行します。依存パッケージのインストール完了後に［これプレビューvivliostyle preview (Current File)］を実行します。
 3. 原稿を保存するとCLI側でプレビューが更新されます。置換JSON・DOM操作JSON・svgimg画像の寸法を変更した場合は、プレビューを再起動してください。
 4. プレビューを停止したい場合は，VSCodeのターミナルをクリックして，Ctrl + C（macOSはcontrol + C）キーを押します。
 5. 読み込むCSSファイルを指定するには、Markdownファイルの先頭にFrontmatterを書きます。
@@ -75,14 +75,15 @@ Mermaidが含まれる原稿だけ描画用ブラウザーを起動します。�
 ### ▶［これプレビューvivliostyle preview (Current File)］
 現在エディタで開いているMarkdownまたはHTMLファイルをもとに，Vivliostyleを使って紙面のプレビューを表示します。
 
-### ▶［vivliostyle.config.jsを生成］
+### ▶［mdbp環境の構築（最初に実行）］
 
 Markdownを開いて実行すると、ワークスペースのルート（フォルダーを開いていない場合は原稿のフォルダー）に設定を生成します。
 `entry`の初期値は現在のMarkdownです。章の追加と順番は`entry`だけで指定します。
 
-既存の`vivliostyle.config.js`がある場合は何も書き出さず、手動で削除してから再実行するようメッセージを表示します。
+既存の`vivliostyle.config.js`がある場合は上書きするか確認します。上書きしない場合も設定ファイルは維持したまま、`.mdbp-cli/`の生成と依存パッケージのインストールを実行します。
 
 変換モジュールと専用の依存パッケージ定義を`.mdbp-cli/`へ生成し、バックグラウンドでインストールします。
+`.gitignore`が存在する場合は、MDBPの生成物を除外する行を不足分だけ追記します。
 進行状況を表示し、完了後に設定を開いて「プレビューを開始」を選べます。失敗した場合はログを表示し、再試行できます。
 Windowsでは`cmd.exe`から`npm.cmd`を実行するため、PowerShellの実行ポリシー変更は不要です。
 プレビュー／ビルドはNode.jsからローカルCLIを直接起動し、依存パッケージが未導入なら先にインストールします。
@@ -97,7 +98,7 @@ npm exec --prefix .mdbp-cli -- vivliostyle build --config vivliostyle.config.js
 ```
 
 設定と`.mdbp-cli/`内のソース・package.json・package-lock.jsonは原稿と一緒に管理してください。
-`.mdbp-cli/node_modules/`、`.mdbp-cli/current-*.config.cjs`、`.vivliostyle/`、`.vivliostyle-current/`は生成物です。
+`.mdbp-cli/node_modules/`、`.mdbp-cli/current-*.cjs`、`.vivliostyle/`、`.vivliostyle-current/`は生成物です。
 
 ### ▶［連結ビルド／連結プレビュー (with config)］
 

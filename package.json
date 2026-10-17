@@ -61,7 +61,7 @@
       },
       {
         "command": "vfmdbp-vscode.generateConfig",
-        "title": "vivliostyle.config.js設定ファイルを生成",
+        "title": "mdbp環境の構築（最初に実行）",
         "category": "vfmdbookpreview"
       }
     ],

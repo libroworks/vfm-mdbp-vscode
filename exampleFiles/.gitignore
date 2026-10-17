@@ -1,0 +1,4 @@
+.mdbp-cli/node_modules/
+.mdbp-cli/current-*.cjs
+.vivliostyle-current/
+.vivliostyle/

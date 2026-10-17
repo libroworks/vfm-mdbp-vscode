@@ -22,13 +22,27 @@ function activate(context) {
     return `XMLを書き出しました: ${xmlPath}`;
   });
 
-  registerCommand("vfmdbp-vscode.generateConfig", "Vivliostyle設定生成", async () => {
+  registerCommand("vfmdbp-vscode.generateConfig", "mdbp環境の構築", async () => {
     const document = requireActiveMarkdownDocument();
     const root = getDocumentRoot(document);
-    const configPath = generateConfig(root, document.fileName, path.join(context.extensionPath, "cli-runtime"));
+    const configPath = path.join(root, "vivliostyle.config.js");
+    let configMode = "create";
+    if (fs.existsSync(configPath)) {
+      const choice = await vscode.window.showWarningMessage(
+        "MDBP: vivliostyle.config.jsは既に存在します。上書きしますか？",
+        { modal: true },
+        "上書きする",
+        "上書きしない"
+      );
+      if (!choice) return;
+      configMode = choice === "上書きする" ? "overwrite" : "preserve";
+    }
+    generateConfig(root, document.fileName, path.join(context.extensionPath, "cli-runtime"), { configMode });
     if (!(await setupProject(root))) return;
-    const configDocument = await vscode.workspace.openTextDocument(configPath);
-    await vscode.window.showTextDocument(configDocument);
+    if (configMode !== "preserve") {
+      const configDocument = await vscode.workspace.openTextDocument(configPath);
+      await vscode.window.showTextDocument(configDocument);
+    }
     const choice = await vscode.window.showInformationMessage("MDBP: 設定生成とインストールが完了しました。", "プレビューを開始");
     if (choice === "プレビューを開始") await launchCLI("preview", root, configPath);
   });

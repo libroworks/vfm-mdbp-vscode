@@ -3,7 +3,7 @@ const fs = require("fs");
 const os = require("os");
 const path = require("path");
 const Module = require("module");
-const { generateConfig, findConfigRoot, currentFileConfig, exportHtml, installDependencies, validateProject, terminalCommand, EXISTS_MESSAGE } = require("../../lib/cli-project");
+const { generateConfig, findConfigRoot, currentFileConfig, exportHtml, installDependencies, validateProject, terminalCommand } = require("../../lib/cli-project");
 
 suite("CLI project generation", () => {
   function fixture(callback) {
@@ -21,11 +21,28 @@ suite("CLI project generation", () => {
     } finally { fs.rmSync(root, { recursive: true, force: true }); }
   });
 
-  test("refuses an existing config before writing any helper files", () => fixture((root) => {
+  test("preserves an existing config while setting up runtime files", () => fixture((root) => {
     fs.writeFileSync(path.join(root, "vivliostyle.config.js"), "manual config");
-    assert.throws(() => generateConfig(root, path.join(root, "chapter.md"), assets), { message: EXISTS_MESSAGE });
+    fs.writeFileSync(path.join(root, ".gitignore"), "dist/\n.vivliostyle/\n");
+    assert.equal(generateConfig(root, path.join(root, "chapter.md"), assets, { configMode: "preserve" }), path.join(root, "vivliostyle.config.js"));
     assert.equal(fs.readFileSync(path.join(root, "vivliostyle.config.js"), "utf8"), "manual config");
-    assert.ok(!fs.existsSync(path.join(root, ".mdbp-cli")));
+    assert.ok(fs.existsSync(path.join(root, ".mdbp-cli", "package.json")));
+    assert.deepEqual(fs.readFileSync(path.join(root, ".gitignore"), "utf8").split(/\r?\n/).filter(Boolean), [
+      "dist/",
+      ".vivliostyle/",
+      ".mdbp-cli/node_modules/",
+      ".mdbp-cli/current-*.cjs",
+      ".vivliostyle-current/",
+    ]);
+  }));
+
+  test("overwrites an existing config when requested", () => fixture((root) => {
+    fs.writeFileSync(path.join(root, "vivliostyle.config.js"), "manual config");
+    const config = generateConfig(root, path.join(root, "chapter.md"), assets, { configMode: "overwrite" });
+    const source = fs.readFileSync(config, "utf8");
+    assert.notEqual(source, "manual config");
+    assert.match(source, /chapter.md/);
+    assert.ok(fs.existsSync(path.join(root, ".mdbp-cli", "package.json")));
   }));
 
   test("generates portable config and runtime with only the selected chapter", () => fixture((root) => {
