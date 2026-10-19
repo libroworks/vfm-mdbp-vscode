@@ -1,7 +1,7 @@
 # vfm-mdbp-vscode README
 MDBP（MarkDown-Book-Preview）は書籍の原稿作成に適したMarkdownプレビューの機能拡張です。 [Vivliostyle](https://vivliostyle.org/download/)と組み合わせて書籍の体裁で表示し、原稿データをInDesign向けのXMLファイルとして書き出す機能を持ちます。
 
-[『Web技術で「本」が作れるCSS組版 Vivliostyle入門』（リブロワークス著，Vivliostyle監修，C&R研究所2023年5月刊）](https://www.c-r.com/book/detail/1493)のために作成した，vivliosytle-cli-helperに，独自機能を盛り込んだものです。
+[『Web技術で「本」が作れるCSS組版 Vivliostyle入門』（リブロワークス著，Vivliostyle監修，C&R研究所2023年5月刊）](https://www.c-r.com/book/detail/1493)のために作成したvivliosytle-cli-helperに独自機能を盛り込んだものです。
 
 v0.5.x以降を初めて使用する場合は、以降の「v0.5.x以降の大幅変更について」を参照してください。
 
