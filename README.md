@@ -26,7 +26,7 @@ v0.5.x以降を初めて使用する場合は、以降の「v0.5.x以降の大�
 - 標準仕様に沿った使い方に近づけたため、MDBPがない状態でも、vivliostyle-cliのコマンドのみでビルド（vivliostyle build）やプレビュー（vivliostyle preview）が可能。
 - MDBPがVFMを内包しないので、vivliostyleの更新速度に追従しやすくなった。
 - 連結ビルド、連結プレビュー時は、vivliostyle.config.jsの`entry:[...]`にMDファイルを列挙するだけでよくなった（以前はMDBPが必須だったので、MDBPでHTMLを出力したのち、それを連結する手間が必要）。
-- その他、全体的に細部の挙動が改善されているはずです。
+- その他、全体的に細部の挙動が改善されており、原稿を書くだけでなく最後までCSSで組版する場合は新版のほうが使いやすいはずです。
 
 その代わりに、0.5.x以降は、**プロジェクトフォルダで初めて作業する際に［mdbp環境の構築（最初に実行）］を選択**して、プロジェクトフォルダ内に必要ファイルを生成する必要があります。
 
@@ -88,11 +88,9 @@ link:
 
 この動作はVFM（Vivliostyle Fravored Markdown）の仕様に基づくものです。詳しくは解説ページを参照してください。
 
-https://vivliostyle.github.io/vfm/#/vfm#frontmatter
-
-https://vivliostyle.github.io/vfm/#/ja/vfm
-
-https://github.com/vivliostyle/vfm
+- https://vivliostyle.github.io/vfm/#/vfm#frontmatter
+- https://vivliostyle.github.io/vfm/#/ja/vfm
+- https://github.com/vivliostyle/vfm
 
 
 ## コマンド解説
@@ -125,14 +123,10 @@ Markdownを開いて実行すると、ワークスペースのルート（フォ
 
 既存の`vivliostyle.config.js`がある場合は上書きするか確認します。上書きしない場合も設定ファイルは維持したまま、`.mdbp-cli/`の生成と依存パッケージのインストールを実行します。
 
-変換モジュールと専用の依存パッケージ定義を`.mdbp-cli/`へ生成し、バックグラウンドでインストールします。
-`.gitignore`が存在する場合は、MDBPの生成物を除外する行を不足分だけ追記します。
-進行状況を表示し、完了後に設定を開いて「プレビューを開始」を選べます。失敗した場合はログを表示し、再試行できます。
-Windowsでは`cmd.exe`から`npm.cmd`を実行するため、PowerShellの実行ポリシー変更は不要です。
-プレビュー／ビルドはNode.jsからローカルCLIを直接起動し、依存パッケージが未導入なら先にインストールします。
-生成環境はCLI 11.2.0、VFM 2.7.2を使用します。CLI v8はこの経路の対象外です。
+この処理を実行すると、変換モジュールと専用の依存パッケージ定義を`.mdbp-cli/`へ生成し、バックグラウンドでインストールします。
+`.gitignore`が存在する場合は、MDBPの生成物の除外指定を必要に応じて追記します。
 
-MDBPなしで実行する場合も、プロジェクトのルートで次のコマンドを使用できます。
+MDBPなしで特定のファイルを実行する場合も、プロジェクトのルートで次のコマンドを使用できます（この文はAIが追加したもので、おそらく実行可能ですが、めったに使う機会はないと思います）。
 
 ```sh
 npm install --prefix .mdbp-cli
@@ -146,8 +140,11 @@ npm exec --prefix .mdbp-cli -- vivliostyle build --config vivliostyle.config.js
 ### ▶［連結ビルド／連結プレビュー (with config)］
 複数のファイルを連結してビルドまたはプレビューします。
 `vivliostyle.config.js`の`entry`に指定したMarkdownをCLIが変換し、svgimg、置換、連番、行番号などの独自処理も適用します。
+```
+entry: ["30_genkou/chap1.md","30_genkou/chap2.md","30_genkou/chap3.md","30_genkou/chap5.md","30_genkou/chap6.md"],
+```
 
-現在のファイルのフォルダーからワークスペース（vscodeで開いているフォルダ）のルートまで上に探した`vivliostyle.config.js`を使用します。既存の手書き設定も実行できますが、独自処理を使う場合は`documentProcessor`の指定が必要です。
+現在のファイルのフォルダーからワークスペース（vscodeで開いているフォルダ）のルートまで上に探した`vivliostyle.config.js`を使用します。MDBP独自処理を使う必要があるため、［mdbp環境の構築］で生成した`vivliostyle.config.js`（`documentProcessor`などの指定を持つ）をベースに、原稿ファイルを付け加えることをおすめします。
 
 v0.4.xまでに使用していた`vivliostyle.mdbplist.json`による連結指定は廃止しました。
 
