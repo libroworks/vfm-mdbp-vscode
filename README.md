@@ -3,6 +3,8 @@ MDBP（MarkDown-Book-Preview）は書籍の原稿作成に適したMarkdownプ�
 
 [『Web技術で「本」が作れるCSS組版 Vivliostyle入門』（リブロワークス著，Vivliostyle監修，C&R研究所2023年5月刊）](https://www.c-r.com/book/detail/1493)のために作成した，vivliosytle-cli-helperに，独自機能を盛り込んだものです。
 
+v0.5.x以降を初めて使用する場合は、以降の「v0.5.x以降の大幅変更について」を参照してください。
+
 ## Features
 - 組版用CSSによって書籍のリアルタイムプレビュー，PDF書き出しを行える
 - 置換リストを使用してHTML変換後にテキスト置換を行える。これはMarkdownの不足を補うために使用する
@@ -14,8 +16,50 @@ MDBP（MarkDown-Book-Preview）は書籍の原稿作成に適したMarkdownプ�
 
 ![右クリックメニューからの実行](docimg-n2.png)
 
+## v0.5.x以降の大幅変更について
+これまでMDBP内部で行っていた独自処理（置換処理、画像トリミング処理など）を、大部分vivliostyle-cli標準のviviliostyle.confing.jsに外出しする構造に変更しました。
+
+![0.4.x以前と0.5.x以降の構造](docimg-v040-v051.svg)
+
+これにより次のようなメリットが得られます。
+
+- 標準仕様に沿った使い方に近づけたため、MDBPがない状態でも、vivliostyle-cliのコマンドのみでビルド（vivliostyle build）やプレビュー（vivliostyle preview）が可能。
+- MDBPがVFMを内包しないので、vivliostyleの更新速度に追従しやすくなった。
+- 連結ビルド、連結プレビュー時は、vivliostyle.config.jsの`entry:[...]`にMDファイルを列挙するだけでよくなった（以前はMDBPが必須だったので、MDBPでHTMLを出力したのち、それを連結する手間が必要）。
+- その他、全体的に細部の挙動が改善されているはずです。
+
+その代わりに、0.5.x以降は、**プロジェクトフォルダで初めて作業する際に［mdbp環境の構築（最初に実行）］を選択**して、プロジェクトフォルダ内に必要ファイルを生成する必要があります。
+
+このコマンドは次の処理を実行します。
+
+- vivliostyle.config.jsがない場合は生成（ある場合は上書き確認あり）
+![vivliostyle.config.jsの上書き確認](docimg-n4.png)
+- .media-cliフォルダに独自処理（置換処理、画像トリミング処理など）を行うためのコードファイルを書き込む
+![.mdbp-cliフォルダ](docimg-n3.png)
+- .media-cliフォルダ内でnpm installを実行（独自処理に必要なnpmパッケージのインストールを行う）
+![インストールの実行中](docimg-n5.png)
+- npmパッケージをGitHubにプッシュすると重くなるため、.gitignoreに無視する指定を追加。
+
+###### .gitignore
+```
+# MDBP
+.mdbp-cli/node_modules/
+.mdbp-cli/current-*.cjs
+.vivliostyle-current/
+.vivliostyle/
+```
+
+副作用として、.mdbp-cli/node_modules内に大量のファイルが存在するため、**プロジェクトフォルダごとコピーすると非常に時間がかかります**。Git以外のクラウドストレージでやりとりする際も同様の問題が起きます。
+
+基本的にはGitHubのリポジトリをクローン→［mdbp環境の構築］を実行するか、Markdown原稿などのファイル単位でコピーすることをおすすめします。
+
+### 既存のプロジェクトからのアップデートについて
+プロジェクト自体には互換性があります。右クリックメニューから［mdbp環境の構築］を選択して必要ファイルを生成させてください。その完了後にこれまでと同様に編集できます。
+
+
+
 ## 事前準備
-1. Vivliostyle CLIの実行に必要なNode.js 22以上をインストールしてください。<br>
+1. Vivliostyle CLIの実行に必要なNode.js 24以上をインストールしてください。<br>
 [Node.js日本語ページ](https://nodejs.org/ja)
 
 
@@ -28,8 +72,8 @@ npm install -g @vivliostyle/cli
 ## 基本的な使い方
 1. VSCodeでフォルダーを開いてください。そこがWebサーバーのルートになります。
 2. Markdownを開いて右クリックし、［mdbp環境の構築（最初に実行）］を実行します。依存パッケージのインストール完了後に［これプレビューvivliostyle preview (Current File)］を実行します。
-3. 原稿を保存するとCLI側でプレビューが更新されます。置換JSON・DOM操作JSON・svgimg画像の寸法を変更した場合は、プレビューを再起動してください。
-4. プレビューを停止したい場合は，VSCodeのターミナルをクリックして，Ctrl + C（macOSはcontrol + C）キーを押します。
+3. 原稿を保存すると自動的にプレビューが更新されます。
+4. プレビューを停止したい場合はプレビューウィンドウを閉じます。それでも終了しない場合は、VSCodeのターミナルをクリックして，Ctrl + C（macOSはcontrol + C）キーを押します。
 5. 読み込むCSSファイルを指定するには、Markdownファイルの先頭にFrontmatterを書きます。
 
 ##### Frontmatterの例
@@ -52,9 +96,9 @@ https://github.com/vivliostyle/vfm
 
 
 ## コマンド解説
-### Mermaidの図版
+### Mermaidの図版（0.5.x以降）
 
-`mermaid`コードブロックは、プレビュー・HTML出力・PDF生成時にインラインSVGへ変換します。
+`mermaid`コードブロックは、プレビュー・HTML出力・PDF生成時にインラインSVGへ変換して表示します。
 
 ````md
 ```mermaid
@@ -65,12 +109,11 @@ flowchart LR
 
 Mermaidが含まれる原稿だけ描画用ブラウザーを起動します。初回セットアップではMermaid CLIとそのブラウザーもインストールするため、時間がかかることがあります。変換できない図は警告を出し、元のコードブロックを残します。
 
-以前生成したプロジェクトで使う場合は、拡張の`cli-runtime/`内の`document-processor.cjs`、`mermaid-transformer.cjs`、`package.json`をプロジェクトの`.mdbp-cli/`へコピーし、プロジェクトのルートで`npm.cmd install --prefix .mdbp-cli`（macOSでは`npm install --prefix .mdbp-cli`）を実行してください。設定ファイルの章順は維持できます。
 
 ### ▶［これビルドvivliostyle build (Current File)］
 現在エディタで開いているMarkdownまたはHTMLファイルをもとに，Vivliostyleを使ってPDFを書き出します。Markdownファイルの拡張子を変えたPDFが，同じ階層に書き出されます。
 
-プレビューを実行している場合は，いったんCtrl + C（macOSはcontrol + C）キーで中止してください。
+プレビューを実行している場合は、いったんCtrl + C（macOSはcontrol + C）キーで中止してください。
 
 ### ▶［これプレビューvivliostyle preview (Current File)］
 現在エディタで開いているMarkdownまたはHTMLファイルをもとに，Vivliostyleを使って紙面のプレビューを表示します。
@@ -101,32 +144,13 @@ npm exec --prefix .mdbp-cli -- vivliostyle build --config vivliostyle.config.js
 `.mdbp-cli/node_modules/`、`.mdbp-cli/current-*.cjs`、`.vivliostyle/`、`.vivliostyle-current/`は生成物です。
 
 ### ▶［連結ビルド／連結プレビュー (with config)］
+複数のファイルを連結してビルドまたはプレビューします。
+`vivliostyle.config.js`の`entry`に指定したMarkdownをCLIが変換し、svgimg、置換、連番、行番号などの独自処理も適用します。
 
-現在のファイルのフォルダーからワークスペースのルートまで上に探した`vivliostyle.config.js`を使用します。
-`entry`に指定したMarkdownをCLIが変換し、svgimg、置換、連番、行番号などの独自処理も適用します。
-既存の手書き設定も実行できますが、独自処理を使う場合は`documentProcessor`の指定が必要です。
-`vivliostyle.mdbplist.json`による一覧指定は廃止しました。
+現在のファイルのフォルダーからワークスペース（vscodeで開いているフォルダ）のルートまで上に探した`vivliostyle.config.js`を使用します。既存の手書き設定も実行できますが、独自処理を使う場合は`documentProcessor`の指定が必要です。
 
-### 現在のファイルのプレビュー／ビルド
+v0.4.xまでに使用していた`vivliostyle.mdbplist.json`による連結指定は廃止しました。
 
-設定生成で作成した`.mdbp-cli/`の変換モジュールを使用します。
-現在のMarkdownまたはHTMLだけを対象にした実行用設定を生成し、CLIを起動します。
-書籍用設定の`entry`は変更しません。PDFは原稿と同じフォルダーに生成します。
-単体実行用の設定と作業フォルダーは原稿パスのハッシュで識別し、同じ原稿では再利用します。
-別原稿のプレビューとは分離します。以前のバージョンが生成したUUID形式の設定・作業フォルダーは、
-プレビュー停止後に必要に応じて手動で削除できます。
-
-実行前に設定ファイルと変換モジュールを確認し、不足していれば設定生成を案内します。
-手書き設定だけを使う連結実行も利用できます。WindowsのPowerShellだけ`.cmd`を使用し、macOSでは`npm`を使用します。
-
-実行前に対象原稿を保存します。連結実行では対象ワークスペース内の変更を保存します。
-保存時にMDBPがHTMLを自動生成する処理は廃止しました。原稿の更新はCLIのプレビューが扱います。
-「HTMLのみ更新」とMarkdownからのXML出力も、同じプロジェクト側変換モジュールをCLIから実行します。
-設定生成と依存パッケージのインストールが必要です。HTMLは原稿と同じフォルダーへ出力します。
-HTML生成の完了後にブラウザーを開くか、既存のXML変換器でXMLを生成します。
-HTMLファイルからXMLを出力する場合は、保存したHTMLを直接使用します。
-拡張機能内部の旧Markdown変換器とVFM依存は削除済みです。VFMはプロジェクト側の`.mdbp-cli/`だけで使用します。
-このリポジトリーの`exampleFiles/vivliostyle.config.js`を直接使う場合は、先にルートで`npm install --prefix cli-runtime`を実行してください。
 ### ▶［Export InDesign XML］
 InDesignの［構造］パネルで読み込み可能なXMLファイルを書き出します。
 
@@ -138,25 +162,26 @@ npm install -g @vivliostyle/cli
 ```
 
 
-## その他の機能
+## MDBP独自機能
 ### 置換リスト
 置換リストは`_postReplaceList.json`というJSONファイル内に記述します。
 
-以下の置換リストは「@div クラス名」と「@divend」で囲んだ範囲を、div要素に置換します。また、ハイフンで生成する水平線は改ページ指定として処理します。
+以下の置換リストは**フェンス記法**を独自実装するためのもので、「:::{.クラス名}」と「:::」で囲んだ範囲を、div要素に置換します。また、ハイフンで生成する水平線は改ページ指定として処理します。
+
 ```
 [
-    {
-        "f": "@div:([a-z|0-9 ]+)",
-        "r": "<div class=\"$1\">"
-    },
-    {
-        "f": "@divend",
-        "r": "<\/div>"
-    },
-    {
-        "f": "<hr>",
-        "r": "<hr class=\"pagebreak\">"
-    },
+  {
+    "f": ":{3,}\\{\\.?([a-z|0-9|\\-|_|\\s]+)\\}",
+    "r": "<div class=\"$1\">"
+  },
+  {
+    "f": ":{3,}",
+    "r": "</div>"
+  },
+  {
+    "f": "<hr>",
+    "r": "<hr class=\"pagebreak\">"
+  },
 ……後略……
 ```
 サンプル置換リスト
@@ -180,38 +205,6 @@ IT書でスクリーンショットは欠かせません。いちいちグラフ
 ### その他
 ゲタ文字〓を使用して連番を自動生成できます。
 
-### postManipulate（後操作）機能
-Markdownの記述を簡単にするために、デザイン都合でHTML構造を自動変更する機能を追加しました。h2見出しと直後のp要素を、装飾用の\<div:secheader\>～\</div\>で囲むといった操作を行えます。jQueryに似た機能を持つcheerioというライブラリを利用しています。
-
-操作内容は_postManipurate.jsonというファイルに「セレクタ」「メソッド」「パラメータ」を指定する形にしているので、プロジェクトごとに設定変更が可能です。
-```
-[
-  {
-    "selector": "h1",
-    "method": "wrapWithNextSib",  // h1要素とその次の1要素をdiv.coverpageでラップする（見出しとリード文のグループ化）
-    "paramator": "<div class=\"coverpage\"></div>"
-  },
-  {
-    "selector": "h2",
-    "method": "wrap",     // h2要素をdiv.secheaderでラップする（h2要素に装飾用のdivを追加）
-    "paramator": "<div class=\"secheader\"></div>"
-  },
-    "selector": "h3",
-    "method": "wrapAll",  // h3要素の直後にある複数のp要素をすべてdiv.col2でラップする（見出しの下の段落を2段組みに）
-    "paramator": ["p", "<div class=\"col2\"></div>"]
-  },
-  {
-    "selector": "h2",
-    "method": "dupRunning",  // h2要素のテキストを複製してspan.header2という要素を作成する（柱テキストの作成）
-    "paramator": "<span class=\"header2\"></span>"
-  },
-    "selector": "p code",
-    "method": "addClass",  // p要素内のcode要素にinline_codeというクラスを追加する
-    "paramator": "inline_code"
-  },
-]
-```
-
 ### ソースコードに行番号を付ける機能
 コードの前に次の形式で書くと、直後のpre &gt; code内を改行コードで分割し、`<span class="codenum-elem">000</span>`を追加する。
 ```
@@ -225,11 +218,20 @@ Markdownの記述を簡単にするために、デザイン都合でHTML構造�
 
 
 ## Requirements
-- VSCode 1.100.0以上
-- Node.js v20以上
+- VSCode 1.140.0以上
+- Node.js v24以上
 
 
 ## Release Notes
+### 0.5.1
+Codexを使用し、MDBPの独自機能を外部に分離する改造を行った。
+
+- ［mdbp環境の構築］機能により、プロジェクトフォルダに対し、必要ファイルのインストールを実行
+- mermaid対応
+- その他の基本操作は変更なし
+
+詳細は、上の「v0.5.x以降の大幅変更について」を参照。
+
 ### 0.4.0
 今回はCodexでコードの大幅な整理を行った。
 - `@vivliostyle/vfm`を最新版へ更新し、依存パッケージを整理
