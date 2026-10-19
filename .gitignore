@@ -2,3 +2,9 @@ node_modules
 .vscode-test/
 *.vsix
 .vsce-cache/
+
+# MDBP
+.mdbp-cli/node_modules/
+.mdbp-cli/current-*.cjs
+.vivliostyle-current/
+.vivliostyle/
