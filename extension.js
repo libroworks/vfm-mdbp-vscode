@@ -1,6 +1,6 @@
 const path = require("path");
 const fs = require("fs");
-const { generateConfig, findConfigRoot, currentFileConfig, exportHtml, installDependencies, validateProject, terminalCommand } = require("./lib/cli-project");
+const { generateConfig, findConfigRoot, currentFileConfig, exportHtml, installDependencies, installMermaidDependencies, validateProject, terminalCommand } = require("./lib/cli-project");
 const vscode = require("vscode");
 const { convertHtmlToInDesignXml } = require("./lib/indesign-xml-converter");
 
@@ -117,12 +117,11 @@ function activate(context) {
       throw new Error("実行する設定ファイルが見つかりません。先に設定生成を実行してください。");
     }
     const helper = path.join(root, ".mdbp-cli");
-    const local = path.join(helper, "node_modules/@vivliostyle/cli/dist/cli.js");
-    if (generated && (installations.has(root) || !fs.existsSync(local))) {
+    const vfm = path.join(helper, "node_modules/@vivliostyle/vfm");
+    if (generated && (installations.has(root) || !fs.existsSync(vfm))) {
       if (!(await setupProject(root))) return;
     }
-    const command = generated ? `node ${shellQuote(local)}` : "vivliostyle";
-    callShell(`${command} ${action} --config ${shellQuote(configPath)}`, root);
+    callShell(`vivliostyle ${action} --config ${shellQuote(configPath)}`, root);
     return undefined;
   }
 
@@ -134,6 +133,18 @@ function activate(context) {
   registerCommand("vfmdbp-vscode.installCLI8", "Vivliostyle CLI v8のインストール", () => {
     callShell(getInstallCommand("npm install -g @vivliostyle/cli@8"), getOptionalOperationRoot());
     return "Vivliostyle CLI v8のインストールを開始しました";
+  });
+
+  registerCommand("vfmdbp-vscode.installMermaid", "Mermaid対応の追加インストール", async () => {
+    const root = operationConfigRoot();
+    validateProject(root, true);
+    if (installations.has(root)) await installations.get(root);
+    await vscode.window.withProgress({ location: vscode.ProgressLocation.Notification,
+      title: "MDBP: Mermaid対応をインストールしています", cancellable: false }, async () => {
+      output.appendLine(`Mermaid対応セットアップ: ${root}`);
+      await installMermaidDependencies(root, (text) => output.append(String(text)));
+    });
+    return "Mermaid対応をインストールしました";
   });
 
   context.subscriptions.push(

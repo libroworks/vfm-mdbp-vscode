@@ -3,7 +3,7 @@ const fs = require("fs");
 const os = require("os");
 const path = require("path");
 const Module = require("module");
-const { generateConfig, findConfigRoot, currentFileConfig, exportHtml, installDependencies, validateProject, terminalCommand } = require("../../lib/cli-project");
+const { generateConfig, findConfigRoot, currentFileConfig, exportHtml, installDependencies, installMermaidDependencies, validateProject, terminalCommand } = require("../../lib/cli-project");
 
 suite("CLI project generation", () => {
   function fixture(callback) {
@@ -17,6 +17,8 @@ suite("CLI project generation", () => {
     const root = fs.mkdtempSync(path.join(os.tmpdir(), "mdbp-install-"));
     try {
       await assert.rejects(installDependencies(root), (error) =>
+        error.message.includes(path.join(root, ".mdbp-cli", "package.json")));
+      await assert.rejects(installMermaidDependencies(root), (error) =>
         error.message.includes(path.join(root, ".mdbp-cli", "package.json")));
     } finally { fs.rmSync(root, { recursive: true, force: true }); }
   });
@@ -140,9 +142,8 @@ suite("CLI project generation", () => {
             assert.equal(sent.length, 0, "Preview must wait for installation");
             installAttempts++;
             if (installAttempts === 1) throw new Error("Installation failed; retry");
-            const cli = path.join(root, ".mdbp-cli/node_modules/@vivliostyle/cli/dist/cli.js");
-            fs.mkdirSync(path.dirname(cli), { recursive: true });
-            fs.writeFileSync(cli, "");
+            const vfm = path.join(root, ".mdbp-cli/node_modules/@vivliostyle/vfm");
+            fs.mkdirSync(vfm, { recursive: true });
           },
           async exportHtml(project, source) {
             assert.equal(project, root);
@@ -162,14 +163,14 @@ suite("CLI project generation", () => {
       extension.activate({ extensionPath: path.resolve(__dirname, "../.."), subscriptions: [] });
       await registered.get("vfmdbp-vscode.generateConfig")();
       assert.equal(installAttempts, 2);
-      assert.match(sent[0], /^node /);
+      assert.match(sent[0], /^vivliostyle(?:\.cmd)? /);
       for (const id of ["previewByConfig", "buildByConfig", "previewThisCLI", "buildThisCLI"]) {
         await registered.get(`vfmdbp-vscode.${id}`)();
       }
       assert.equal(errors.length, 0, errors.join("\n"));
       assert.equal(document.isDirty, false);
       assert.equal(sent.length, 5);
-      assert.ok(sent.every((command) => command.includes("--config") && command.startsWith("node ") && command.includes("cli.js")));
+      assert.ok(sent.every((command) => command.includes("--config") && /^vivliostyle(?:\.cmd)? /.test(command)));
       assert.ok(!fs.existsSync(path.join(root, "chapter.html")));
       await registered.get("vfmdbp-vscode.convertMD2HTMLonly")();
       assert.deepEqual(opened, [path.join(root, "chapter.html")]);
