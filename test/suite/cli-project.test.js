@@ -34,6 +34,7 @@ suite("CLI project generation", () => {
       ".vivliostyle/",
       ".mdbp-cli/node_modules/",
       ".mdbp-cli/current-*.cjs",
+      ".mdbp-cli/current-*.mjs",
       ".vivliostyle-current/",
     ]);
   }));
@@ -58,7 +59,10 @@ suite("CLI project generation", () => {
     assert.ok(fs.existsSync(path.join(root, ".mdbp-cli", "mermaid-transformer.cjs")));
     assert.equal(findConfigRoot(path.dirname(chapter), root), root);
     const current = currentFileConfig(root, chapter);
-    assert.match(fs.readFileSync(current, "utf8"), /chapter.pdf/);
+    const currentSource = fs.readFileSync(current, "utf8");
+    assert.match(currentSource, /chapter.pdf/);
+    assert.match(currentSource, /require\("\.\.\/vivliostyle\.config\.js"\)/);
+    assert.match(currentSource, /\.\.\.base/);
     const modified = fs.statSync(current).mtimeMs;
     assert.equal(currentFileConfig(root, chapter), current);
     assert.equal(fs.statSync(current).mtimeMs, modified);
@@ -86,6 +90,9 @@ suite("CLI project generation", () => {
     const config = generateConfig(root, path.join(root, "chapter.md"), assets);
     assert.match(fs.readFileSync(config, "utf8"), /export default/);
     assert.doesNotMatch(fs.readFileSync(config, "utf8"), /module.exports/);
+    const current = currentFileConfig(root, path.join(root, "chapter.md"));
+    assert.equal(path.extname(current), ".mjs");
+    assert.match(fs.readFileSync(current, "utf8"), /await import\("\.\.\/vivliostyle\.config\.js"\)/);
   }));
 
   test("removes a reserved incomplete config on generation failure", () => fixture((root) => {
