@@ -114,7 +114,7 @@ function activate(context) {
   async function launchCLI(action, root, configPath) {
     const generated = validateProject(root);
     if (!fs.existsSync(configPath) || !fs.statSync(configPath).isFile()) {
-      throw new Error("実行する設定ファイルが見つかりません。先に設定生成を実行してください。");
+      throw new Error("実行する設定ファイルが見つかりません。先に［mdbp環境の構築］を実行してください。");
     }
     const helper = path.join(root, ".mdbp-cli");
     const vfm = path.join(helper, "node_modules/@vivliostyle/vfm");
