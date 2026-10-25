@@ -7,7 +7,7 @@
   "name": "vfmdbp-vscode",
   "displayName": "vfm_mdbp_vscode",
   "description": "Markdown Book Preview for VSCode with VFM",
-  "version": "0.5.2",
+  "version": "0.5.3",
   "engines": {
     "vscode": "^1.140.0",
     "node": ">=22"
